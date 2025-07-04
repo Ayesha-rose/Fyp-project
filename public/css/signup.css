@@ -1,0 +1,74 @@
+/* Logo Styling */
+.logo-img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Input Fields */
+.input-content {
+    width: 90%;
+    height: 40px;
+    border: 1px solid rgba(102, 102, 102, 0.35);
+    padding: 8px;
+}
+
+/* Image Styling */
+.img-content {
+    width: 1200px;
+    height: 750px;
+    object-fit: cover;
+}
+
+
+/* Button Styling */
+.btn-primary {
+    height: 50px;
+    font-size: 18px;
+}
+
+/* Password Requirement Items */
+.paragraph-content {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+}
+
+.btn2 {
+    background: linear-gradient(rgba(71, 55, 255, 1), rgba(110, 164, 252, 1));
+    width: 236px;
+    font-size: 22px;
+    height: 55px;
+}
+
+.logo-img {
+    max-width: 150px;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.img-content {
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 767.98px) {
+    .img-content {
+        margin-top: 2rem;
+    }
+}
+
+.btn2 {
+    background-color: #007bff;
+    padding: 10px 30px;
+}

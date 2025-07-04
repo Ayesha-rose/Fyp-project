@@ -1,0 +1,97 @@
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+
+.image_Content {
+  width: 100%;
+  height: 100vh;
+    object-fit: cover;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 550px;
+  padding: 30px;
+}
+
+.btn-google,
+.btn-twitter {
+  background-color: white;
+  border: 1px solid #ccc;
+  font-weight: 500;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary-custom {
+  background-color: #4a1cdb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  width: 40%;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+input.form-control {
+  border-radius: 50px;
+  padding: 10px 15px;
+}
+
+.or-divider {
+  text-align: center;
+  position: relative;
+  margin: 24px 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.or-divider::before {
+  left: 0;
+}
+
+.or-divider::after {
+  right: 0;
+}
+
+.or-divider span {
+  background-color: white;
+  padding: 0 10px;
+  color: #888;
+}
+
+.form-footer {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  body {
+    overflow: auto;
+  }
+
+  .image_Content {
+    display: none;
+  }
+
+  .form-wrapper {
+    max-width: 90%;
+  }
+
+  .col-md-6 {
+    width: 100% !important;
+  }
+}
