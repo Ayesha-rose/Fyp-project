@@ -3,22 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
-
-
-// Route::get('/', function () {
-//     return view('home'); 
-// })->name('home');
-
-// Route::get('/login', [UserController::class, 'loginForm'])->name('login');
-// Route::post('/login', [UserController::class, 'login']);
-
-// Route::get('/signup', [UserController::class, 'signupForm']);
-// Route::post('/signup', [UserController::class, 'signup']);
-
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/', function () {
-    return view('admin_dashboard.dashboard'); 
-})->name('admin.dashboard');
+    return view('home'); 
+})->name('home');
+
+Route::get('/login', [UserController::class, 'loginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
+
+Route::get('/signup', [UserController::class, 'signupForm']);
+Route::post('/signup', [UserController::class, 'signup']);
+
+// Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 
-Route::resource('categories', CategoryController::class);
+// Route::resource('categories', CategoryController::class);
