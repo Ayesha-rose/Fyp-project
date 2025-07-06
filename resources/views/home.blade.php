@@ -10,8 +10,8 @@
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-  <!-- <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="css/home.css" rel="stylesheet" type="text/css"> -->
+  <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -21,7 +21,7 @@
 
   <!-- Eduverse Landing Page -->
   <!-- <div class="bg1"> -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-light py-3">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light py-3">
       <div class="container d-flex justify-content-between">
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="images/Logo (1).png" alt="Eduverse Logo" class="me-2" />
@@ -48,81 +48,82 @@
         </div>
       </div>
     </nav> -->
-     <header>
-            <nav class="navbar navbar-expand-lg navbar-light mx-0 px-0">
-                <div class="container">
-                    <a class="navbar-brand" href="Home.html">
-                        <img src="images/Logo.png">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarTogglerDemo" aria-controls="navbarTogglerDemo" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-muted fw-bold me-2 " href="Home.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fw-bold me-2" id="catag" aria-current="page"
-                                    href="categories.html">Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted fw-bold me-2" href="feed.html">My Books</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted fw-bold me-2" href="reviews.html">Reviews</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <div class="input-group" id="input-feild">
-                                <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
-                                <input class="form-control border-0 me-0" type="search" placeholder="Search"
-                                    aria-label="Search">
-                            </div>
-
-                            <a class="btn btn-outline-primary px-5 pt-2" href="login">Sign In</a>
-
-                            
-                            <a class="btn btn-primary text-white" href="signup">Sign Up</a>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-    <!-- Hero Section -->
-    <section class="py-5 ">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light mx-0 px-0">
       <div class="container">
-        <div class="row align-items-center position-relative">
-          <div class="col-md-6 ">
-            <div class="" style="max-width: 500px;">
-              <h1 class="fw-bold text-dark mb-5 mt-5">Explore A World of <span class="text-primary">knowledge</span> &
-                <span class="text-primary ">adventure!</span></h1>
-              <p class="fw-semibold text-muted">Your Next Great Read!</p>
-              <p class="text-secondary">Embark on a literary journey like never before with our revolutionary library
-                application! A seamless experience that transcends traditional boundaries, where you can effortlessly
-                search your favorite books.</p>
-              <button class="btn btn-primary mt-5 py-3 px-5 fs-5 fw-medium">Start Now →</button>
+        <a class="navbar-brand" href="Home.html">
+          <img src="images/Logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo" aria-controls="navbarTogglerDemo" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
+            <li class="nav-item">
+              <a class="nav-link text-muted fw-bold me-2 " href="Home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold me-2" id="catag" aria-current="page"
+                href="categories">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted fw-bold me-2" href="feed.html">My Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted fw-bold me-2" href="reviews.html">Reviews</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <div class="input-group" id="input-feild">
+              <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
+              <input class="form-control border-0 me-0" type="search" placeholder="Search"
+                aria-label="Search">
             </div>
-          </div>
-          <div class="col-md-6 position-relative d-flex">
-            <div class="position-relative ms-5 " style="height: 300px; width: 300px;">
-              <img src="images/h2.png" alt="Book 1" class="position-absolute rounded"
-                style="top:0; left: 280px; width: 230px; height: 280px;" />
-              <img src="images/h3.png" alt="Book 2" class="position-absolute rounded"
-                style="top: 260px; left:280px;  width: 230px; height: 280px;" />
-              <img src="images/h1.png" alt="Book 3" class="position-absolute rounded"
-                style="top: 120px; left: 480px;  width: 230px; height: 280px;" />
-              <img src="images/h4.png" alt="Book 4" class="position-absolute rounded"
-                style="top: 120px; left: 80px; width: 230px; height: 280px;" />
-            </div>
-          </div>
 
+            <a class="btn btn-outline-primary px-5 pt-2" href="login">Sign In</a>
+
+
+            <a class="btn btn-primary text-white" href="signup">Sign Up</a>
+          </form>
         </div>
       </div>
-    </section>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-5 ">
+    <div class="container">
+      <div class="row align-items-center position-relative">
+        <div class="col-md-6 ">
+          <div class="" style="max-width: 500px;">
+            <h1 class="fw-bold text-dark mb-5 mt-5">Explore A World of <span class="text-primary">knowledge</span> &
+              <span class="text-primary ">adventure!</span>
+            </h1>
+            <p class="fw-semibold text-muted">Your Next Great Read!</p>
+            <p class="text-secondary">Embark on a literary journey like never before with our revolutionary library
+              application! A seamless experience that transcends traditional boundaries, where you can effortlessly
+              search your favorite books.</p>
+            <button class="btn btn-primary mt-5 py-3 px-5 fs-5 fw-medium">Start Now →</button>
+          </div>
+        </div>
+        <div class="col-md-6 position-relative d-flex">
+          <div class="position-relative ms-5 " style="height: 300px; width: 300px;">
+            <img src="images/h2.png" alt="Book 1" class="position-absolute rounded"
+              style="top:0; left: 280px; width: 230px; height: 280px;" />
+            <img src="images/h3.png" alt="Book 2" class="position-absolute rounded"
+              style="top: 260px; left:280px;  width: 230px; height: 280px;" />
+            <img src="images/h1.png" alt="Book 3" class="position-absolute rounded"
+              style="top: 120px; left: 480px;  width: 230px; height: 280px;" />
+            <img src="images/h4.png" alt="Book 4" class="position-absolute rounded"
+              style="top: 120px; left: 80px; width: 230px; height: 280px;" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
   <!-- </div> -->
   <!-- Font Awesome (for search icon) -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -524,5 +525,5 @@
     <!-- Bootstrap icons (if not added already) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-   
+
 </body>

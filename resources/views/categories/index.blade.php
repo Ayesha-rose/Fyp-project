@@ -3,7 +3,7 @@
 @section('main-content')
 <div class="col-md-10 main-content">
   <a href="{{route('categories.create')}}">Create_Category</a>
-  <h2>hello catagory page</h2>
+  <h2>Category List</h2>
   <table class="table table-bordered">
     <thead>
       <td>Book Name</td>
