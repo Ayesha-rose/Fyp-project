@@ -33,10 +33,10 @@
           <!-- Email Input -->
            <form action="/login" method="post">
             @csrf
-          <input type="email" class="form-control mb-3 w-100" name="email" placeholder="email@gmail.com" value="{{old('email')}}"/>
+          <input type="email" class="form-control mb-3 w-100" name="email" placeholder="email@gmail.com" value="" require>
 
           <!-- Password Input -->
-          <input type="password" class="form-control mb-1 w-100" name="password" placeholder="Password" value="{{old('password')}}"/>
+          <input type="password" class="form-control mb-1 w-100" name="password" placeholder="Password" value="" require>
           
           <div class="d-flex justify-content-end mb-3">
             <a href="#" class="text-muted" style="font-size: 14px;">Forget your password</a>

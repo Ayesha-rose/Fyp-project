@@ -10,37 +10,57 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-   public function loginForm()
+    public function loginForm()
     {
         return view('user-auth.login');
     }
 
     public function Login(Request $request)
     {
-        $data = [
-            'email'=>$request->email,
-            'password'=>$request->password,
-        ];
-        if(Auth::attempt($data)){
+        $data = $request->only('email','password');
+        if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->route('home');
-        }
-        else{
-            return "Incorrect Password";
-        }
+            $user = Auth::user();
+            if ($user->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('home');
+            }
+        } 
+        return back()->withErrors([
+            'email'=> 'Invalid email or password',
+        ]);
     }
-      public function signupForm()
+
+    public function signupForm()
     {
         return view('user-auth.signup');
     }
 
     public function signup(Request $request)
     {
-       
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => [
+                'required',
+                'confirmed', 
+                'min:8',
+                'regex:/[A-Z]/',      
+                'regex:/[a-z]/',      
+                'regex:/[0-9]/',      
+                'regex:/[@$!%*#?&]/', 
+            ],
+        ], [
+            'password.regex' => 'Password must include uppercase, lowercase, number, and special character.',
+            'password.confirmed' => 'Passwords do not match.',
+        ]);
+
         User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         return redirect()->route('login');

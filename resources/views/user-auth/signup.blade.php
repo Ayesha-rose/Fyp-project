@@ -8,10 +8,17 @@
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="css/signup.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .valid {
+      color: green;
+    }
+    .invalid {
+      color: red;
+    }
+  </style>
 </head>
 
 <body>
-
   <div class="container py-2">
     <div class="row">
       <!-- Column 1 -->
@@ -24,6 +31,16 @@
         <p class="fs-5 fw-normal">
           Unlock a universe of free books and boundless learning.
         </p>
+
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
 
         <form action="/signup" method="post">
           @csrf
@@ -41,59 +58,38 @@
             required />
           <input
             type="password"
+            id="password"
             name="password"
             class="form-control mb-3"
             placeholder="Enter Password"
-            required />
+            required
+            onkeyup="validatePassword()" />
           <input
             type="password"
-            name="confirmpassword"
+            name="password_confirmation"
             class="form-control mb-3"
             placeholder="Re-enter Password"
             required />
 
-          <div id="password-rules" >
+          <div id="password-rules">
             <div class="row gx-2 gy-2">
               <div class="col-6">
-                <p class="small d-flex align-items-center">
-                  <img src="/images/Ellipse 1.png" alt="" class="icon" /> Use
-                  8+ characters
-                </p>
+                <p id="length" class="small"><span class="invalid">&#x25CF;</span> Use 8+ characters</p>
               </div>
               <div class="col-6">
-                <p class="small d-flex align-items-center">
-                  <img src="/images/Ellipse 1.png" alt="" class="icon" /> One
-                  uppercase character
-                </p>
+                <p id="uppercase" class="small"><span class="invalid">&#x25CF;</span> One uppercase character</p>
               </div>
               <div class="col-6">
-                <p class="small d-flex align-items-center">
-                  <img src="/images/Ellipse 1.png" alt="" class="icon" /> One
-                  lowercase characters
-                </p>
+                <p id="lowercase" class="small"><span class="invalid">&#x25CF;</span> One lowercase character</p>
               </div>
               <div class="col-6">
-                <p class="small d-flex align-items-center">
-                  <img src="/images/Ellipse 1.png" alt="" class="icon" /> One
-                  special character
-                </p>
+                <p id="special" class="small"><span class="invalid">&#x25CF;</span> One special character</p>
               </div>
               <div class="col-6">
-                <p class="small d-flex align-items-center">
-                  <img src="/images/Ellipse 1.png" alt="" class="icon" /> One
-                  number
-                </p>
+                <p id="number" class="small"><span class="invalid">&#x25CF;</span> One number</p>
               </div>
             </div>
           </div>
-
-          <!-- Checkbox & Terms -->
-      <!--    <div class="form-check my-3">
-            <input type="checkbox" class="form-check-input" id="consent" />
-            <label class="form-check-label small" for="consent">
-              I want to receive emails about product updates and promotions.
-            </label>
-          </div> -->
 
           <p class="small">
             By creating an account, you agree to the
@@ -123,9 +119,33 @@
       </div>
     </div>
   </div>
+   <script>
+    function validatePassword() {
+      const password = document.getElementById("password").value;
 
+      const rules = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        special: /[!@#$%^&*(),.?\":{}|<>]/.test(password),
+        number: /[0-9]/.test(password)
+      };
 
-
+      for (let rule in rules) {
+        const element = document.getElementById(rule);
+        if (rules[rule]) {
+          element.classList.remove("invalid");
+          element.classList.add("valid");
+          element.querySelector("span").classList.remove("invalid");
+          element.querySelector("span").classList.add("valid");
+        } else {
+          element.classList.remove("valid");
+          element.classList.add("invalid");
+          element.querySelector("span").classList.remove("valid");
+          element.querySelector("span").classList.add("invalid");
+        }
+      }
+    }
+  </script>
 </body>
-
 </html>
