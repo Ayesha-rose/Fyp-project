@@ -1,9 +1,9 @@
-@extends('master')
+@extends('admin.master')
 @section('main-content')
 <div class="main-content">
   <h2>Categories</h2>
   <div class="categories" style="text-align: center; justify-content: center;">
-      <form action="{{route('categories.store')}}" method="post">
+      <form action="{{route('admin_categories.store')}}" method="post">
         @csrf
         @if($categories->id)
             @method('put')

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category :: query()->get();
-        return view('categories.index', compact('categories'));
+        return view('admin_categories.index', compact('categories'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = new Category();
-        return view('categories.create', compact('categories'));
+        return view('admin_categories.create', compact('categories'));
     }
 
     /**
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $catagories->Date = $request->date;
         $catagories->save();
         
-        return redirect()->route('categories.index');
+        return redirect()->route('admin_categories.index');
     }
 
     /**

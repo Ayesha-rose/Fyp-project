@@ -1,8 +1,8 @@
-@extends('master')
+@extends('admin.master')
 
 @section('main-content')
 <div class="col-md-10 main-content">
-  <a href="{{route('categories.create')}}">Create_Category</a>
+  <a href="{{route('admin_categories.create')}}">Create_Category</a>
   <h2>Category List</h2>
   <table class="table table-bordered">
     <thead>
