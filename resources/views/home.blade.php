@@ -19,35 +19,7 @@
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Eduverse Landing Page -->
-  <!-- <div class="bg1"> -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-light py-3">
-      <div class="container d-flex justify-content-between">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="images/Logo (1).png" alt="Eduverse Logo" class="me-2" />
-          <span class="fw-bold fs-4 text-dark">Eduverse</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-          <ul class="navbar-nav me-4 ms-5 ps-5">
-            <li class="nav-item ps-5 ms-5 pe-2"><a class="nav-link fw-bold active" href="Home.html">Home</a></li>
-            <li class="nav-item px-2"><a class="nav-link fw-bold text-muted" href="categories.html">Categories</a></li>
-            <li class="nav-item px-2"><a class="nav-link fw-bold text-muted" href="feed.html">My Books</a></li>
-            <li class="nav-item px-2"><a class="nav-link fw-bold text-muted" href="reviews.html">Review</a></li>
-          </ul>
-          <form class="d-flex align-items-center">
-            <div class="input-group me-3 shadow-sm" style="width: 200px;">
-              <span class="input-group-text bg-white border-0"><i class="fas fa-search text-muted"></i></span>
-              <input type="text" class="form-control border-0 bg-light" placeholder="Search" />
-            </div>
-            <a class="btn btn-outline-primary me-2" href="login">Sign In</a>
-            <a class="btn btn-primary text-white" href="signup">Sign Up</a>
-          </form>
-        </div>
-      </div>
-    </nav> -->
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-light mx-0 px-0">
       <div class="container">
@@ -75,16 +47,24 @@
               <a class="nav-link text-muted fw-bold me-2" href="reviews.html">Reviews</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <div class="input-group" id="input-feild">
-              <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
-              <input class="form-control border-0 me-0" type="search" placeholder="Search"
-                aria-label="Search">
-            </div>
+       <div class="d-flex align-items-center">
+  <div class="input-group me-3" id="input-feild">
+    <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
+    <input class="form-control border-0 me-0" type="search" placeholder="Search" aria-label="Search">
+  </div>
 
-            <a class="btn btn-outline-primary me-2" href="login">SignIn</a>
-            <a class="btn btn-primary text-white" href="signup">SignUp</a>
-          </form>
+  @auth
+    <span class="me-3 fw-bold">{{ Auth::user()->name }}</span>
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+      <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+  @else
+    <a class="btn btn-outline-primary px-4 pt-2 me-2" href="{{ route('login') }}">SignIn</a>
+    <a class="btn btn-primary text-white px-4 pt-2" href="{{ url('signup') }}">SignUp</a>
+  @endauth
+</div>
+
         </div>
       </div>
     </nav>
