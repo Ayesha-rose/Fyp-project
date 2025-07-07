@@ -155,7 +155,7 @@
           <ul class="nav flex-column">
             <li class="nav-item" id="sidemenu"><a href="categories" class="nav-link">
                 <i class="fa-solid fa-folder"></i> Categories</a></li>
-            <li class="nav-item" id="sidemenu"><a href="admin_dashboard.dashboard" class="nav-link"><i
+            <li class="nav-item" id="sidemenu"><a href="admin.dashboard" class="nav-link"><i
                   class="fa-solid fa-square-poll-vertical"></i> Total Books</a></li>
             <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
                   class="fa-solid fa-calendar-days"></i> Calendar</a></li>

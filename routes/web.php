@@ -17,4 +17,5 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/admin_dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth')->name('admin.dashboard');
+
 Route::resource('categories', CategoryController::class);

@@ -66,7 +66,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link fw-bold me-2" id="catag" aria-current="page"
-                href="categories">Categories</a>
+                href="categories.html">Categories</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-muted fw-bold me-2" href="feed.html">My Books</a>
@@ -82,10 +82,8 @@
                 aria-label="Search">
             </div>
 
-            <a class="btn btn-outline-primary px-5 pt-2" href="login">Sign In</a>
-
-
-            <a class="btn btn-primary text-white" href="signup">Sign Up</a>
+            <a class="btn btn-outline-primary me-2" href="login">SignIn</a>
+            <a class="btn btn-primary text-white" href="signup">SignUp</a>
           </form>
         </div>
       </div>

@@ -23,7 +23,7 @@
     <div class="row">
       <!-- Left Side Image -->
      <div class="col-md-6 p-0 d-none d-md-block">
-        <img src="/images/Image (1).png" alt="Library Image" class="image_Content" />
+        <img src="/images/Image (1).png" alt="Library Image" class="img-fluid" />
       </div>
 
       <!-- Right Side Form -->

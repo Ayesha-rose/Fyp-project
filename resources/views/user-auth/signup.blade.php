@@ -19,13 +19,13 @@
 </head>
 
 <body>
-  <div class="container py-2">
+  <div class="container">
     <div class="row">
       <!-- Column 1 -->
       <div class="col-lg-6 mb-4 mb-lg-0">
         <img
         src="/images/Logo (1).png"
-        alt="Eduvers Logo"
+        alt="Eduverse Logo"
         class="img-fluid logo-img mb-3" />
         <h3>Join <span class="text-primary">Eduverse</span> Today</h3>
         <p class="fs-5 fw-normal">
