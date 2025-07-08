@@ -46,10 +46,7 @@ class UserController extends Controller
                 'required',
                 'confirmed', 
                 'min:8',
-                'regex:/[A-Z]/',      
-                'regex:/[a-z]/',      
                 'regex:/[0-9]/',      
-                'regex:/[@$!%*#?&]/', 
             ],
         ], [
             'password.regex' => 'Password must include uppercase, lowercase, number, and special character.',
@@ -67,17 +64,15 @@ class UserController extends Controller
     }
     public function logoutConfirmForm()
     {
-        return view('logout'); // Yeh aapki logout.blade.php file ko load karega
+        return view('logout'); 
     }
 
+public function logout(Request $request)
+{
+    Auth::logout(); 
+    $request->session()->invalidate(); 
+    $request->session()->regenerateToken(); 
 
-     public function logout(Request $request)
-    {
-        Auth::logout(); // User ko logout karega
-
-        $request->session()->invalidate(); // Session ko invalidate karega
-        $request->session()->regenerateToken(); // CSRF token regenerate karega
-
-        return redirect()->route('login'); // User ko login page par redirect karega
-    }
+    return redirect('/login'); 
+}
 }

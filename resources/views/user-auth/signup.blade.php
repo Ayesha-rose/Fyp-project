@@ -54,7 +54,7 @@
             type="text"
             name="name"
             class="form-control mb-3"
-            placeholder="Username"
+            placeholder="Name"
             required />
           <input
             type="password"
@@ -75,15 +75,6 @@
             <div class="row gx-2 gy-2">
               <div class="col-6">
                 <p id="length" class="small"><span class="invalid">&#x25CF;</span> Use 8+ characters</p>
-              </div>
-              <div class="col-6">
-                <p id="uppercase" class="small"><span class="invalid">&#x25CF;</span> One uppercase character</p>
-              </div>
-              <div class="col-6">
-                <p id="lowercase" class="small"><span class="invalid">&#x25CF;</span> One lowercase character</p>
-              </div>
-              <div class="col-6">
-                <p id="special" class="small"><span class="invalid">&#x25CF;</span> One special character</p>
               </div>
               <div class="col-6">
                 <p id="number" class="small"><span class="invalid">&#x25CF;</span> One number</p>
@@ -125,9 +116,6 @@
 
       const rules = {
         length: password.length >= 8,
-        uppercase: /[A-Z]/.test(password),
-        lowercase: /[a-z]/.test(password),
-        special: /[!@#$%^&*(),.?\":{}|<>]/.test(password),
         number: /[0-9]/.test(password)
       };
 
