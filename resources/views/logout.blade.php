@@ -25,10 +25,10 @@
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
                     <!-- <a href="{{ route('home') }}" class="btn btn-outline-primary px-4">Yes I Am</a> -->
-                    <!-- <button type="submit" class="btn btn-outline-primary px-4">Yes I Am</button> -->
+                    <button type="submit" class="btn btn-outline-primary px-4">Yes I Am</button>
                 </form>
-                <!-- <a href="{{ route('home') }}" class="btn btn-secondary px-4 ms-2">Cancel</a> {{-- Cancel button added --}} -->
-                 <a href="{{ route('home') }}" class="btn btn-outline-primary px-4">Yes I Am</a>
+                <a href="{{ route('home') }}" class="btn btn-secondary px-4 ms-2">Cancel</a> {{-- Cancel button added --}}
+                 <!-- <a href="{{ route('home') }}" class="btn btn-outline-primary px-4">Yes I Am</a> -->
             </div>
         </div>
     </div>

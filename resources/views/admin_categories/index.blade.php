@@ -2,8 +2,10 @@
 
 @section('main-content')
 <div class="col-md-10 main-content">
-  <h2>Category List</h2>
-  <a class="btn btn-primary text-white px-4 pt-2" href="{{route('admin_categories.create')}}">Add New Categories</a>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Category List</h2>
+    <a class="btn btn-primary text-white px-4 pt-2" href="{{route('admin_categories.create')}}">Add New Categories</a>
+  </div>
 
   <table class="table table-bordered">
     <thead>
