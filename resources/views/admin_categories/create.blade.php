@@ -8,15 +8,16 @@
         @if($categories->id)
             @method('put')
         @endif
-      <label for="">Book_Name: </label>
-      <input type="text" name="book_name" placeholder="Book Name" style="width: 400px;" required value="{{$categories->book_name}}">
-      <br><br>
-
-      <label for="">Category_Name </label>
+        
+      <label for="">Category Name: </label>
       <input type="text" name="category_name" placeholder="Category Name" style="width: 400px;" required value="{{$categories->category_name}}">
       <br><br>
 
-      <label for="">Date </label>
+      <label for="">Book Name: </label>
+      <input type="text" name="book_name" placeholder="Book Name" style="width: 400px;" required value="{{$categories->book_name}}">
+      <br><br>
+      
+      <label for="">Date: </label>
       <input type="date" name="date" placeholder="Date" style="width: 400px;"  value="{{$categories->date}}">
       <br><br>
 

@@ -65,4 +65,19 @@ class UserController extends Controller
 
         return redirect()->route('login');
     }
+    public function logoutConfirmForm()
+    {
+        return view('logout'); // Yeh aapki logout.blade.php file ko load karega
+    }
+
+
+     public function logout(Request $request)
+    {
+        Auth::logout(); // User ko logout karega
+
+        $request->session()->invalidate(); // Session ko invalidate karega
+        $request->session()->regenerateToken(); // CSRF token regenerate karega
+
+        return redirect()->route('login'); // User ko login page par redirect karega
+    }
 }

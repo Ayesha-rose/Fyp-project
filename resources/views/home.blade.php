@@ -47,23 +47,28 @@
               <a class="nav-link text-muted fw-bold me-2" href="reviews.html">Reviews</a>
             </li>
           </ul>
-       <div class="d-flex align-items-center">
-  <div class="input-group me-3" id="input-feild">
-    <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
-    <input class="form-control border-0 me-0" type="search" placeholder="Search" aria-label="Search">
-  </div>
+          <div class="d-flex align-items-center">
+            <div class="input-group me-3" id="input-feild">
+              <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
+              <input class="form-control border-0 me-0" type="search" placeholder="Search" aria-label="Search">
+            </div>
 
-  @auth
-    <span class="me-3 fw-bold">{{ Auth::user()->name }}</span>
-    <form method="POST" action="{{ route('logout') }}">
+            @auth
+            <span class="me-3 fw-bold">{{ Auth::user()->name }}</span>
+            <!-- <form method="POST" action="{{ route('logout') }}">
       @csrf
       <button type="submit" class="btn btn-primary">Logout</button>
-    </form>
-  @else
-    <a class="btn btn-outline-primary px-4 pt-2 me-2" href="{{ route('login') }}">SignIn</a>
-    <a class="btn btn-primary text-white px-4 pt-2" href="{{ url('signup') }}">SignUp</a>
-  @endauth
-</div>
+    </form> -->
+
+            <form action="{{ route('logout.confirm') }}" method="GET">
+              @csrf
+              <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+            @else
+            <a class="btn btn-outline-primary px-4 pt-2 me-2" href="{{ route('login') }}">SignIn</a>
+            <a class="btn btn-primary text-white px-4 pt-2" href="{{ url('signup') }}">SignUp</a>
+            @endauth
+          </div>
 
         </div>
       </div>

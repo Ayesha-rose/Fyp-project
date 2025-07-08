@@ -2,20 +2,21 @@
 
 @section('main-content')
 <div class="col-md-10 main-content">
-  <a href="{{route('admin_categories.create')}}">Create_Category</a>
   <h2>Category List</h2>
+  <a class="btn btn-primary text-white px-4 pt-2" href="{{route('admin_categories.create')}}">Add New Categories</a>
+
   <table class="table table-bordered">
     <thead>
-      <td>Book Name</td>
-      <td>Category Name</td>
-      <td>Date</td>
+      <td><b>Category Name</b></td>
+      <td><b>Book Name</b></td>
+      <td><b>Date</b></td>
     </thead>
     <tbody>
 
       @foreach($categories as $category)
       <tr>
-        <td>{{$category->book_name}}</td>
         <td>{{$category->category_name}}</td>
+        <td>{{$category->book_name}}</td>
         <td>{{$category->date}}</td>
       </tr>
       @endforeach

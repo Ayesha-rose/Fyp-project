@@ -16,12 +16,19 @@
     <div class="background">
         <div class="card shadow p-4 text-center bg-white">
             <div class="mt-4">
-                <img src="images/Logo_ft.png" alt="Logo" class="position-absolute top-0 start-0 m-2" >
+                <img src="images/Logo_ft.png" alt="Logo" class="position-absolute top-0 start-0 m-2">
                 <button type="button" class="btn-close position-absolute top-0 end-0 m-2"></button>
                 <div class="display-4"><i class="fa-solid fa-circle-exclamation"></i></div>
                 <h4 class="mt-3">Are You Leaving?</h4>
                 <p>Are you sure you want to log out?</p>
-                <button class="btn btn-outline-primary px-4">Yes I Am</button>
+                <!-- <button class="btn btn-outline-primary px-4">Yes I Am</button> -->
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <!-- <a href="{{ route('home') }}" class="btn btn-outline-primary px-4">Yes I Am</a> -->
+                    <!-- <button type="submit" class="btn btn-outline-primary px-4">Yes I Am</button> -->
+                </form>
+                <!-- <a href="{{ route('home') }}" class="btn btn-secondary px-4 ms-2">Cancel</a> {{-- Cancel button added --}} -->
+                 <a href="{{ route('home') }}" class="btn btn-outline-primary px-4">Yes I Am</a>
             </div>
         </div>
     </div>
