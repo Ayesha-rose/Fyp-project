@@ -153,14 +153,24 @@
             <i class="fa-solid fa-user me-2 fs-5"></i> Admin
           </div>
           <ul class="nav flex-column">
-            <li class="nav-item" id="sidemenu"><a href="categories" class="nav-link">
-                <i class="fa-solid fa-folder"></i> Categories</a></li>
-            <li class="nav-item" id="sidemenu"><a href="admin.dashboard" class="nav-link"><i
-                  class="fa-solid fa-square-poll-vertical"></i> Total Books</a></li>
+            <li class="nav-item" id="sidemenu"><a href="{{ route('admin.dashboard') }}" class="nav-link"><i
+                  class="fa-solid fa-square-poll-vertical"></i> Dashboard</a></li>
             <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
-                  class="fa-solid fa-calendar-days"></i> Calendar</a></li>
+                  class="fa-solid fa-calendar-days"></i> Manage Users</a></li>
+            <li class="nav-item" id="sidemenu"><a href="{{ route('admin_categories.index') }}" class="nav-link">
+                <i class="fa-solid fa-folder"></i> Manage Categories</a></li>
             <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
-                  class="fa-solid fa-clock"></i> History</a></li>
+                  class="fa-solid fa-calendar-days"></i> Manage Books</a></li>
+            <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
+                  class="fa-solid fa-calendar-days"></i> Reading Stats</a></li>
+            <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
+                  class="fa-solid fa-calendar-days"></i> Calender</a></li>
+            <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
+                  class="fa-solid fa-calendar-days"></i> Notifications</a></li>
+            <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
+                  class="fa-solid fa-clock"></i> AI Chatbot</a></li>
+            <li class="nav-item" id="sidemenu"><a href="#" class="nav-link "><i
+                  class="fa-solid fa-clock"></i> Feedback</a></li>
           </ul>
         </div>
       </div>
