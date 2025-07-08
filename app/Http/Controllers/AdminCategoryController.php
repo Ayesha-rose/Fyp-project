@@ -38,12 +38,12 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $catagories = new Category();
-        $catagories->Book_Name = $request->book_name;
-        $catagories->Category_Name = $request->category_name;
-        $catagories->Date = $request->date;
-        $catagories->save();
-        
+        $categories = new Category();
+        $categories->Category_Name = $request->category_name;
+        $categories->Book_Name = $request->book_name;
+        $categories->Date = $request->date;
+        $categories->save();
+
         return redirect()->route('admin_categories.index');
     }
 

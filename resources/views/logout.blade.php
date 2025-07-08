@@ -33,8 +33,6 @@
                     <button type="submit" class="btn btn-outline-primary px-4">Yes I Am</button>
                 </form>
 
-                <!-- CANCEL button -->
-                <a href="javascript:goBack()" class="btn btn-secondary px-4 ms-2">Cancel</a>
             </div>
         </div>
     </div>
