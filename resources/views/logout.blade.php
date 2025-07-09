@@ -40,18 +40,10 @@
 
 
     <script>
-        function goBack() {
-            window.history.back();
-        }
-
-
         function closeCard() {
             document.querySelector('.card').style.display = 'none';
         }
     </script>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
