@@ -73,7 +73,7 @@
       <div class="col-md-2 sidebar">
         <h4 class="text-white text-center mb-4">EduVerse</h4>
         <nav class="nav flex-column">
-          <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Dashboard</a>
+          <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
          <a href="{{ route('admin_categories.index') }}" class="nav-link"><i class="fas fa-tags"></i> Manage Catego</a>
           <a href="#" class="nav-link"><i class="fas fa-book"></i> Manage Books</a>
           <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Reading Stats</a>
