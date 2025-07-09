@@ -174,8 +174,8 @@
           </ul>
         </div>
       </div>
-      <div class="main-content mt-4">
-        @yield ('main-content')
+      <div class="adminpanel mt-4">
+        @yield ('adminpanel')
       </div>
     </div>
 

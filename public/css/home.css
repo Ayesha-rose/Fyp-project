@@ -2,13 +2,14 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #ffffff;
 }
-
-.navbar-brand img {
-  height: 40px;
+.input-group {
+    transition: box-shadow 0.3s, transform 0.3s;
+    border-radius: 4px;
+     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .bg1 {
-  background-image: url("cover1.png");
+  background-image: url("images/cover1.png");
   background-position: right; 
   background-repeat: no-repeat;
   background-size: contain;
