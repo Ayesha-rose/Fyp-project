@@ -21,7 +21,7 @@
         <div class="card shadow p-4 text-center bg-white">
             <div class="mt-4">
                 <img src="images/Logo_ft.png" alt="Logo" class="position-absolute top-0 start-0 m-2">
-                <button type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="closeCard()"></button>
+                <a href="/" type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="closeCard()"></a>
                 
                 <div class="display-4"><i class="fa-solid fa-circle-exclamation"></i></div>
                 <h4 class="mt-3">Are You Leaving?</h4>
