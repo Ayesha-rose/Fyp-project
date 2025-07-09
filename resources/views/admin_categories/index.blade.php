@@ -23,11 +23,11 @@
         <td>{{ $category->book_name }}</td>
         <td>{{ $category->date }}</td>
         <td>
-          <a href="{{ route('admin_categories.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="{{ route('admin_categories.edit', $category->id) }}" class="btn btn-sm text-dark btn-outline-secondary">Edit</a>
           <form action="{{ route('admin_categories.destroy', $category->id) }}" method="post" style="display:inline;">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            <button type="submit" class="btn btn-sm btn-outline-secondary text-danger">Delete</button>
           </form>
         </td>
       </tr>
