@@ -23,5 +23,5 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])
     ->middleware('auth')->name('admin.dashboard');
-
 Route::resource('admin_categories', AdminCategoryController::class);
+

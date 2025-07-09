@@ -8,87 +8,49 @@ use Illuminate\Routing\Controller;
 
 class AdminCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $categories = Category :: query()->get();
+        $categories = Category::all();
         return view('admin_categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $categories = new Category();
-        return view('admin_categories.create', compact('categories'));
+        $category = new Category();
+        return view('admin_categories.create', compact('category'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $categories = new Category();
-        $categories->Category_Name = $request->category_name;
-        $categories->Book_Name = $request->book_name;
-        $categories->Date = $request->date;
-        $categories->save();
+        $category = new Category();
+        $category->category_name = $request->category_name;
+        $category->book_name = $request->book_name;
+        $category->date = $request->date;
+        $category->save();
 
         return redirect()->route('admin_categories.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return "Show Record -> " . $id;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin_categories.create', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->category_name = $request->category_name;
+        $category->book_name = $request->book_name;
+        $category->date = $request->date;
+        $category->save();
+
+        return redirect()->route('admin_categories.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return redirect()->route('admin_categories.index');
     }
 }

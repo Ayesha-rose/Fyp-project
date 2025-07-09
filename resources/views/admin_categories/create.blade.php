@@ -1,28 +1,28 @@
 @extends('admin.master')
-@section('main-content')
+
+@section('adminpanel')
 <div class="main-content">
   <h2>Categories</h2>
-  <div class="categories" >
-      <form action="{{route('admin_categories.store')}}" method="post">
-        @csrf
-        @if($categories->id)
-            @method('put')
-        @endif
-        
-      <label for="">Category Name: </label>
-      <input type="text" name="category_name" placeholder="Category Name" style="width: 400px;" required value="{{$categories->category_name}}">
+  <div class="categories">
+    <form action="{{ $category->id ? route('admin_categories.update', $category->id) : route('admin_categories.store') }}" method="post">
+      @csrf
+      @if($category->id)
+        @method('put')
+      @endif
+
+      <label>Category Name:</label>
+      <input type="text" name="category_name" placeholder="Category Name" style="width: 400px;" required value="{{ $category->category_name ?? '' }}">
       <br><br>
 
-      <label for="">Book Name: </label>
-      <input type="text" name="book_name" placeholder="Book Name" style="width: 400px;" required value="{{$categories->book_name}}">
+      <label>Book Name:</label>
+      <input type="text" name="book_name" placeholder="Book Name" style="width: 400px;" required value="{{ $category->book_name ?? '' }}">
       <br><br>
-      
-      <label for="">Date: </label>
-      <input type="date" name="date" placeholder="Date" style="width: 400px;"  value="{{$categories->date}}">
+
+      <label>Date:</label>
+      <input type="date" name="date" style="width: 400px;" value="{{ $category->date ?? '' }}">
       <br><br>
 
       <button type="submit" style="width: 400px;">Save</button>
-      <br><br>
     </form>
   </div>
 </div>
