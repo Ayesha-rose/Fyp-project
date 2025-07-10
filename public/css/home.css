@@ -2,19 +2,39 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #ffffff;
 }
-.input-group {
-    transition: box-shadow 0.3s, transform 0.3s;
-    border-radius: 4px;
-     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
+
+body.homepage-background {
+  margin-top: 0%;
+  padding-top: 0%;
+  margin-bottom: 0%;
+  width: 100%;
+  height: 115vh;
+  background: url('../images/cover1.png') no-repeat right;
+  background-size: contain;
+  background-attachment: scroll;
 }
- 
+
+#input-feild input:focus,
+#input-main input:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.input-group {
+  transition: box-shadow 0.3s, transform 0.3s;
+  border-radius: 4px;
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
 .bg1 {
   background-image: url("images/cover1.png");
-  background-position: right; 
+  background-position: right;
   background-repeat: no-repeat;
   background-size: contain;
-  z-index: -1; 
-  position: relative; 
+  z-index: -1;
+  position: relative;
   min-height: 110vh;
 }
 
@@ -65,29 +85,36 @@ body {
 }
 
 /* Button Section */
-.hText{
-color: #015F9E;
+.hText {
+  color: #015F9E;
 }
-.btn-bg{
+
+.btn-bg {
   background: linear-gradient(#4737FF, #6EA4FC);
 }
-.color{
+
+.color {
   color: #015F9E !important;
 }
-.wh{
+
+.wh {
   width: 200px;
 }
-.t1{
+
+.t1 {
   color: #015F9E !important;
 
 }
-.t2{
-  color:#6E7889;
+
+.t2 {
+  color: #6E7889;
 }
+
 .custom-img {
   width: 200px;
   height: auto;
 }
+
 .custom-control {
   position: absolute;
   top: 50%;
@@ -99,5 +126,5 @@ color: #015F9E;
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;
 }

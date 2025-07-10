@@ -1,5 +1,6 @@
 @extends('master')
 
+@section('body-class', 'homepage-background')
 
 @section('userpanel')
 <!-- Hero Section -->
@@ -18,7 +19,7 @@
         <br>
         <br><br>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-2">
         <div class="position-relative">
           <img src="images/h2.png" alt="Book 1" class="position-absolute rounded" href="#"
             style="top: 20px; left: 210px; height: 250px; width: 190px; " />

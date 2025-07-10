@@ -11,12 +11,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="css/home.css" rel="stylesheet" type="text/css">
-  
+  <link href="{{asset('css/home.css')}}" rel="stylesheet" type="text/css">
+
 
 </head>
 
-<body>
+<body class="@yield('body-class')">
   <!-- Bootstrap 5 CDN -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-light mx-0 px-0">
@@ -52,15 +52,15 @@
             </div>
 
             @auth
-            <span class="me-3 fw-bold">{{ Auth::user()->name }}</span>
+            <span class="btn px-4 mx-4 pt-2 fw-bold text-white" style="border:none;">{{ Auth::user()->name }}</span>
 
             <form action="{{ route('logout.confirm') }}" method="GET">
               @csrf
-              <button type="submit" class="btn btn-primary">Logout</button>
+              <button type="submit" class="btn btn-primary fw-bold bg-light text-danger">Logout</button>
             </form>
             @else
-            <a class="btn btn-outline-primary px-4 pt-2 me-2" href="{{ route('login') }}">SignIn</a>
-            <a class="btn btn-primary text-white px-4 pt-2" href="{{ url('signup') }}">SignUp</a>
+            <a class="btn bg-light text-primary px-4 mx-4 pt-2" href="{{ route('login') }}">SignIn</a>
+            <a class="btn btn-outline-light text-light px-4 pt-2" style="background-color: #36A5DC;" href="{{ url('signup') }}">SignUp</a>
             @endauth
           </div>
         </div>

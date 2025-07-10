@@ -28,7 +28,6 @@
                 <h4 class="mt-3">Are You Leaving?</h4>
                 <p>Are you sure you want to log out?</p>
 
-                <!-- YES button -->
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="btn btn-outline-primary px-4">Yes I Am</button>
