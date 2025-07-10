@@ -15,7 +15,7 @@
                 <div class="media d-flex align-items-center">
                     <i class="fa-solid fa-user me-2 fs-5"></i>
                     @auth
-                    <span class="fa-solid fa-user me-2 fs-5" style="border:none;">{{ Auth::user()->name }}</span>
+                    <span>{{ Auth::user()->name }}</span>
                     @else
                     <a class="btn" style="border:none;" href="{{ route('login') }}">Username</a>
 
