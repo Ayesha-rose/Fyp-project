@@ -3,21 +3,36 @@ body {
   background-color: #ffffff;
 }
 
+.nav-item {
+  transition: text-decoration 0.3s ease;
+}
+
+.nav-item:hover {
+
+  color: #015F9E;
+  /* text-decoration: underline; */
+}
+
+#homepage {
+  color: #015F9E;
+  font-family: Poppins, sans-serif;
+  font-style: bold;
+}
+
 body.homepage-background {
   margin-top: 0%;
   padding-top: 0%;
   margin-bottom: 0%;
   width: 100%;
-  height: 115vh;
+  height: 110vh;
   background: url('../images/cover1.png') no-repeat right;
   background-size: contain;
-  background-attachment: scroll;
 }
 
 #input-feild input:focus,
-#input-main input:focus{
-    outline: none;
-    box-shadow: none;
+#input-main input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .input-group {

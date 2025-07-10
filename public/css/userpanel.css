@@ -1,7 +1,11 @@
 *{
     font-family: Poppins, sans-serif;
 }
-
+#mybooks, #myreviews{
+    color: #015F9E;
+    font-family: Poppins, sans-serif;
+    font-style: bold;
+}
 .vertical-nav {
     width: 270px;
     height: 100vh;
@@ -10,11 +14,11 @@
     left: 0;
     top: 60px;
     overflow-y: auto;
-} 
+} w
 #mybooks, #reviews ,.nav-item{
     color: #015F9E;
 }
-.main-content {
+.userpanelcontent {
     /* margin-left: 250px; */
     width: calc(100% - 270px);
 }
@@ -85,7 +89,7 @@ nav{
         margin-left: 20px;
     }
 
-    .main-content {
+    .userpanelcontent {
         margin-left: 0;
         width: 100%;
     }

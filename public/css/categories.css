@@ -4,14 +4,15 @@
     font-family: Poppins, sans-serif;
 }
 
-#home {
+body.categories-background {
     margin-top: 0%;
     padding-top: 0%;
     margin-bottom: 0%;
     width: 100%;
-    height: 100vh;
-    background: url('images/right_bg.png') no-repeat right;
+    height: 110vh;
+    background: url('../images/right_bg.png') no-repeat right;
     background-size: contain;
+
 }
 
 nav {

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -22,6 +22,41 @@ Route::get('/logout-confirm', [UserController::class, 'logoutConfirmForm'])->nam
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])
-    ->middleware('auth')->name('admin.dashboard');
+->middleware('auth')->name('admin.dashboard');
 Route::resource('admin_categories', AdminCategoryController::class);
 
+Route::get('/categories', function () {
+    return view('categories');
+})->name('categories');
+
+Route::get('/myfeed', function () {
+    return view('user_dashboard.myfeed');
+})->name('user_dashboard.myfeed');
+
+Route::get('/alreadyread', function () {
+    return view('user_dashboard.alreadyread');
+})->name('user_dashboard.alreadyread');
+
+Route::get('/currentlyread', function () {
+    return view('user_dashboard.currentlyread');
+})->name('user_dashboard.currentlyread');
+
+Route::get('/mycalendar', function () {
+    return view('user_dashboard.mycalendar');
+})->name('user_dashboard.mycalendar');
+
+Route::get('/mynotes', function () {
+    return view('user_dashboard.mynotes');
+})->name('user_dashboard.mynotes');
+
+Route::get('/myreadingstat', function () {
+    return view('user_dashboard.myreadingstat');
+})->name('user_dashboard.myreadingstat');
+
+Route::get('/myreviews', function () {
+    return view('user_dashboard.myreviews');
+})->name('user_dashboard.myreviews');
+
+Route::get('/wishlist', function () {
+    return view('user_dashboard.wishlist');
+})->name('user_dashboard.wishlist');

@@ -2,6 +2,10 @@
 
 @section('body-class', 'homepage-background')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
+
 @section('userpanel')
 <!-- Hero Section -->
 <div class="userpanel">
