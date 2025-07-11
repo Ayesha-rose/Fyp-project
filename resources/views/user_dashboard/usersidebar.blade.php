@@ -25,24 +25,24 @@
 
                 <h4 class="py-2 mb-0">User</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myfeed') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.myfeed') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myfeed') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.myfeed') }}" ><i
                                 class="fa-solid fa-house"></i> My Feed</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myreadingstat') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.myreadingstat') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myreadingstat') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.myreadingstat') }}" ><i
                                 class="fa-solid fa-square-poll-vertical"></i> My Reading Stat</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.mycalendar') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.mycalendar') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.mycalendar') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.mycalendar') }}" ><i
                                 class="fa-solid fa-calendar-days"></i> My Calendar</a></li>
 
                     <h4 class="py-2 mb-0">Reading Log</h4>
-
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.wishlist') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.wishlist') }}" id="sidemenu"><i
+                    
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.wishlist') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.wishlist') }}"><i
                                 class="fa-solid fa-book-open"></i> Wishlist</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.currentlyread') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.currentlyread') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.currentlyread') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.currentlyread') }}" ><i
                                 class="fa-solid fa-book-open-reader"></i> Currently Read</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.alreadyread') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.alreadyread') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.alreadyread') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.alreadyread') }}" ><i
                                 class="fa-solid fa-check-double"></i> Already Read</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.mynotes') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.mynotes') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.mynotes') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.mynotes') }}" ><i
                                 class="fa-solid fa-note-sticky"></i> My Notes</a></li>
-                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" id="sidebuttons"><a href="{{ route('user_dashboard.myreviews') }}" id="sidemenu"><i
+                    <li class="nav-item  {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" id="sidemenu"><a href="{{ route('user_dashboard.myreviews') }}"><i
                                 class="fa-solid fa-star"></i> My Reviews</a></li>
                 </ul>
             </div>
