@@ -1,11 +1,7 @@
-*{
+* {
     font-family: Poppins, sans-serif;
 }
-.nav-link.active {
-  color: #015F9E !important;
-  font-family: Poppins, sans-serif;
-  font-style: bold;
-}
+
 .vertical-nav {
     width: 270px;
     height: 100vh;
@@ -14,49 +10,72 @@
     left: 0;
     top: 60px;
     overflow-y: auto;
-} 
+}
+
+.nav-item.active {
+    color: #015F9E !important;
+    font-family: Poppins, sans-serif;
+    font-style: bold;
+}
+
+.nav-item {
+    color: #015F9E;
+}
 
 .userpanelcontent {
     /* margin-left: 250px; */
     width: calc(100% - 270px);
 }
 
-#sidemenu.active {
-    color: #015F9E !important;
-    font-style: bold;
-    background-color: #ebf6fd !important;
-    border-radius: 8px;
-}
-
-/* #sidemenu:hover{
-    color: #015F9E;
-    font-style: bold;
-    background-color: #ebf6fd;
-    border-radius: 8px;
+/* nav {
+    position: top;
+    font-size: 16px;
 } */
 
-.input-group,#logout-btn{
-    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 4px; 
-}
-#bar{
-    background-color: #ebf6fd;
+#sidemenu, #sidebuttons {
+    color: #015F9E;
+    font-weight: 500;
+    font-style: bold;
+    padding: 8px 20px;
     border-radius: 8px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
 }
+
+#sidemenu.active {
+    color: #015F9E !important;
+    background-color: #ebf6fd !important;
+     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sidemenu:hover {
+    color: #015F9E;
+    background-color: #ebf6fd;
+}
+
+.input-group,
+#logout-btn {
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
 #input-feild input:focus,
-#input-main input:focus{
+#input-main input:focus {
     outline: none;
     box-shadow: none;
 }
 
-#logout-btn{
+#logout-btn {
     color: red;
     background-color: white;
 }
-#logout-btn:hover{
+
+#logout-btn:hover {
     background-color: #015F9E;
     color: white;
 }
+
 .feed {
     color: #015F9E;
     width: 100%;
@@ -95,17 +114,20 @@
         position: relative;
     }
 }
-.calendar-box{
+
+.calendar-box {
     height: 120px;
     padding: 10px;
     vertical-align: top;
-   
+
 }
+
 .event {
     font-size: 0.7rem;
     color: red;
 }
-.background{
+
+.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -116,7 +138,7 @@
     align-items: center;
     display: flex;
 }
-.card{
-    width: 350px;
-}
 
+.card {
+    width: 350px;
+}
