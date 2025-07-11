@@ -7,17 +7,13 @@ body {
   transition: text-decoration 0.3s ease;
 }
 
-.nav-item:hover {
-
-  color: #015F9E;
-  /* text-decoration: underline; */
-}
-
-#homepage {
-  color: #015F9E;
+.nav-link.active {
+  color: #015F9E !important;
   font-family: Poppins, sans-serif;
   font-style: bold;
 }
+
+
 
 body.homepage-background {
   margin-top: 0%;
@@ -95,9 +91,7 @@ body.homepage-background {
   padding: 0 1rem;
 }
 
-.nav-link.active {
-  color: #2aa7ff !important;
-}
+
 
 /* Button Section */
 .hText {

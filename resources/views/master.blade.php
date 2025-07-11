@@ -30,17 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2 " id="homepage" href="{{ route('home') }}">Home</a>
+              <a class="nav-link fw-bold me-2  {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2" id="catag" aria-current="page"
-                href="{{ route('categories') }}">Categories</a>
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2" id="mybooks" href="{{ route('user_dashboard.myfeed') }}">My Books</a>
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myfeed') ? 'active' : '' }}" href="{{ route('user_dashboard.myfeed') }}">My Books</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
             </li>
           </ul>
           <div class="d-flex align-items-center">

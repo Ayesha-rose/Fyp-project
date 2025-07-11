@@ -1,10 +1,10 @@
 *{
     font-family: Poppins, sans-serif;
 }
-#mybooks, #myreviews{
-    color: #015F9E;
-    font-family: Poppins, sans-serif;
-    font-style: bold;
+.nav-link.active {
+  color: #015F9E !important;
+  font-family: Poppins, sans-serif;
+  font-style: bold;
 }
 .vertical-nav {
     width: 270px;
@@ -14,30 +14,26 @@
     left: 0;
     top: 60px;
     overflow-y: auto;
-} w
-#mybooks, #reviews ,.nav-item{
-    color: #015F9E;
-}
+} 
+
 .userpanelcontent {
     /* margin-left: 250px; */
     width: calc(100% - 270px);
 }
 
-/* .navbar {
-    position: relative; 
-    width: 100%;
-} */
-nav{
-    position: top;
-    font-size: 16px;
+#sidemenu.active {
+    color: #015F9E !important;
+    font-style: bold;
+    background-color: #ebf6fd !important;
+    border-radius: 8px;
 }
 
-#sidemenu:hover{
+/* #sidemenu:hover{
     color: #015F9E;
     font-style: bold;
     background-color: #ebf6fd;
     border-radius: 8px;
-}
+} */
 
 .input-group,#logout-btn{
     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);

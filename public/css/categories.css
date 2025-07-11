@@ -15,25 +15,21 @@ body.categories-background {
 
 }
 
+.nav-link.active {
+  color: #015F9E !important;
+    font-family: Poppins, sans-serif;
+    font-style: bold;
+}
+
 nav {
     position: top;
     font-size: 16px;
 }
 
-/* .navbar{
-    display: flex;
-    position: fixed;
-} */
- 
 .nav-item {
     transition: text-decoration 0.3s ease;
 }
 
-.nav-item:hover {
-   
-    color: #015F9E;
-    /* text-decoration: underline; */
-}
 
 .input-group {
     transition: box-shadow 0.3s, transform 0.3s;
