@@ -50,11 +50,11 @@
             </div>
 
             @auth
-            <span class="btn px-4 mx-4 pt-2 fw-bold text-white" style="border:none;">{{ Auth::user()->name }}</span>
+            <span class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">{{ Auth::user()->name }}</span>
 
             <form action="{{ route('logout.confirm') }}" method="GET">
               @csrf
-              <button type="submit" class="btn btn-primary fw-bold bg-light text-danger">Logout</button>
+              <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
             </form>
             @else
             <a class="btn bg-light btn-outline-primary text-primary px-4 mx-4 pt-2" href="{{ route('login') }}">SignIn</a>

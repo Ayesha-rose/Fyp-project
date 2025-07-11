@@ -14,7 +14,7 @@
     
     <!-- CSS -->
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="css/style3.css" rel="stylesheet" type="text/css">
+    <link href="css/userpanel.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

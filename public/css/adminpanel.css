@@ -10,6 +10,10 @@
       padding-top: 20px;
   }
 
+  .input-group {
+    transition: box-shadow 0.3s, transform 0.3s;
+    border-radius: 4px;
+}
   .sidebar .nav-link {
       color: white;
       padding: 12px 20px;
