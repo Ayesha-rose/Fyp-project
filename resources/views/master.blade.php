@@ -35,9 +35,19 @@
             <li class="nav-item">
               <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myfeed') ? 'active' : '' }}" href="{{ route('user_dashboard.myfeed') }}">My Books</a>
-            </li>
+            <a class="nav-link fw-bold me-2 
+                 {{ request()->routeIs('user_dashboard.myfeed') || 
+                 request()->routeIs('user_dashboard.wishlist') || 
+                 request()->routeIs('user_dashboard.currentlyread') || 
+                 request()->routeIs('user_dashboard.alreadyread') || 
+                 request()->routeIs('user_dashboard.mynotes') || 
+                 request()->routeIs('user_dashboard.mycalendar') || 
+                 request()->routeIs('user_dashboard.myreadingstat') 
+                 ? 'active' : '' }}"
+              href="{{ route('user_dashboard.myfeed') }}">
+              My Books
+            </a>
+
             <li class="nav-item">
               <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
             </li>

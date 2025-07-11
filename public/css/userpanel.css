@@ -36,23 +36,33 @@
     color: #015F9E;
     font-weight: 500;
     font-style: bold;
-    padding: 8px 20px;
+    padding: 3px 10px;
     border-radius: 8px;
     margin-bottom: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    text-decoration: none;
+    text-decoration: none ;
 }
 
 #sidemenu.active {
     color: #015F9E !important;
     background-color: #ebf6fd !important;
     transition: background-color 0.3s ease, color 0.3s ease;
+   
 }
 
 #sidemenu:hover {
     color: #015F9E;
     background-color: #ebf6fd;
+   
+} 
+#sidemenu a,
+#sidemenu a:hover,
+#sidemenu.active a {
+    text-decoration: none !important;
 }
+
+
+
 
 .input-group,
 #logout-btn {
