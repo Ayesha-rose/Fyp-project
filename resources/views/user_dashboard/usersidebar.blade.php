@@ -21,7 +21,7 @@
                     @endauth
                 </div>
 
-                <h4 class="py-2 mb-0">User</h4>
+                <h4 class="py-1 mb-0">User</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item" id="sidemenu">
                         <a href="{{ route('user_dashboard.myfeed') }}"
@@ -42,7 +42,7 @@
                         </a>
                     </li>
 
-                    <h4 class="py-2 mb-0">Reading Log</h4>
+                    <h4 class="py-1 mb-0">Reading Log</h4>
 
                     <li class="nav-item" id="sidemenu">
                         <a href="{{ route('user_dashboard.wishlist') }}"
