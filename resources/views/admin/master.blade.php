@@ -31,16 +31,15 @@
 
       <!-- Main Content -->
       <div class="col-md-10 p-4">
-        <div class="topbar">
-          <h3>Dashboard</h3>
-          <div class="logout">
+        <div class="topbar d-flex">
+          <div class="logout me-2">
             <form action="{{ route('logout.confirm') }}" method="GET">
               @csrf
               <button type="submit" class="btn btn-primary">Logout</button>
             </form>
           </div>
         </div>
-
+    
         @yield('adminpanel')
       </div>
     </div>
