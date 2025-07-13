@@ -9,6 +9,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{ asset('css/adminpanel.css') }}" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
+
 </head>
 
 <body>
@@ -33,10 +36,7 @@
       <div class="col-md-10 p-4">
         <div class="topbar d-flex">
           <div class="logout me-2">
-            <form action="{{ route('logout.confirm') }}" method="GET">
-              @csrf
-              <button type="submit" class="btn btn-primary">Logout</button>
-            </form>
+           
           </div>
         </div>
     
