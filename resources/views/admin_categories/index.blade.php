@@ -8,7 +8,7 @@
 <div class="col-md-10 main-content">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Category List</h2>
-    <a class="btn btn-dark text-white px-4 pt-2" href="{{ route('admin_categories.create') }}">Add New Categories</a>
+    <a class="btn text-white px-4 pt-2" style="background-color: #015F9E;" href="{{ route('admin_categories.create') }}">Add Categories</a>
   </div>
 
   <table class="table table-bordered">
@@ -28,7 +28,7 @@
         <td>{{ $category->date }}</td>
         <td>
 
-          <a href="{{ route('admin_categories.edit', $category->id) }}" class="btn btn-sm text-dark btn-outline-secondary">Edit</a>
+          <a href="{{ route('admin_categories.edit', $category->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
 
           <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $category->id }}">
             Delete

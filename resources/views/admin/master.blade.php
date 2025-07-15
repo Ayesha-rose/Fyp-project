@@ -31,12 +31,12 @@
             <li class="nav-item">
               <span class="btn px-4 mx-2 pt-2 fw-bold text-muted" style="border: none;">{{ Auth::user()->name }}</span>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <form action="{{ route('logout.confirm') }}" method="GET">
                 @csrf
                 <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
               </form>
-            </li>
+            </li> -->
             @else
             <li class="nav-item">
               <a class="btn bg-light btn-outline-primary text-primary px-4 mx-2 pt-2" href="{{ route('login') }}">SignIn</a>
@@ -97,6 +97,12 @@
                 class="nav-link">
                 <i class="fas fa-comment-dots"></i>Reviews
               </a>
+            </li>
+            <li class="nav-item">
+              <form action="{{ route('logout.confirm') }}" method="GET">
+                @csrf
+                <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
+              </form>
             </li>
           </ul>
         </div>

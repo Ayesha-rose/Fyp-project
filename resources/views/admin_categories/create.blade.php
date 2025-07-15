@@ -19,8 +19,8 @@
         <div class="card p-4 shadow-sm">
           <div class="card-body">
 
-            <h5 class="card-title mb-4 d-flex align-items-center">
-              <i class="fa-solid fa-book me-2"></i> {{ $category->id ? 'Edit Book' : 'Add Book' }}
+            <h5 class="card-title mb-4 d-flex align-items-center" style="color: #015F9E;">
+              <i class="fa-solid fa-book me-2"></i> {{ $category->id ? 'Edit Book' : 'Add Category' }}
             </h5>
 
             <div class="mb-3">
@@ -33,12 +33,13 @@
               <input type="text" name="book_name" class="form-control rounded-pill" placeholder="Book Name" required value="{{ $category->book_name ?? '' }}">
             </div>
 
+
             <div class="mb-4">
               <label class="form-label">Date</label>
               <input type="date" name="date" class="form-control rounded-pill" value="{{ $category->date ?? '' }}">
             </div>
 
-            <button type="submit" class="btn btn-dark w-100 fw-bold">
+            <button type="submit" class="btn w-100 text-light fw-bold" style="background-color: #015F9E;">
               {{ $category->id ? 'Update' : 'Save' }}
             </button>
 

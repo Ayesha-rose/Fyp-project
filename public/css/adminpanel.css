@@ -8,7 +8,7 @@
   } */
 
   .sidebar {
-      height: 100vh;
+      height: 120vh;
       width: 270px;
       left: 0;
       top: 60px;
@@ -16,12 +16,10 @@
   }
 
   h2,
-  thead
+  thead,label
    {
       font-weight: bold;
       color: #015F9E;
-      /* width: 100%;
-      padding: 15px; */
   }
 
   .input-group {
