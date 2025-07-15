@@ -1,5 +1,9 @@
 @extends('admin.master')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/adminpanel.css') }}">
+@endsection
+
 @section('adminpanel')
 <div class="row">
   <div class="col-12">

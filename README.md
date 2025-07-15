@@ -1,28 +1,14 @@
-nav{
-    position: top;
-    font-size: 16px;
-}
-
-#sidemenu {
-    color: #015F9E;
-    font-weight: 500;
-    padding: 5px 20px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    text-decoration: none;
-    text-underline: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-#sidemenu.active {
-    color: #015F9E !important;
-    font-style: bold;
-    background-color: #ebf6fd !important;
-    border-radius: 8px;
-}
-
-#sidemenu:hover{
-    color: #015F9E;
-    font-style: bold;
-    background-color: #ebf6fd;
-    border-radius: 8px;
-}
+ <!-- Sidebar -->
+      <!-- <div class="col-md-2 sidebar">
+        <h4 class="text-white text-center mb-4">EduVerse</h4>
+        <nav class="nav flex-column">
+          <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+          <a href="{{ route('admin_categories.index') }}" class="nav-link"><i class="fas fa-tags"></i> Manage Catego</a>
+          <a href="#" class="nav-link"><i class="fas fa-book"></i> Manage Books</a>
+          <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Reading Stats</a>
+          <a href="#" class="nav-link"><i class="fas fa-calendar"></i> Calendar</a>
+          <a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
+          <a href="#" class="nav-link"><i class="fas fa-robot"></i> AI Chatbot</a>
+          <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i>Reviews</a>
+        </nav>
+      </div> -->
