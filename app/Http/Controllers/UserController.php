@@ -21,10 +21,10 @@ class UserController extends Controller
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
             $user = Auth::user();
-            if ($user->role == 'admin') {
-                return redirect()->route('admin.dashboard');
+            if (auth()->user()->role === 'admin') {
+                return view('admin.dashboard');
             } else {
-                return redirect()->route('home');
+                return view('home');
             }
         } 
         return back()->withErrors([

@@ -46,7 +46,7 @@ class AdminBookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->pdf_path = $request->pdf_path;
+        $book->pdf_link = $request->pdf_link;
         $book->description = $request->description;
         $book->image = $request->image;
         $book->save();
@@ -91,7 +91,7 @@ class AdminBookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->pdf_path = $request->pdf_path;
+        $book->pdf_link = $request->pdf_link;
         $book->description = $request->description;
         $book->image = $request->image;
         $book->save();

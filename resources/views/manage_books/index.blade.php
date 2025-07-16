@@ -19,10 +19,10 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Category_id</th>
+          <th>Category Id</th>
           <th>Title</th>
           <th>Author</th>
-          <th>Pdf_Path</th>
+          <th>Pdf Link</th>
           <th>Description</th>
           <th>Image</th>
           <td>Actions</td>
@@ -34,7 +34,7 @@
           <td>{{ $book->category_id }}</td>
           <td>{{ $book->title }}</td>
           <td>{{ $book->author }}</td>
-          <td>{{ $book->pdf_path }}</td>
+          <td>{{ $book->pdf_link }}</td>
           <td>{{ $book->description }}</td>
           <td>{{ $book->image }}</td>
           <td>

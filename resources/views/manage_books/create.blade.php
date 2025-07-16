@@ -31,23 +31,23 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title" required value="{{ $book->title ?? '' }}">
+                        <input type="text" class="form-control" name="title" required value="{{ $book->title ?? '' }}">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="author">Author</label>
-                        <input type="text" class="form-control" placeholder="Author" name="author" required value="{{ $book->author ?? '' }}">
+                        <input type="text" class="form-control" name="author" required value="{{ $book->author ?? '' }}">
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="pdf_path">Pdf_Path</label>
-                        <input type="link" class="form-control" placeholder="Pdf_Path" name="pdf_path" required value="{{ $book->pdf_path ?? '' }}">
+                        <label for="pdf_link">Pdf Link</label>
+                        <input type="link" class="form-control" name="pdf_link" required value="{{ $book->pdf_Link ?? '' }}">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" placeholder="description" name="description" required value="{{ $book->description ?? '' }}">
+                        <input type="text" class="form-control" name="description" required value="{{ $book->description ?? '' }}">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="image">Image</label>
-                        <input type="text" class="form-control" placeholder="Image" name="image" value="{{ $book->image ?? '' }}">
+                        <input type="text" class="form-control" name="image" value="{{ $book->image ?? '' }}">
                     </div>
                     <button class="btn mt-4" style="background-color: #015F9E; color: white;">
                         {{ $book->id ? 'Update' : 'Create' }}

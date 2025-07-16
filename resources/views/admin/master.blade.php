@@ -24,16 +24,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mt-1">
             @auth
-              <li class="nav-item">
-                <span class="btn px-4 mx-2 pt-2 fw-bold text-muted" style="border: none;">{{ Auth::user()->name }}</span>
-              </li>
+            <li class="nav-item">
+              <span class="btn px-4 mx-2 pt-2 fw-bold text-muted" style="border: none;">{{ Auth::user()->name }}</span>
+            </li>
             @else
-              <li class="nav-item">
-                <a class="btn bg-light btn-outline-primary text-primary px-4 mx-2 pt-2" href="{{ route('login') }}">SignIn</a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-outline-light text-light px-4 pt-2" style="background-color: #36A5DC;" href="{{ url('signup') }}">SignUp</a>
-              </li>
+            <li class="nav-item">
+              <a class="btn bg-light btn-outline-primary text-primary px-4 mx-2 pt-2" href="{{ route('login') }}">SignIn</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light text-light px-4 pt-2" style="background-color: #36A5DC;" href="{{ url('signup') }}">SignUp</a>
+            </li>
             @endauth
           </ul>
         </div>
@@ -41,14 +41,14 @@
     </nav>
   </header>
 
-  <div class="container">
+  <div class="container" style="height: 85vh;">
     <div class="row d-flex mt-4" style="min-height: 100vh;">
       <div class="sidebar">
         <div class="py-3 mb-4">
           <ul class="nav flex-column">
             <li class="nav-item sidemenu">
               <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="fa-solid fa-house"></i>Dashboard
+                <i class="fa-solid fa-house"></i> Dashboard
               </a>
             </li>
             <li class="nav-item sidemenu">
@@ -56,18 +56,22 @@
                 <i class="fas fa-tags"></i> Manage Categories
               </a>
             </li>
-            <li class="nav-item sidemenu"><a href="{{ route('manage_books.index') }}" class="nav-link {{ request()->routeIs('manage_books.index')|| request()->routeIs('manage_books.create') || request()->routeIs('manage_books.edit') ? 'active' : '' }} "><i class="fas fa-book"></i> Manage Books</a></li>
+            <li class="nav-item sidemenu"><a href="{{ route('manage_books.index') }}"
+                class="nav-link {{ request()->routeIs('manage_books.index')|| 
+                request()->routeIs('manage_books.create') || 
+                request()->routeIs('manage_books.edit') ? 'active' : '' }} ">
+                <i class="fas fa-book"></i> Manage Books</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-calendar"></i> Calendar</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-robot"></i> AI Chatbot</a></li>
-            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-comment-dots"></i>Reviews</a></li>
-            <li class="nav-item">
-              <form action="{{ route('logout.confirm') }}" method="GET">
-                @csrf
-                <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
-              </form>
-            </li>
+            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-comment-dots"></i> Reviews</a></li>
           </ul>
+        </div>
+        <div class="logout-section p-3">
+          <form action="{{ route('logout.confirm') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
+          </form>
         </div>
       </div>
 
@@ -78,6 +82,7 @@
       </div>
     </div>
   </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

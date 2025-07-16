@@ -8,16 +8,19 @@
   } */
 
   .sidebar {
-      height: 120vh;
+      height: 85vh;
       width: 270px;
       left: 0;
       top: 60px;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
   }
 
   h2,
-  thead,label
-   {
+  thead,
+  label {
       font-weight: bold;
       color: #015F9E;
   }
@@ -77,6 +80,15 @@
   .logout:hover {
       text-decoration: underline;
   }
+
+  .logout-section {
+      border-top: 1px solid #e5e7eb;
+  }
+
+  .logout-section form button {
+      text-align: center;
+  }
+
 
   .card-icon {
       font-size: 28px;

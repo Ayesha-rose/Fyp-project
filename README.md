@@ -20,4 +20,13 @@ category selection k liye add kia hy
 
 
 
+
+ $table->string('category_id');
+            $table->string('title');
+            $table->string('author');
+            $table->string('pdf_link');
+            $table->string('description');
+            $table->string('image');
+
+
      

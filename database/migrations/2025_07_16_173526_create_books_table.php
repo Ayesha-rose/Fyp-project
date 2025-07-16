@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('category_id');
             $table->string('title');
             $table->string('author');
-            $table->string('pdf_path');
+            $table->string('pdf_link');
             $table->string('description');
             $table->string('image');
             $table->timestamps();
