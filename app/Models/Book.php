@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {

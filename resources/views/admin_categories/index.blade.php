@@ -44,7 +44,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content p-3 rounded-4 shadow">
             <div class="modal-header border-0">
-              <h5 class="modal-title fw-bold" id="addCategoryModalLabel">
+              <h5 class="modal-title fw-bold" id="addCategoryModalLabel" style="color: #015F9E;">
                 <i class="fa-solid fa-book me-2"></i> Add Category
               </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -69,7 +69,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content p-3 rounded-4 shadow">
             <div class="modal-header border-0">
-              <h5 class="modal-title fw-bold" id="editModalLabel{{ $category->id }}">
+              <h5 class="modal-title fw-bold" id="editModalLabel{{ $category->id }}" style="color: #015F9E;">
                 <i class="fa-solid fa-book me-2"></i> Edit Category
               </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

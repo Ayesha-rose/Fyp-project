@@ -12,3 +12,12 @@
           <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i>Reviews</a>
         </nav>
       </div> -->
+
+
+
+
+category selection k liye add kia hy 
+
+
+
+     

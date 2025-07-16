@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -28,7 +29,9 @@ class AdminBookController extends Controller
     public function create()
     {
         $book = new Book();
-        return view('manage_books.create', compact('book'));
+        // return view('manage_books.create', compact('book'));
+        $categories = Category::all(); // Fetch all categories
+        return view('manage_books.create', compact('book', 'categories'));
     }
 
     /**
@@ -71,7 +74,8 @@ class AdminBookController extends Controller
     public function edit($id)
     {
         $book = Book::findOrFail($id);
-        return view('manage_books.edit', compact('book'));
+        $categories = Category::all();
+       return view('manage_books.create', compact('book', 'categories'));
     }
 
     /**
