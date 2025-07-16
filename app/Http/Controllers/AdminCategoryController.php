@@ -24,8 +24,6 @@ class AdminCategoryController extends Controller
     {
         $category = new Category();
         $category->category_name = $request->category_name;
-        $category->book_name = $request->book_name;
-        $category->date = $request->date;
         $category->save();
 
         return redirect()->route('admin_categories.index');
@@ -41,8 +39,6 @@ class AdminCategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->category_name = $request->category_name;
-        $category->book_name = $request->book_name;
-        $category->date = $request->date;
         $category->save();
 
         return redirect()->route('admin_categories.index');

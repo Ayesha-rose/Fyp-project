@@ -1,4 +1,4 @@
-@extends('admin.master')
+<!-- @extends('admin.master')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/adminpanel.css') }}">
@@ -91,4 +91,4 @@
 
   </div>
 </div>
-@stop
+@stop -->
