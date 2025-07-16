@@ -56,7 +56,7 @@
                 <i class="fas fa-tags"></i> Manage Categories
               </a>
             </li>
-            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-book"></i> Manage Books</a></li>
+            <li class="nav-item sidemenu"><a href="{{ route('manage_books.index') }}" class="nav-link"><i class="fas fa-book"></i> Manage Books</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-calendar"></i> Calendar</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a></li>
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-robot"></i> AI Chatbot</a></li>

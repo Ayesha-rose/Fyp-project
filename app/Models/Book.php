@@ -4,7 +4,7 @@ namespace App\Models;
 
 use illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Book extends Model
 {
-    protected $fillable = ['title', 'author','pdf_path', 'description', 'image','category_id'];
+    protected $fillable = ['category_id', 'title', 'author','pdf_path', 'description', 'image'];
 }

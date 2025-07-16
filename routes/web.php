@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,9 +24,10 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])
 ->middleware('auth')->name('admin.dashboard');
+
 Route::resource('admin_categories', AdminCategoryController::class);
 
-Route::resource('admin_books', AdminBookController::class);
+Route::resource('manage_books', AdminBookController::class);
 
 Route::get('/categories', function () {
     return view('categories');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+
 
 class AdminBookController extends Controller
 {
@@ -38,12 +40,12 @@ class AdminBookController extends Controller
     public function store(Request $request)
     {
         $book = new Book();
+        $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
         $book->pdf_path = $request->pdf_path;
         $book->description = $request->description;
         $book->image = $request->image;
-        $book->category_id = $request->category_id;
         $book->save();
 
         return redirect()->route('manage_books.index');
@@ -82,12 +84,12 @@ class AdminBookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
+        $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
         $book->pdf_path = $request->pdf_path;
         $book->description = $request->description;
         $book->image = $request->image;
-        $book->category_id = $request->category_id;
         $book->save();
 
         return redirect()->route('manage_books.index');

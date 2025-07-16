@@ -10,32 +10,32 @@
     <h2>Books List</h2>
 
     <!-- Add Category Button -->
-    <button class="btn text-white px-4 pt-2" style="background-color: #015F9E;" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+    <a href="" class="btn text-white px-4 pt-2" style="background-color: #015F9E;" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
       Add Book
-    </button>
+    </a>
   </div>
 
   <!-- Category Table -->
   <table class="table table-bordered">
     <thead>
       <tr>
+        <th>Category_id</th>
         <th>Title</th>
         <th>Author</th>
         <th>Pdf_Path</th>
         <th>Description</th>
         <th>Image</th>
-        <th>Category_Id</th>
       </tr>
     </thead>
     <tbody>
       @foreach($books as $book)
       <tr>
+        <td>{{ $book->category_id }}</td>
         <td>{{ $book->title }}</td>
         <td>{{ $book->author }}</td>
         <td>{{ $book->pdf_path }}</td>
         <td>{{ $book->description }}</td>
         <td>{{ $book->image }}</td>
-        <td>{{ $book->category_id }}</td>
         <td>
           <!-- Edit Button -->
           <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
@@ -49,7 +49,7 @@
         </td>
       </tr>
       <!-- Delete Modal -->
-      <div class="modal fade" id="deleteModal{{ $category->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $category->id }}" aria-hidden="true">
+      <!-- <div class="modal fade" id="deleteModal{{ $category->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $category->id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content p-3 rounded-4 shadow">
             <div class="modal-header border-0">
@@ -70,7 +70,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       @endforeach
     </tbody>
