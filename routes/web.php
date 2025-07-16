@@ -25,6 +25,8 @@ Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])
 ->middleware('auth')->name('admin.dashboard');
 Route::resource('admin_categories', AdminCategoryController::class);
 
+Route::resource('admin_books', AdminBookController::class);
+
 Route::get('/categories', function () {
     return view('categories');
 })->name('categories');
