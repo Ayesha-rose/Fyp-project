@@ -21,7 +21,7 @@
                     <div class="col-md-6 form-group">
                         <label for="category_id">Select Category</label>
                         <select class="form-control" name="category_id" required>
-                            <option value="">Select Category</option>
+                            <option value="">Choose</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>
                                 {{ $category->category_name }}
