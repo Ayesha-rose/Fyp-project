@@ -34,9 +34,9 @@
           <td>{{ $book->category_id }}</td>
           <td>{{ $book->title }}</td>
           <td>{{ $book->author }}</td>
-          <td>{{ $book->pdf_link }}</td>
+          <td> <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View PDF</a></td>
           <td>{{ $book->description }}</td>
-          <td>{{ $book->image }}</td>
+          <td> <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
           <td>
             <!-- Edit Button -->
             <a class="btn btn-sm btn-outline-secondary"

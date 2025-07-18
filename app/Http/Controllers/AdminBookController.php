@@ -46,9 +46,10 @@ class AdminBookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->pdf_link = $request->pdf_link;
+
+        $book->pdf_link = $request->pdf->store('book-pdf');
         $book->description = $request->description;
-        $book->image = $request->image;
+        $book->image = $request->image->store('book-image');
         $book->save();
 
         return redirect()->route('manage_books.index');
@@ -91,9 +92,9 @@ class AdminBookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->pdf_link = $request->pdf_link;
+        $book->pdf_link = $request->pdf->store('book-pdf');
         $book->description = $request->description;
-        $book->image = $request->image;
+        $book->image = $request->image->store('book-image');
         $book->save();
 
         return redirect()->route('manage_books.index');
