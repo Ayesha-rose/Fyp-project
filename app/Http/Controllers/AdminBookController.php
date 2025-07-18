@@ -29,8 +29,7 @@ class AdminBookController extends Controller
     public function create()
     {
         $book = new Book();
-        // return view('manage_books.create', compact('book'));
-        $categories = Category::all(); // Fetch all categories
+        $categories = Category::all(); 
         return view('manage_books.create', compact('book', 'categories'));
     }
 
@@ -46,7 +45,6 @@ class AdminBookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
-
         $book->pdf_link = $request->pdf->store('book-pdf');
         $book->description = $request->description;
         $book->image = $request->image->store('book-image');
