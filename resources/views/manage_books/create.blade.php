@@ -41,14 +41,9 @@
                         <input type="text" class="form-control" name="author" required value="{{ $book->author ?? '' }}">
                     </div>
 
-
                     <div class="col-md-6 form-group">
-                        <label for="pdf">Pdf</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Choose file" readonly
-                                value="{{ $book->id && $book->pdf_link ? basename($book->pdf_link) : '' }}">
-                            <input type="file" name="pdf" class="form-control" style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%;">
-                        </div>
+                         <label for="pdf_link">Pdf</label>
+                        <input type="file" class="form-control" name="pdf" required value="{{ $book->pdf_Link ?? '' }}">
                     </div>
 
 
@@ -56,15 +51,10 @@
                         <label for="description">Description</label>
                         <input type="text" class="form-control" name="description" required value="{{ $book->description ?? '' }}">
                     </div>
+
                     <div class="col-md-6 form-group">
                         <label for="image">Image</label>
-                        <div class="input-group" style="position: relative;">
-                            <input type="text" class="form-control" placeholder="Choose image" readonly
-                                value="{{ $book->id && $book->image ? basename($book->image) : '' }}">
-                            <input type="file" name="image" accept="image/*"
-                                class="form-control"
-                                style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%;">
-                        </div>
+                        <input type="file" class="form-control" name="image" accept="image/*" value="{{ $book->image ?? '' }}">
                     </div>
 
 
