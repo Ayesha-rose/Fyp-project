@@ -41,11 +41,18 @@
                         <input type="text" class="form-control" name="author" required value="{{ $book->author ?? '' }}">
                     </div>
 
-                    <div class="col-md-6 form-group">
-                         <label for="pdf_link">Pdf</label>
-                        <input type="file" class="form-control" name="pdf" required value="{{ $book->pdf_Link ?? '' }}">
-                    </div>
 
+                    <div class="col-md-6 form-group">
+                        <label for="pdf">PDF</label>
+                        <input type="file" class="form-control" name="pdf" accept="application/pdf">
+
+                        @if(isset($book->pdf_link))
+                        <div class="mt-2">
+                            <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View Current PDF</a>
+                        </div>
+                        @endif
+
+                    </div>
 
                     <div class="col-md-6 form-group">
                         <label for="description">Description</label>
@@ -55,8 +62,13 @@
                     <div class="col-md-6 form-group">
                         <label for="image">Image</label>
                         <input type="file" class="form-control" name="image" accept="image/*" value="{{ $book->image ?? '' }}">
-                    </div>
 
+                        @if(isset($book->image))
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image" width="100">
+                        </div>
+                        @endif
+                    </div>
 
                     <button class="btn mt-4" style="background-color: #015F9E; color: white;">
                         {{ $book->id ? 'Update' : 'Create' }}
