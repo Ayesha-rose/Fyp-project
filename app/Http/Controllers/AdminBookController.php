@@ -40,8 +40,11 @@ class AdminBookController extends Controller
      */
     public function store(Request $request)
     {
+        $category = Category::findOrFail($request->category_id);
+
         $book = new Book();
-        $book->category_id = $request->category_id;
+        $category = Category::findOrFail($request->category_id);
+        $book->category_name = $category->category_name;
         $book->title = $request->title;
         $book->author = $request->author;
         $book->pdf_link = $request->pdf->store('book-pdf');
@@ -87,7 +90,8 @@ class AdminBookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
-        $book->category_id = $request->category_id;
+        $category = Category::findOrFail($request->category_id);
+        $book->category_name = $category->category_name;
         $book->title = $request->title;
         $book->author = $request->author;
         if ($request->hasFile('pdf_link')) {
