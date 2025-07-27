@@ -6,8 +6,9 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserCategoryController;
 
-Route::get('/', function () {
+Route::get('/', function () {   
     return view('home');
 })->name('home');
 
@@ -29,9 +30,8 @@ Route::resource('admin_categories', AdminCategoryController::class);
 
 Route::resource('manage_books', AdminBookController::class);
 
-Route::get('/categories', function () {
-    return view('categories');
-})->name('categories');
+Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
+
 
 Route::get('/myfeed', function () {
     return view('user_dashboard.myfeed');
