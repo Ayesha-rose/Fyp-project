@@ -31,6 +31,7 @@ Route::resource('admin_categories', AdminCategoryController::class);
 Route::resource('manage_books', AdminBookController::class);
 
 Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
+Route::get('/books/{id}', [App\Http\Controllers\AdminBookController::class, 'show'])->name('book.show');
 
 
 Route::get('/myfeed', function () {

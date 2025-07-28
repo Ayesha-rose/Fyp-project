@@ -15,10 +15,14 @@ class UserCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all(); 
+        $categories = Category::all();
         return view('categories', compact('categories'));
     }
-
+    // public function showCategoriesWithBooks()
+    // {
+    //     $categories = Category::with('books')->get();
+    //     return view('categories', compact('categories'));
+    // }
     /**
      * Show the form for creating a new resource.
      *

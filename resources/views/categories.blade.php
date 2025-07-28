@@ -153,27 +153,31 @@
                 </a>
             </div> -->
             @foreach($categories as $category)
-
             <div class="col-12 mt-3 text-primary fw-bold">
                 <h4><b>{{ $category->category_name }}</b></h4>
             </div>
-
             <div class="carousel carousel-dark slide" id="carousel{{ $category->id }}" data-bs-ride="carousel">
                 <div class="carousel-inner ">
                     {{-- First Carousel Item (Active) --}}
                     <div class="carousel-item active">
                         <div class="row">
                             {{-- Dummy Book/Image Card --}}
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <img src="{{ asset('your-default-image.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <p class="card-text">Book Title</p>
-                                        
+                            @foreach($category->books as $book)
 
-                                    </div>
+                            <div class="col-lg-2 col-md-3 col-sm-6 col-12">
+                                <div class="card">
+                                    <a href="{{ route('book.show', $book->id) }}" class="card-text">
+                                        <img src="{{ asset ('storage/' . $book->image)}}" class="card-img-top" alt="">
+                                    </a>
+                                    <!-- <div class="card-body">
+                                        <a href="{{ route('book.show', $book->id) }}" class="card-text"> {{$book->title}}</a>
+                                        <p class="card-text">{{$book->category->category_name}}</p>
+                                    </div> -->
+
                                 </div>
                             </div>
+                            @endforeach
+
                             {{-- You can repeat more dummy cards here or fetch real data --}}
                         </div>
                     </div>
@@ -190,8 +194,6 @@
                 </a>
             </div>
             @endforeach
-
-
         </div>
     </div>
     <footer>
