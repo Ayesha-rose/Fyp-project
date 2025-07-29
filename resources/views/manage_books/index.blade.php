@@ -32,12 +32,12 @@
         @foreach($books as $book)
         <tr>
        
-          <td>{{ optional($book->category)->category_id ?? 'No Category' }}</td>
+          <td>{{ $book->category->category_name ?? ' ' }}</td>
           <td>{{ $book->title }}</td>
           <td>{{ $book->author }}</td>
           <td> <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View PDF</a></td>
           <td>{{ $book->description }}</td>
-          <td> <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
+          <td> <img src ="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
           <td>
             <!-- Edit Button -->
             <a class="btn btn-sm btn-outline-secondary"

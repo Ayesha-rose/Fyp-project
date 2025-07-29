@@ -21,11 +21,11 @@
                 <div class="row g-3">
                     <div class="col-md-6 form-group">
 
-                        <label for="category">Category</label>
+                        <label for="category_id">Category</label>
                         <select name="category_id" class="form-control" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
 
