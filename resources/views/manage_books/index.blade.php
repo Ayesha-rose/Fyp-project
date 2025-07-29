@@ -31,7 +31,8 @@
       <tbody>
         @foreach($books as $book)
         <tr>
-          <td>{{ $book->category->category_name }}</td>
+       
+          <td>{{ optional($book->category)->category_id ?? 'No Category' }}</td>
           <td>{{ $book->title }}</td>
           <td>{{ $book->author }}</td>
           <td> <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View PDF</a></td>

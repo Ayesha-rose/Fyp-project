@@ -19,7 +19,7 @@ class AdminBookController extends Controller
         // $books = Book::all();
         // return view('manage_books.index', compact('books'));
         $books = Book::with('category')->get();
-        return view('admin.manage_books', compact('books'));
+        return view('manage_books.index', compact('books'));
     }
 
     /**
@@ -43,9 +43,8 @@ class AdminBookController extends Controller
     public function store(Request $request)
     {
         $category = Category::findOrFail($request->category_id);
-
         $book = new Book();
-        $category = Category::findOrFail($request->category_id);
+        $book->category_id = $category->id;
         $book->category_id = $category->category_id;
         $book->title = $request->title;
         $book->author = $request->author;
@@ -95,7 +94,7 @@ class AdminBookController extends Controller
     {
         $book = Book::findOrFail($id);
         $category = Category::findOrFail($request->category_id);
-        $book->category_id = $category->category_id;
+        $book->category_id = $category->id;
         $book->title = $request->title;
         $book->author = $request->author;
         if ($request->hasFile('pdf_link')) {
