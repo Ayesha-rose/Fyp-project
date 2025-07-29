@@ -44,8 +44,8 @@ class AdminBookController extends Controller
     {
         $category = Category::findOrFail($request->category_id);
         $book = new Book();
-        $book->category_id = $category->id;
-        $book->category_id = $category->category_id;
+        $book->category_id = $request->category_id;
+       
         $book->title = $request->title;
         $book->author = $request->author;
         $book->pdf_link = $request->pdf->store('book-pdf');

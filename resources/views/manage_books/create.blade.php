@@ -20,16 +20,16 @@
                 @endif
                 <div class="row g-3">
                     <div class="col-md-6 form-group">
-                        <label for="category_id">Select Category</label>
-                        <select class="form-control" name="category_id" required>
-                            <option value="">Choose</option>
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ $book->category_name == $category->category_name ? 'selected' : '' }}>
-                                {{ $category->category_name }}
-                            </option>
 
+                        <label for="category">Category</label>
+                        <select name="category_id" class="form-control" required>
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+
+
                     </div>
 
                     <div class="col-md-6 form-group">
