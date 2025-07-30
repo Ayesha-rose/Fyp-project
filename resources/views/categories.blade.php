@@ -152,12 +152,12 @@
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div> -->
-            @foreach($categories as $category)
+            <!-- @foreach($categories as $category)
             <div class="col-12 mt-3 text-primary fw-bold">
                 <h4><b>{{ $category->category_name }}</b></h4>
             </div>
             <div class="carousel carousel-dark slide" id="carousel{{ $category->id }}" data-bs-ride="carousel">
-                <div class="carousel-inner ">
+                <div class="carousel-inner">
                     {{-- First Carousel Item (Active) --}}
                     <div class="carousel-item active">
                         <div class="row">
@@ -165,15 +165,12 @@
                             @foreach($category->books as $book)
 
                             <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                                <div class="card">
-                                    <a href="{{ route('book.show', $book->id) }}" class="card-text">
-                                        <img src="{{ asset ('storage/' . $book->image)}}" class="card-img-top" alt="">
-                                    </a>
-                                    <!-- <div class="card-body">
-                                        <a href="{{ route('book.show', $book->id) }}" class="card-text"> {{$book->title}}</a>
-                                        <p class="card-text">{{$book->category->category_name}}</p>
-                                    </div> -->
-
+                                <div class="books-grid">
+                                    <div class="book-card">
+                                        <a href="{{ route('book.show', $book->id) }}">
+                                            <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach
@@ -193,7 +190,45 @@
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
+            @endforeach -->
+
+            @foreach($categories as $category)
+            <div class="col-12 mt-3 text-primary fw-bold">
+                <h4><b>{{ $category->category_name }}</b></h4>
+            </div>
+            <div id="carousel{{ $category->id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                <div class="carousel-inner">
+                    @php
+                    $chunks = $category->books->chunk(6);
+                    @endphp
+                    @foreach($chunks as $chunkIndex => $chunk)
+                    <div class="carousel-item @if($chunkIndex === 0) active @endif">
+                        <div class="books-grid">
+                            @foreach($chunk as $book)
+                            <div class="book-card">
+                                <a href="{{ route('book.show', $book->id) }}">
+                                    <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                @if($chunks->count() > 1)
+                <a class="carousel-control-prev" href="#carousel{{ $category->id }}" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel{{ $category->id }}" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
+                @endif
+            </div>
             @endforeach
+
         </div>
     </div>
     <footer>
