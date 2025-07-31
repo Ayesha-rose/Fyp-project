@@ -152,71 +152,35 @@
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div> -->
-            <!-- @foreach($categories as $category)
-            <div class="col-12 mt-3 text-primary fw-bold">
-                <h4><b>{{ $category->category_name }}</b></h4>
-            </div>
-            <div class="carousel carousel-dark slide" id="carousel{{ $category->id }}" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {{-- First Carousel Item (Active) --}}
-                    <div class="carousel-item active">
-                        <div class="row">
-                            {{-- Dummy Book/Image Card --}}
-                            @foreach($category->books as $book)
 
-                            <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                                <div class="books-grid">
-                                    <div class="book-card">
-                                        <a href="{{ route('book.show', $book->id) }}">
-                                            <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-
-                            {{-- You can repeat more dummy cards here or fetch real data --}}
-                        </div>
-                    </div>
-
-                    {{-- Optional: Add More Carousel Items for more books --}}
-                </div>
-
-                {{-- Controls --}}
-                <a class="carousel-control-prev" href="#carousel{{ $category->id }}" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#carousel{{ $category->id }}" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-            </div>
-            @endforeach -->
 
             @foreach($categories as $category)
             <div class="col-12 mt-3 text-primary fw-bold">
                 <h4><b>{{ $category->category_name }}</b></h4>
             </div>
-            <div id="carousel{{ $category->id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+
+            <div id="carousel{{ $category->id }}" class="carousel slide carousel-dark" data-bs-interval="false">
                 <div class="carousel-inner">
-                    @php
-                    $chunks = $category->books->chunk(6);
-                    @endphp
-                    @foreach($chunks as $chunkIndex => $chunk)
-                    <div class="carousel-item @if($chunkIndex === 0) active @endif">
+                    @foreach($category->books as $book)
+                    @if($loop->index % 6 == 0)
+                    <div class="carousel-item @if($loop->first) active @endif">
                         <div class="books-grid">
-                            @foreach($chunk as $book)
+                            @endif
+
                             <div class="book-card">
                                 <a href="{{ route('book.show', $book->id) }}">
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
                                 </a>
                             </div>
-                            @endforeach
+                            @if($loop->index % 6 == 5 || $loop->last)
                         </div>
                     </div>
+                    @endif
                     @endforeach
+
                 </div>
 
-                @if($chunks->count() > 1)
+                @if($category->books->count() > 6)
                 <a class="carousel-control-prev" href="#carousel{{ $category->id }}" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -228,6 +192,7 @@
                 @endif
             </div>
             @endforeach
+
 
         </div>
     </div>
