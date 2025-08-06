@@ -59,15 +59,13 @@ nav {
     height: auto;
 }
 
-#catag,
-#heading,
-#search_button,
-h1,
-h4,
+.categ,
+#search_button,h1,
 button {
     color: #015F9E;
     font-family: Poppins, sans-serif;
-    font-style: bold;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 h4 {
@@ -143,7 +141,7 @@ h4 {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    padding: 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 
 .carousel-inner{
@@ -152,7 +150,7 @@ h4 {
 
 .book-card {
     width: 160px;
-    height: 240px;
+    height: 220px;
     border-radius: 8px;
     overflow: hidden;
     background: #fff;

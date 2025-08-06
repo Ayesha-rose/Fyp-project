@@ -47,7 +47,8 @@
         <div class="py-3 mb-4">
           <ul class="nav flex-column">
             <li class="nav-item sidemenu">
-              <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+              <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') || 
+                request()->routeIs('admin_dashboard') ? 'active' : '' }}">
                 <i class="fa-solid fa-house"></i> Dashboard
               </a>
             </li>

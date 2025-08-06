@@ -13,8 +13,8 @@
             <div class="front">
                 <div class="row mt-5">
                     <div class="col-6 p-0 mt-3">
-                        <div class="left text-primary fw-bold" id="heading">
-                            <h1 class="heading-main mt-0"><b>CATEGORIES</b></h1>
+                        <div class="left">
+                            <h1 class="mt-0">CATEGORIES</h1>
                         </div>
                         <div class="row mt-4">
                             <div class="col-8">
@@ -155,10 +155,9 @@
 
 
             @foreach($categories as $category)
-            <div class="col-12 mt-3 text-primary fw-bold">
-                <h4><b>{{ $category->category_name }}</b></h4>
+            <div class="col-12 mb-0">
+                <h4><a href="#category{{ $category->id }}" class="categ">{{ $category->category_name }}</a></h4>
             </div>
-
             <div id="carousel{{ $category->id }}" class="carousel slide carousel-dark" data-bs-interval="false">
                 <div class="carousel-inner">
                     @foreach($category->books as $book)
@@ -166,7 +165,6 @@
                     <div class="carousel-item @if($loop->first) active @endif">
                         <div class="books-grid">
                             @endif
-
                             <div class="book-card">
                                 <a href="{{ route('book.show', $book->id) }}">
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
@@ -237,17 +235,6 @@
 @endsection
 
 @section('scripts')
-<script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
