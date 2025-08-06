@@ -1,22 +1,35 @@
-@extends('master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Display</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
 
-@section('userpanel')
-<div class="container ">
-    <div class="row">
-        <div class="col-md-3" >
-            <img src="{{ asset('storage/' . $book->image) }}" class="img-fluid rounded" alt="Book Image">
+<div class="container my-5">
+    <div class="row align-items-center g-4">
+        <!-- Book Image -->
+        <div class="col-auto">
+             <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image" class="img-fluid" style="width: 200px;">
         </div>
 
-        <div class="col-md-9">
-            <h2>Title: {{ $book->title }}</h2>
-            <h5>Author: {{ $book->author }}</h5>
-            <h5>Category: {{ $book->category->category_name }}</h5>
-            <p>Description: {{ $book->description }}</p>
-
-            <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
-                View PDF
-            </a>
+        <!-- Book Details -->
+        <div class="col">
+            <h2 class="mb-2">Title:{{$book->title}}</h2>
+            <p class="mb-1"><strong>Author:{{$book->author}}</strong> </p>
+            <p class="mb-1"><strong>Category:</strong>{{$book->category->category_name}}</p>
+            <p class="mb-3"><strong>Description:</strong>{{$book->description}}</p>
+         <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">View PDF</a>
         </div>
     </div>
 </div>
-@endsection
+
+</body>
+</html>
