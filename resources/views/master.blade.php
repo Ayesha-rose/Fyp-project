@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2  {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+              <a class="nav-link fw-bold me-2  {{ request()->routeIs('home')? 'active' : '' }}" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
