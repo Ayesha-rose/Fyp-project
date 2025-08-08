@@ -28,16 +28,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
-    <li class="nav-item">
-        <a class="nav-link fw-bold me-2 {{ request()->routeIs('home')? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
-    </li>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
+            <li class="nav-item">
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('home')? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
+            </li>
 
-    <li class="nav-item">
-        <a class="nav-link fw-bold me-2 
+            <li class="nav-item">
+              <a class="nav-link fw-bold me-2 
             {{ request()->routeIs('user_dashboard.myfeed') || 
                request()->routeIs('user_dashboard.wishlist') || 
                request()->routeIs('user_dashboard.currentlyread') || 
@@ -47,22 +47,22 @@
                request()->routeIs('user_dashboard.myreadingstat') ||
                 request()->routeIs('user_dashboard.myreviews') 
                ? 'active' : '' }}"
-            href="{{ route('user_dashboard.myfeed') }}">
-            My Books
-        </a>
-    </li>
+                href="{{ route('user_dashboard.myfeed') }}">
+                My Books
+              </a>
+            </li>
 
-    <li class="nav-item">
-        <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
-    </li>
-    @auth
+            <li class="nav-item">
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
+            </li>
+            <!-- @auth
         @if(Auth::user()->role === 'admin')
             <li class="nav-item">
                 <a class="nav-link fw-bold me-2 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
             </li>
         @endif
-    @endauth
-</ul>
+    @endauth -->
+          </ul>
 
           <div class="d-flex align-items-center">
             <div class="input-group me-3" id="input-feild">
@@ -71,7 +71,13 @@
             </div>
 
             @auth
+            @if(Auth::user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}"class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
+              {{ Auth::user()->name }}
+            </a>
+            @else
             <span class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">{{ Auth::user()->name }}</span>
+            @endif
 
             <form action="{{ route('logout.confirm') }}" method="GET">
               @csrf
