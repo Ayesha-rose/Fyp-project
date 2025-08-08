@@ -165,11 +165,16 @@
                     <div class="carousel-item @if($loop->first) active @endif">
                         <div class="books-grid">
                             @endif
-                            <div class="book-card">
-                                <a href="{{ route('book.show', $book->id) }}">
+                            <div class="card">
+                                <a href="{{ route('book.show', $book->id) }}" class="book-card">
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
                                 </a>
+                                <div class="card-body" style="margin: 0px; padding: 0px;">
+                                    <a href="{{ route('book.show', $book->id) }}" class="card-text"><b>Title: </b>{{$book->title}}</a>
+                                    <p class="card-text"><b>Author: </b>{{$book->author}}</p>
+                                </div>
                             </div>
+
                             @if($loop->index % 6 == 5 || $loop->last)
                         </div>
                     </div>

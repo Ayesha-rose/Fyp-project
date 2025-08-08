@@ -3,7 +3,7 @@
 @section('userpanelcontent')
 <div class="main-content mt-4">
     <div class="feed">
-        <h2 class="fw-bold">Reviews</h2>
+        <h2 class="fw-bold">My Reviews</h2>
         <div class="d-flex flex-column align-items-center text-muted feed-box fw-bold">
             <p class="text-center">
                 Your book notes are private and cannot be viewed<br>by other patrons.

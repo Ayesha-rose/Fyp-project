@@ -31,37 +31,44 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('manage_books', AdminBookController::class);
 });
 
+Route::get('/reviews', function () {
+    return view('reviews');
+})->name('reviews');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/myfeed', function () {     
-        return view('user_dashboard.myfeed'); 
-    })->name('user_dashboard.myfeed');  
+    Route::get('/myfeed', function () {
+        return view('user_dashboard.myfeed');
+    })->name('user_dashboard.myfeed');
 
-    Route::get('/alreadyread', function () {     
-        return view('user_dashboard.alreadyread'); 
-    })->name('user_dashboard.alreadyread');  
+    Route::get('/alreadyread', function () {
+        return view('user_dashboard.alreadyread');
+    })->name('user_dashboard.alreadyread');
 
-    Route::get('/currentlyread', function () {     
-        return view('user_dashboard.currentlyread'); 
-    })->name('user_dashboard.currentlyread');  
+    Route::get('/currentlyread', function () {
+        return view('user_dashboard.currentlyread');
+    })->name('user_dashboard.currentlyread');
 
-    Route::get('/mycalendar', function () {     
-        return view('user_dashboard.mycalendar'); 
-    })->name('user_dashboard.mycalendar');  
+    Route::get('/mycalendar', function () {
+        return view('user_dashboard.mycalendar');
+    })->name('user_dashboard.mycalendar');
 
-    Route::get('/mynotes', function () {     
-        return view('user_dashboard.mynotes'); 
-    })->name('user_dashboard.mynotes');  
+    Route::get('/mynotes', function () {
+        return view('user_dashboard.mynotes');
+    })->name('user_dashboard.mynotes');
 
-    Route::get('/myreadingstat', function () {     
-        return view('user_dashboard.myreadingstat'); 
-    })->name('user_dashboard.myreadingstat');  
+    Route::get('/myreadingstat', function () {
+        return view('user_dashboard.myreadingstat');
+    })->name('user_dashboard.myreadingstat');
 
-    Route::get('/myreviews', function () {     
-        return view('user_dashboard.myreviews'); 
-    })->name('user_dashboard.myreviews');  
+    Route::get('/myreviews', function () {
+        return view('user_dashboard.myreviews');
+    })->name('user_dashboard.myreviews');
 
-    Route::get('/wishlist', function () {     
-        return view('user_dashboard.wishlist'); 
-    })->name('user_dashboard.wishlist');  
+    Route::get('/wishlist', function () {
+        return view('user_dashboard.wishlist');
+    })->name('user_dashboard.wishlist');
+
+    Route::get('/reviews', function () {
+        return view('reviews');
+    })->name('reviews');
 });

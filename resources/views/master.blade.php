@@ -44,7 +44,8 @@
                request()->routeIs('user_dashboard.alreadyread') || 
                request()->routeIs('user_dashboard.mynotes') || 
                request()->routeIs('user_dashboard.mycalendar') || 
-               request()->routeIs('user_dashboard.myreadingstat') 
+               request()->routeIs('user_dashboard.myreadingstat') ||
+                request()->routeIs('user_dashboard.myreviews') 
                ? 'active' : '' }}"
             href="{{ route('user_dashboard.myfeed') }}">
             My Books
@@ -52,9 +53,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
+        <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
     </li>
-
     @auth
         @if(Auth::user()->role === 'admin')
             <li class="nav-item">

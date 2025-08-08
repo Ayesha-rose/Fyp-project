@@ -15,7 +15,4 @@
         <img src="images/ChartMotion.png" class="mt-5 img px-5 w-100">
     </div>
 </div>
-</div>
-</div>
-
 @endsection
