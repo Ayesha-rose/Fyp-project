@@ -21,7 +21,7 @@
                 <h5>Category: {{ $book->category->category_name }}</h5>
                 <p style="text-align: justify;">Description: {{ $book->description }}</p>
                 <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
-                    View PDF
+                    Read Book
                 </a>
             </div>
         </div>
