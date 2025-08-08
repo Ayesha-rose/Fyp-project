@@ -32,14 +32,36 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-
 Route::middleware('auth')->group(function () {
-    Route::get('/myfeed', fn() => view('user_dashboard.myfeed'))->name('user_dashboard.myfeed');
-    Route::get('/alreadyread', fn() => view('user_dashboard.alreadyread'))->name('user_dashboard.alreadyread');
-    Route::get('/currentlyread', fn() => view('user_dashboard.currentlyread'))->name('user_dashboard.currentlyread');
-    Route::get('/mycalendar', fn() => view('user_dashboard.mycalendar'))->name('user_dashboard.mycalendar');
-    Route::get('/mynotes', fn() => view('user_dashboard.mynotes'))->name('user_dashboard.mynotes');
-    Route::get('/myreadingstat', fn() => view('user_dashboard.myreadingstat'))->name('user_dashboard.myreadingstat');
-    Route::get('/myreviews', fn() => view('user_dashboard.myreviews'))->name('user_dashboard.myreviews');
-    Route::get('/wishlist', fn() => view('user_dashboard.wishlist'))->name('user_dashboard.wishlist');
+    Route::get('/myfeed', function () {     
+        return view('user_dashboard.myfeed'); 
+    })->name('user_dashboard.myfeed');  
+
+    Route::get('/alreadyread', function () {     
+        return view('user_dashboard.alreadyread'); 
+    })->name('user_dashboard.alreadyread');  
+
+    Route::get('/currentlyread', function () {     
+        return view('user_dashboard.currentlyread'); 
+    })->name('user_dashboard.currentlyread');  
+
+    Route::get('/mycalendar', function () {     
+        return view('user_dashboard.mycalendar'); 
+    })->name('user_dashboard.mycalendar');  
+
+    Route::get('/mynotes', function () {     
+        return view('user_dashboard.mynotes'); 
+    })->name('user_dashboard.mynotes');  
+
+    Route::get('/myreadingstat', function () {     
+        return view('user_dashboard.myreadingstat'); 
+    })->name('user_dashboard.myreadingstat');  
+
+    Route::get('/myreviews', function () {     
+        return view('user_dashboard.myreviews'); 
+    })->name('user_dashboard.myreviews');  
+
+    Route::get('/wishlist', function () {     
+        return view('user_dashboard.wishlist'); 
+    })->name('user_dashboard.wishlist');  
 });
