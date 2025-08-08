@@ -28,30 +28,42 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
-            <li class="nav-item">
-              <a class="nav-link fw-bold me-2  {{ request()->routeIs('home')? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
-            </li>
-            <a class="nav-link fw-bold me-2 
-                 {{ request()->routeIs('user_dashboard.myfeed') || 
-                 request()->routeIs('user_dashboard.wishlist') || 
-                 request()->routeIs('user_dashboard.currentlyread') || 
-                 request()->routeIs('user_dashboard.alreadyread') || 
-                 request()->routeIs('user_dashboard.mynotes') || 
-                 request()->routeIs('user_dashboard.mycalendar') || 
-                 request()->routeIs('user_dashboard.myreadingstat') 
-                 ? 'active' : '' }}"
-              href="{{ route('user_dashboard.myfeed') }}">
-              My Books
-            </a>
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4 mt-1">
+    <li class="nav-item">
+        <a class="nav-link fw-bold me-2 {{ request()->routeIs('home')? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link fw-bold me-2 {{ request()->routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">Categories</a>
+    </li>
 
+    @auth
+       
+        <a class="nav-link fw-bold me-2 
+            {{ request()->routeIs('user_dashboard.myfeed') || 
+            request()->routeIs('user_dashboard.wishlist') || 
+            request()->routeIs('user_dashboard.currentlyread') || 
+            request()->routeIs('user_dashboard.alreadyread') || 
+            request()->routeIs('user_dashboard.mynotes') || 
+            request()->routeIs('user_dashboard.mycalendar') || 
+            request()->routeIs('user_dashboard.myreadingstat') 
+            ? 'active' : '' }}"
+            href="{{ route('user_dashboard.myfeed') }}">
+            My Books
+        </a>
+
+        <li class="nav-item">
+            <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
+        </li>
+
+      
+        @if(Auth::user()->role === 'admin')
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2 {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}" href="{{ route('user_dashboard.myreviews') }}">Reviews</a>
+                <a class="nav-link fw-bold me-2 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
             </li>
-          </ul>
+        @endif
+    @endauth
+</ul>
+
           <div class="d-flex align-items-center">
             <div class="input-group me-3" id="input-feild">
               <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
