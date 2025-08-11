@@ -27,28 +27,23 @@
     width: calc(100% - 270px);
 }
 
-/* nav {
-    position: top;
-    font-size: 16px;
-} */
-
- .vertical-nav .nav-link{
+.vertical-nav .nav-link {
     color: #015F9E;
     font-style: bold;
     display: block;
     padding: 8px 16px;
-    border-radius: 8px; 
-    margin-bottom: 5px; 
+    border-radius: 8px;
+    margin-bottom: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.vertical-nav .nav-link.active{
-    background-color: #ebf6fd ;
+.vertical-nav .nav-link.active {
+    background-color: #ebf6fd;
 }
 
-.vertical-nav .nav-link:hover{
+.vertical-nav .nav-link:hover {
     background-color: #ebf6fd;
-} 
+}
 
 .input-group,
 #logout-btn {
@@ -70,6 +65,41 @@
 #logout-btn:hover {
     background-color: #015F9E;
     color: white;
+}
+
+.books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0px 0px 10px 0px;
+}
+
+.books-grid {
+    margin: 0px 10px 0px 10px;
+    width: 160px;
+}
+
+.book-card {
+    width: 160px;
+    height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.book-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .book-card {
+        width: 140px;
+        height: 200px;
+    }
 }
 
 .feed {

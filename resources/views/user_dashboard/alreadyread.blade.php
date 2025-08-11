@@ -8,12 +8,12 @@
         <h2 class="fw-bold ">Already Read</h2>
         <div class="row">
             @forelse ($books as $item)
-            <div class="col-md-2 mb-4">
+            <div class="books-grid">
                 <div class="card">
-                    <a href="{{ route('book.show', $item->book->id) }}">
-                        <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image" style="height: 200px; object-fit: cover;">
+                    <a href="{{ route('book.show', $item->book->id) }}" class="book-card">
+                        <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image">
                     </a>
-                    <div class="card-body p-2">
+                    <div class="card-body">
                         <a href="{{ route('book.show', $item->book->id) }}" class="card-text">
                             <b>Title: </b>{{ $item->book->title }}
                         </a>

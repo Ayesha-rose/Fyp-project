@@ -16,7 +16,7 @@ body.categories-background {
 }
 
 .nav-link.active {
-  color: #015F9E !important;
+    color: #015F9E !important;
     font-family: Poppins, sans-serif;
     font-style: bold;
 }
@@ -30,7 +30,6 @@ nav {
     transition: text-decoration 0.3s ease;
 }
 
-
 .input-group {
     transition: box-shadow 0.3s, transform 0.3s;
     border-radius: 4px;
@@ -39,12 +38,12 @@ nav {
 #input-feild,
 #logout-btn,
 #input-main,
-#search_button{
+#search_button {
     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 #input-feild input:focus,
-#input-main input:focus{
+#input-main input:focus {
     outline: none;
     box-shadow: none;
 }
@@ -60,7 +59,8 @@ nav {
 }
 
 .categ,
-#search_button,h1,
+#search_button,
+h1,
 button {
     color: #015F9E;
     font-family: Poppins, sans-serif;
@@ -81,13 +81,14 @@ h4 {
     font-size: 16px;
     color: #6c757d;
 }
-.category-term{
+
+.category-term {
     color: #6c757d;
     text-decoration: none;
 }
 
-.category-term:hover ,
-.category-item:hover{
+.category-term:hover,
+.category-item:hover {
     color: #015F9E;
 }
 
@@ -137,6 +138,11 @@ h4 {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
+.carousel-inner {
+    margin: 0px 40px 0px 40px;
+}
+
 .books-grid {
     display: flex;
     flex-wrap: wrap;
@@ -144,11 +150,7 @@ h4 {
     padding: 0px 0px 10px 0px;
 }
 
-.carousel-inner{
-    margin: 0px 40px 0px 40px ;
-}
-
-.card{
+.card {
     width: 160px;
 }
 
@@ -180,7 +182,7 @@ h4 {
     width: 10%;
 }
 
-.icon{
+.icon {
     margin-left: 8px;
     color: #4b5258;
 }

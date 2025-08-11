@@ -7,21 +7,22 @@
 
         <div class="row">
             @forelse ($books as $item)
-            <div class="col-md-2 mb-4">
-                <div class="card">
-                    <a href="{{ route('book.read', $item->book->id) }}">
-                        <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image" style="height: 200px; object-fit: cover;">
+            <div class="books-grid">
+                <div class="card" style="width: 160px;">
+                    <a href="{{ route('book.read', $item->book->id) }}" class="book-card">
+                        <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image">
                     </a>
-                    <div class="card-body p-2">
+                    <div class="card-body" style="margin: 0px; padding: 0px;">
                         <a href="{{ route('book.show', $item->book->id) }}" class="card-text">
                             <b>Title: </b>{{ $item->book->title }}
                         </a>
                         <p class="card-text"><b>Author: </b>{{ $item->book->author }}</p>
                     </div>
+
                     <div class="p-2">
                         <form action="{{ route('book.mark.read', $item->book->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-success btn-sm w-100">
+                            <button type="submit" class="btn btn-success btn-sm" style="align-items: center;">
                                 Mark as Read
                             </button>
                         </form>
