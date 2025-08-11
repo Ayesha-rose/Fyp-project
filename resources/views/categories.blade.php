@@ -166,11 +166,14 @@
                         <div class="books-grid">
                             @endif
                             <div class="card">
+                                <button class="favorite-btn btn btn-outline-danger btn-sm">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
                                 <a href="{{ route('book.read', $book->id) }}" class="book-card">
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
                                 </a>
                                 <div class="card-body" style="margin: 0px; padding: 0px;">
-                                    <a href="{{ route('book.show', $book->id) }}" class="card-text"><b>Title: </b>{{$book->title}}</a>
+                                    <a href="{{ route('book.show', $book->id) }}" class="card-text" ><b>Title: </b>{{$book->title}}</a>
                                     <p class="card-text"><b>Author: </b>{{$book->author}}</p>
                                 </div>
                             </div>
