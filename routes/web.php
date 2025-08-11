@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\CurrentlyReadingController;
+use App\Http\Controllers\AlreadyReadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
 
@@ -34,7 +35,7 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
-// When clicking "Read" button — store book in currently reading
+// Store a book in currently reading list when clicking "Read"
 Route::get('/book/read/{id}', [CurrentlyReadingController::class, 'store'])
     ->name('book.read')
     ->middleware('auth');
@@ -44,15 +45,19 @@ Route::get('/currentlyread', [CurrentlyReadingController::class, 'index'])
     ->name('user_dashboard.currentlyread')
     ->middleware('auth');
 
-// Other dashboard pages
 Route::middleware('auth')->group(function () {
     Route::get('/myfeed', function () {
         return view('user_dashboard.myfeed');
     })->name('user_dashboard.myfeed');
 
-    Route::get('/alreadyread', function () {
-        return view('user_dashboard.alreadyread');
-    })->name('user_dashboard.alreadyread');
+    Route::post('/book/mark-read/{id}', [AlreadyReadController::class, 'store'])
+        ->name('book.mark.read')
+        ->middleware('auth');
+
+    // Show already read list
+    Route::get('/already-read', [AlreadyReadController::class, 'index'])
+        ->name('user_dashboard.alreadyread')
+        ->middleware('auth');
 
     Route::get('/mycalendar', function () {
         return view('user_dashboard.mycalendar');
