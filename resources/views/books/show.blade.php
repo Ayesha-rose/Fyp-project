@@ -20,19 +20,19 @@
                 <h5>Author: {{ $book->author }}</h5>
                 <h5>Category: {{ $book->category->category_name }}</h5>
                 <p style="text-align: justify;">Description: {{ $book->description }}</p>
-               @auth
-    <!-- If logged in, show Read Book link -->
-    <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
-        Read Book
-    </a>
-@endauth
+                @auth
 
-@guest
-    <!-- If not logged in, redirect to login page -->
-    <a href="{{ route('login') }}" class="btn btn-primary">
-        Read Book
-    </a>
-@endguest
+                <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
+                    Read Book
+                </a>
+                @endauth
+
+                @guest
+
+                <a href="{{ route('login') }}" class="btn btn-primary">
+                    Read Book
+                </a>
+                @endguest
 
             </div>
         </div>

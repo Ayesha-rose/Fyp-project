@@ -166,7 +166,9 @@
                         <div class="books-grid">
                             @endif
                             <div class="card">
-                                <a href="{{ route('book.show', $book->id) }}" class="book-card">
+                                <a href="{{ route('book.read', $book->id) }}">
+
+
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
                                 </a>
                                 <div class="card-body" style="margin: 0px; padding: 0px;">

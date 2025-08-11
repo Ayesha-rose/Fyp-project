@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
+use App\Http\Controllers\CurrentlyReadingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
-
 
 Route::get('/', function () {
     return view('home');
@@ -21,7 +21,6 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
 Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show');
 
-
 Route::get('/logout-confirm', [UserController::class, 'logoutConfirmForm'])->name('logout.confirm');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -35,6 +34,17 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
+// When clicking "Read" button — store book in currently reading
+Route::get('/book/read/{id}', [CurrentlyReadingController::class, 'store'])
+    ->name('book.read')
+    ->middleware('auth');
+
+// Show currently reading list
+Route::get('/currentlyread', [CurrentlyReadingController::class, 'index'])
+    ->name('user_dashboard.currentlyread')
+    ->middleware('auth');
+
+// Other dashboard pages
 Route::middleware('auth')->group(function () {
     Route::get('/myfeed', function () {
         return view('user_dashboard.myfeed');
@@ -43,10 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/alreadyread', function () {
         return view('user_dashboard.alreadyread');
     })->name('user_dashboard.alreadyread');
-
-    Route::get('/currentlyread', function () {
-        return view('user_dashboard.currentlyread');
-    })->name('user_dashboard.currentlyread');
 
     Route::get('/mycalendar', function () {
         return view('user_dashboard.mycalendar');
@@ -67,8 +73,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/wishlist', function () {
         return view('user_dashboard.wishlist');
     })->name('user_dashboard.wishlist');
-
-    Route::get('/reviews', function () {
-        return view('reviews');
-    })->name('reviews');
 });
