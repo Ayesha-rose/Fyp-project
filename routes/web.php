@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
-use App\Http\Controllers\CurrentlyReadingController;
-use App\Http\Controllers\AlreadyReadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
+use App\Http\Controllers\ReadingController;
 
 Route::get('/', function () {
     return view('home');
@@ -35,29 +34,23 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
-// Store a book in currently reading list when clicking "Read"
-Route::get('/book/read/{id}', [CurrentlyReadingController::class, 'store'])
-    ->name('book.read')
-    ->middleware('auth');
-
-// Show currently reading list
-Route::get('/currentlyread', [CurrentlyReadingController::class, 'index'])
-    ->name('user_dashboard.currentlyread')
-    ->middleware('auth');
-
 Route::middleware('auth')->group(function () {
+
     Route::get('/myfeed', function () {
         return view('user_dashboard.myfeed');
     })->name('user_dashboard.myfeed');
 
-    Route::post('/book/mark-read/{id}', [AlreadyReadController::class, 'store'])
-        ->name('book.mark.read')
-        ->middleware('auth');
+    // Book actions
+    Route::get('/book/read/{id}', [ReadingController::class, 'store'])->name('book.read');
+    Route::post('/book/mark-complete/{id}', [ReadingController::class, 'markComplete'])->name('book.complete');
 
-    // Show already read list
-    Route::get('/already-read', [AlreadyReadController::class, 'index'])
-        ->name('user_dashboard.alreadyread')
-        ->middleware('auth');
+    // Currently reading routes (aliases)
+    Route::get('/currentlyread', [ReadingController::class, 'currently'])->name('user_dashboard.currentlyread');
+    Route::get('/reading-currently', [ReadingController::class, 'currently'])->name('reading.currently');
+
+    // Already read routes (aliases)
+    Route::get('/already-read', [ReadingController::class, 'already'])->name('user_dashboard.alreadyread');
+    Route::get('/reading-already', [ReadingController::class, 'already'])->name('reading.already');
 
     Route::get('/mycalendar', function () {
         return view('user_dashboard.mycalendar');

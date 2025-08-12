@@ -14,7 +14,6 @@ class AlreadyReadController extends Controller
     {
         $user = auth()->user();
 
-        // Agar already marked hai to skip
         $exists = AlreadyReading::where('user_id', $user->id)
             ->where('book_id', $id)
             ->first();
