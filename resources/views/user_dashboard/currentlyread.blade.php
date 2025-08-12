@@ -3,7 +3,7 @@
 @section('userpanelcontent')
 <div class="main-content mt-4">
     <div class="feed">
-        <h2 class="fw-bold">Currently Reading Stat</h2>
+        <h2 class="fw-bold">Currently Reading</h2>
         <div class="row">
             @forelse ($books as $item)
                 <div class="books-grid">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             @empty
-                <p class="text-muted">You are not currently reading any books.</p>
+                <p class="text-muted" style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">You are not currently reading any books.</p>
             @endforelse
         </div>
     </div>

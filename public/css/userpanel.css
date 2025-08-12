@@ -66,6 +66,21 @@
     background-color: #015F9E;
     color: white;
 }
+.card {
+    width: 350px;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 185px;
+    right: 8px;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+}
+
 
 .books-grid {
     display: flex;
@@ -165,6 +180,4 @@
     display: flex;
 }
 
-.card {
-    width: 350px;
-}
+

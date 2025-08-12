@@ -39,7 +39,7 @@
             <li class="nav-item">
               <a class="nav-link fw-bold me-2 
             {{ request()->routeIs('user_dashboard.myfeed') || 
-               request()->routeIs('user_dashboard.wishlist') || 
+               request()->routeIs('user_dashboard.favorites') || 
                request()->routeIs('user_dashboard.currentlyread') || 
                request()->routeIs('user_dashboard.alreadyread') || 
                request()->routeIs('user_dashboard.mynotes') || 

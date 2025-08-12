@@ -58,5 +58,37 @@ class ReadingController extends Controller
 
         return view('user_dashboard.alreadyread', compact('books'));
     }
-}
+    
+    public function favorites()
+    {
+        $userId = Auth::id();
+        $books = Reading::where('user_id', $userId)
+            ->where('status', 'favorite')
+            ->with('book')
+            ->get();
 
+        return view('user_dashboard.favorites', compact('books'));
+    }
+
+    public function toggleFavorite($bookId)
+    {
+        $userId = Auth::id();
+
+        $existing = Reading::where('user_id', $userId)
+            ->where('book_id', $bookId)
+            ->first();
+
+        if ($existing && $existing->status === 'favorite') {
+            // Remove favorite
+            $existing->delete();
+            return back()->with('message', 'Removed from favorites.');
+        } else {
+            // Mark as favorite
+            Reading::updateOrCreate(
+                ['user_id' => $userId, 'book_id' => $bookId],
+                ['status' => 'favorite']
+            );
+            return back()->with('message', 'Added to favorites.');
+        }
+    }
+}

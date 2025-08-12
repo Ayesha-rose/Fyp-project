@@ -44,12 +44,14 @@
 
                     <h4 class="py-1 mb-0">Reading Log</h4>
 
+                   
                     <li class="nav-item sidemenu">
-                        <a href="{{ route('user_dashboard.wishlist') }}"
-                            class="nav-link {{ request()->routeIs('user_dashboard.wishlist') ? 'active' : '' }}">
-                            <i class="fa-solid fa-book-open"></i> Wishlist
+                        <a href="{{ route('user_dashboard.favorites') }}" 
+                        class="nav-link {{ request()->routeIs('user_dashboard.favorites') ? 'active' : '' }}">
+                            <i class="fa fa-heart"></i> Favorites
                         </a>
-                    </li>
+                    </li> 
+
                     <li class="nav-item sidemenu">
                         <a href="{{ route('user_dashboard.currentlyread') }}"
                             class="nav-link {{ request()->routeIs('user_dashboard.currentlyread') ? 'active' : '' }}">

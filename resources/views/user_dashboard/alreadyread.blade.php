@@ -20,7 +20,7 @@
                     </div>
                 </div>
             @empty
-                <p class="text-muted">You have not read any books yet.</p>
+                <p class="text-muted" style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">You have not read any books yet.</p>
             @endforelse
         </div>
     </div>

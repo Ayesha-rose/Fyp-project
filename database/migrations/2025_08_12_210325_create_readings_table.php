@@ -17,8 +17,8 @@ class CreateReadingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
-            $table->enum('status', ['read', 'complete'])->default('read');
-            $table->unique(['user_id','book_id']);
+            $table->enum('status', ['read', 'complete', 'favorite'])->default('read');
+            $table->unique(['user_id', 'book_id']);
             $table->timestamps();
         });
     }

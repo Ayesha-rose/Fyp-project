@@ -52,6 +52,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/already-read', [ReadingController::class, 'already'])->name('user_dashboard.alreadyread');
     Route::get('/reading-already', [ReadingController::class, 'already'])->name('reading.already');
 
+    Route::post('/book/favorite/{id}', [ReadingController::class, 'toggleFavorite'])->name('book.favorite');
+    Route::get('/favorites', [ReadingController::class, 'favorites'])->name('user_dashboard.favorites');
+
+
     Route::get('/mycalendar', function () {
         return view('user_dashboard.mycalendar');
     })->name('user_dashboard.mycalendar');
@@ -67,8 +71,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/myreviews', function () {
         return view('user_dashboard.myreviews');
     })->name('user_dashboard.myreviews');
-
-    Route::get('/wishlist', function () {
-        return view('user_dashboard.wishlist');
-    })->name('user_dashboard.wishlist');
 });
