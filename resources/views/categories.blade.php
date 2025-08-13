@@ -165,8 +165,11 @@
                     <div class="carousel-item @if($loop->first) active @endif">
                         <div class="books-grid">
                             @endif
+                            @php
+                            $avgRating = round($book->reviews->avg('rating'), 1);
+                            @endphp
                             <div class="card">
-                                <form action="{{ route('book.favorite', $book->id) }}" method="POST" >
+                                <form action="{{ route('book.favorite', $book->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="favorite-btn btn btn-outline-danger btn-sm">
                                         <i class="fa{{ $book->is_favorite ? 's' : 'r' }} fa-heart"></i>
@@ -179,6 +182,12 @@
                                     <a href="{{ route('book.show', $book->id) }}" class="card-text"><b>Title: </b>{{$book->title}}</a>
                                     <p class="card-text"><b>Author: </b>{{$book->author}}</p>
                                 </div>
+                                <p class="mb-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="fa-solid fa-star {{ $i <= round($avgRating) ? 'text-warning' : 'text-muted' }}"></i>
+                                        @endfor
+                                        <span class="text-muted ms-1">{{ $avgRating ?? 'No ratings' }}</span>
+                                </p>
                             </div>
 
                             @if($loop->index % 6 == 5 || $loop->last)

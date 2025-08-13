@@ -16,7 +16,10 @@ class UserCategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $categories = Category::with(['books.reviews'])->get();
         return view('categories', compact('categories'));
+
+        // return view('categories', compact('categories'));
     }
     // public function showCategoriesWithBooks()
     // {

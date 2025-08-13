@@ -18,7 +18,6 @@ class CreateReviewsTable extends Migration
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('review'); // aligns with your <textarea name="review">
-            // $table->unique(['book_id', 'user_id']);
             $table->timestamps();
         });
     }

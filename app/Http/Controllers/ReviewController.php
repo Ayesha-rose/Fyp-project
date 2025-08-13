@@ -36,22 +36,25 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request, Book $book)
     {
         $validated = $request->validate([
-            'review' => ['required', 'string', 'min:5', 'max:2000'],
+            'review' => 'required|string|min:5|max:2000',
+            'rating' => 'required|integer|min:1|max:5',
         ]);
 
-       
-
         $book->reviews()->updateOrCreate(
-            ['user_id' => auth()->id()], // Find by user_id for this book
-            ['review'  => $validated['review']]
+            ['user_id' => auth()->id()],
+            [
+                'review' => $validated['review'],
+                'rating' => $validated['rating'],
+            ]
         );
 
-
-        return back()->with('status', 'Your review has been posted.');
+        return back()->with('status', 'Your review and rating have been saved.');
     }
+
 
     /**
      * Display the specified resource.
