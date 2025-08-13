@@ -14,7 +14,7 @@
                             <i class="fa{{ $item->book->is_favorite ? 's' : 'r' }} fa-heart"></i>
                         </button>
                     </form>
-                    <a href="{{ route('book.show', $item->book->id) }}" class="book-card">
+                    <a href="{{ route('book.read', $item->book->id) }}" class="book-card">
                         <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image">
                     </a>
                     <div class="card-body">
@@ -22,6 +22,7 @@
                             <b>Title: </b>{{ $item->book->title }}
                         </a>
                         <p class="card-text"><b>Author: </b>{{ $item->book->author }}</p>
+                       
                     </div>
                 </div>
             </div>
