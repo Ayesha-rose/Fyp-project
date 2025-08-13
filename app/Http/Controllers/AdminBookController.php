@@ -45,7 +45,7 @@ class AdminBookController extends Controller
         $category = Category::findOrFail($request->category_id);
         $book = new Book();
         $book->category_id = $request->category_id;
-       
+
         $book->title = $request->title;
         $book->author = $request->author;
         $book->pdf_link = $request->pdf->store('book-pdf');
@@ -66,6 +66,11 @@ class AdminBookController extends Controller
     {
         //
         $book = Book::with('category')->findOrFail($id);
+        $book->load([
+            'category',
+            'reviews' => fn($q) => $q->latest(),
+            'reviews.user',
+        ]);
         return view('books.show', compact('book'));
     }
 

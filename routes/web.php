@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
 use App\Http\Controllers\ReadingController;
+use App\Http\Controllers\ReviewController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -28,6 +30,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('admin_categories', AdminCategoryController::class);
     Route::resource('manage_books', AdminBookController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])
+        ->name('books.reviews.store');
 });
 
 Route::get('/reviews', function () {

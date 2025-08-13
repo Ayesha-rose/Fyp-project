@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
+
 class Book extends Model
 {
     protected $fillable = ['category_id', 'title', 'author', 'pdf_link', 'description', 'image'];
@@ -20,5 +23,9 @@ class Book extends Model
     public function readings()
     {
         return $this->hasMany(Reading::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class);
     }
 }
