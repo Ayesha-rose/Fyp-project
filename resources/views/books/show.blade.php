@@ -12,7 +12,7 @@
         .star-rating {
             flex-direction: row-reverse;
             /* highest star first */
-            justify-content: flex-start;
+            justify-content: flex-end;
         }
 
         .star-rating input {
