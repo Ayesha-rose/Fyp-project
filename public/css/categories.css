@@ -156,19 +156,6 @@ h4 {
     overflow: hidden;
 }
 
-
-.favorite-btn {
-    position: absolute;
-    top: 185px;
-    right: 8px;
-    border: none;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: white;
-}
-
-
 .book-card {
     width: 160px;
     height: 220px;
@@ -190,6 +177,17 @@ h4 {
         width: 140px;
         height: 200px;
     }
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 185px;
+    right: 8px;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
 }
 
 .footer_logo {

@@ -1,32 +1,48 @@
- <!-- Sidebar -->
-      <!-- <div class="col-md-2 sidebar">
-        <h4 class="text-white text-center mb-4">EduVerse</h4>
-        <nav class="nav flex-column">
-          <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
-          <a href="{{ route('admin_categories.index') }}" class="nav-link"><i class="fas fa-tags"></i> Manage Catego</a>
-          <a href="#" class="nav-link"><i class="fas fa-book"></i> Manage Books</a>
-          <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Reading Stats</a>
-          <a href="#" class="nav-link"><i class="fas fa-calendar"></i> Calendar</a>
-          <a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
-          <a href="#" class="nav-link"><i class="fas fa-robot"></i> AI Chatbot</a>
-          <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i>Reviews</a>
-        </nav>
-      </div> -->
 
 
+<!-- @extends('user_dashboard.usersidebar')
+
+@section('userpanelcontent')
+<div class="main-content mt-4">
+    <div class="feed">
+        <h2 class="fw-bold">My Reviews</h2>
+        @if($reviews->count() > 0)
+        <div class="row">
+            @foreach($reviews as $review)
+            <div class="books-grid">
+                <div class="card " style="width: 160px;">
+                
+                    <img src="{{ asset('storage/' . $review->book->image) }}"
+                        class="book-card card-img-top"style="margin: 0; padding: 0;" alt="{{ $review->book->title }}">
+                    <div class="card-body">
+                        <h6 class="mb-1"><b>Title: </b>{{ $review->book->title }}</h6>
+                        <small class="text-muted">
+                            {{ $review->book->category->category_name ?? 'Uncategorized' }}
+                        </small>
+                        <p class="mt-2">{{ $review->review }}</p>
+                        <div class="star-rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <=$review->rating)
+                                <i class="bi bi-star-fill text-warning"></i>
+                                @else
+                                <i class="bi bi-star text-warning"></i>
+                                @endif
+                                @endfor
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @else
+        <div class="d-flex flex-column align-items-center text-muted feed-box fw-bold">
+            <p class="text-center">You haven’t reviewed any books yet.</p>
+        </div>
+        @endif
+    </div>
+</div>
+@endsection-->
 
 
-category selection k liye add kia hy 
-
-
-
-
- $table->string('category_id');
-            $table->string('title');
-            $table->string('author');
-            $table->string('pdf_link');
-            $table->string('description');
-            $table->string('image');
-
-
-     

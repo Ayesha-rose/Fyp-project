@@ -7,6 +7,8 @@
     <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <style>
         .star-rating {
@@ -101,8 +103,8 @@
 
             <p class="mb-1">
                 @for ($i = 1; $i <= 5; $i++)
-                    <i class="fa-solid fa-star {{ $i <= $rev->rating ? 'text-warning' : 'text-muted' }}"></i>
-                    @endfor
+                    <i class="bi {{ $i <= $rev->rating ? 'bi-star-fill text-warning' : 'bi-star text-muted' }}"></i>
+                @endfor
             </p>
         </div>
         @endforeach
@@ -135,7 +137,7 @@
 
                         {{-- Star Rating --}}
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Rate this book:</label>
+                            <label class="form-label fw-bold" style="color: #015F9E;">Rate this book:</label>
                             <div class="star-rating d-flex gap-1">
 
                                 @for ($i = 5; $i >= 1; $i--)
