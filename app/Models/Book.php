@@ -11,6 +11,7 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+    
     public function getIsFavoriteAttribute()
     {
         if (!auth()->check()) return false;
@@ -28,4 +29,5 @@ class Book extends Model
     {
         return $this->hasMany(\App\Models\Review::class);
     }
+    
 }

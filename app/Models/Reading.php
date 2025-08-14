@@ -13,4 +13,5 @@ class Reading extends Model
     {
         return $this->belongsTo(Book::class);
     }
+    
 }

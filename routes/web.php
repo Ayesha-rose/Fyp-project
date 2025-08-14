@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\MyFeedController;
+
 
 
 Route::get('/', function () {
@@ -41,12 +43,16 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
+
+
+Route::get('/myfeed', [MyFeedController::class, 'index'])
+    ->name('user_dashboard.myfeed')
+    ->middleware('auth');
+
+
 Route::middleware('auth')->group(function () {
 
-    Route::get('/myfeed', function () {
-        return view('user_dashboard.myfeed');
-    })->name('user_dashboard.myfeed');
-
+   
     // Book actions
     Route::get('/book/read/{id}', [ReadingController::class, 'store'])->name('book.read');
     Route::post('/book/mark-complete/{id}', [ReadingController::class, 'markComplete'])->name('book.complete');
