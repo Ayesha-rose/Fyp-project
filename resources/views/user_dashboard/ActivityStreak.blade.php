@@ -3,7 +3,7 @@
 @section('userpanelcontent')
 <div class="main-content mt-4">
     <div class="feed">
-        <h2 class="fw-bold">My Reading Stat</h2>
+        <h2 class="fw-bold">My Activity Streak</h2>
         <div class="d-flex align-items-center justify-content-between">
             <h4 class="p-2 fw-bold">January</h4>
             <select class="form-select w-auto list">

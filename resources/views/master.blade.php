@@ -44,7 +44,7 @@
                request()->routeIs('user_dashboard.alreadyread') || 
                request()->routeIs('user_dashboard.mynotes') || 
                request()->routeIs('user_dashboard.mycalendar') || 
-               request()->routeIs('user_dashboard.myreadingstat') ||
+               request()->routeIs('user_dashboard.activitystreak') ||
                 request()->routeIs('user_dashboard.myreviews') 
                ? 'active' : '' }}"
                 href="{{ route('user_dashboard.myfeed') }}">

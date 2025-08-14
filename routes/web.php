@@ -77,9 +77,9 @@ Route::middleware('auth')->group(function () {
         return view('user_dashboard.mynotes');
     })->name('user_dashboard.mynotes');
 
-    Route::get('/myreadingstat', function () {
-        return view('user_dashboard.myreadingstat');
-    })->name('user_dashboard.myreadingstat');
+    Route::get('/activitystreak', function () {
+        return view('user_dashboard.activitystreak');
+    })->name('user_dashboard.activitystreak');
 
     Route::get('/myreviews', function () {
         return view('user_dashboard.myreviews');

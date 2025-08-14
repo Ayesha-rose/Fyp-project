@@ -30,9 +30,9 @@
                         </a>
                     </li>
                     <li class="nav-item sidemenu">
-                        <a href="{{ route('user_dashboard.myreadingstat') }}"
-                            class="nav-link {{ request()->routeIs('user_dashboard.myreadingstat') ? 'active' : '' }}">
-                            <i class="fa-solid fa-square-poll-vertical"></i> My Reading Stat
+                        <a href="{{ route('user_dashboard.activitystreak') }}"
+                            class="nav-link {{ request()->routeIs('user_dashboard.activitystreak') ? 'active' : '' }}">
+                            <i class="fa-solid fa-square-poll-vertical"></i> My Activity Streak
                         </a>
                     </li>
                     <li class="nav-item sidemenu">

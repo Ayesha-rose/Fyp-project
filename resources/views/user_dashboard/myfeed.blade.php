@@ -21,11 +21,11 @@
                     </div>
                 </div>
             @empty
-                <div class="col-12">
-                    <div class="alert alert-info" style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+                
+                    <div class="text-muted" style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
                         No personalized recommendations yet. Start reading to populate your feed.
                     </div>
-                </div>
+                
             @endforelse
         </div>
 
