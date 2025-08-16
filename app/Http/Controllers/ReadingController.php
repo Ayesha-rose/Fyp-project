@@ -21,8 +21,25 @@ class ReadingController extends Controller
             ['user_id' => $userId, 'book_id' => $bookId],
             ['status' => 'read']
         );
-        $this->updateStreak();
         return redirect()->route('book.show', $bookId);
+    }
+
+    public function read(Request $request, $bookId)
+    {
+        $userId = Auth::id();
+
+        // 1️⃣ Update reading status
+        Reading::updateOrCreate(
+            ['user_id' => $userId, 'book_id' => $bookId],
+            ['status' => 'read']
+        );
+
+        // 2️⃣ Update streak
+        $this->updateStreak();
+
+        // 3️⃣ Redirect to PDF
+        $book = \App\Models\Book::findOrFail($bookId);
+        return redirect()->away(asset('storage/' . $book->pdf_link));
     }
 
     // Mark book as complete

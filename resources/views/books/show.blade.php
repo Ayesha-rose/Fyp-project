@@ -54,11 +54,20 @@
                 <h5>Category: {{ $book->category->category_name }}</h5>
                 <p style="text-align: justify;"><b>Description:</b> {{ $book->description }}</p>
 
-                @auth
+                <!-- @auth
                 <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
                     Read Book
                 </a>
+                @endauth -->
+
+                @auth
+                <form action="{{ route('book.read', $book->id) }}" method="POST" target="_blank">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Read Book</button>
+                </form>
                 @endauth
+
+
 
                 @guest
                 <a href="{{ route('login') }}" class="btn btn-primary">
@@ -104,7 +113,7 @@
             <p class="mb-1">
                 @for ($i = 1; $i <= 5; $i++)
                     <i class="bi {{ $i <= $rev->rating ? 'bi-star-fill text-warning' : 'bi-star text-muted' }}"></i>
-                @endfor
+                    @endfor
             </p>
         </div>
         @endforeach

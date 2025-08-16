@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">Current Streak</h5>
                         @if($lastStreak)
-                        <p class="display-6 fw-bold">{{ $lastStreak->streak_count }} <small>day(s)</small></p>
+                        <p class="display-6 fw-bold" style="color: orangered;">{{ $lastStreak->streak_count }} <small><i class="fa-solid fa-fire"></i></small></p>
                         <p class="text-muted mb-0">Last Activity: {{ $lastStreak->activity_date->format('d M, Y') }}</p>
                         @else
                         <p class="text-muted">You have not started your reading streak yet.</p>
@@ -40,7 +40,7 @@
                             @foreach($streakHistory as $streak)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ $streak->activity_date->format('d M, Y') }}
-                                <span class="badge bg-success rounded-pill">{{ $streak->streak_count }} day(s)</span>
+                                <span class="badge rounded-pill" style="background-color: orangered;">{{ $streak->streak_count }} <small><i class="fa-solid fa-fire"></i></small></span>
                             </li>
                             @endforeach
                         </ul>

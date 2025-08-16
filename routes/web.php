@@ -54,11 +54,16 @@ Route::get('/myreviews', [UserReviewController::class, 'index'])
     ->name('user_dashboard.myreviews')
     ->middleware('auth');
 
+Route::post('/book/read/{id}', [ReadingController::class, 'read'])
+    ->name('book.read')
+    ->middleware('auth');
+
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/activitystreak', [ReadingController::class, 'showStreak'])
         ->name('user_dashboard.activitystreak');
-
+    
     // Book actions
     Route::get('/book/read/{id}', [ReadingController::class, 'store'])->name('book.read');
     Route::post('/book/mark-complete/{id}', [ReadingController::class, 'markComplete'])->name('book.complete');
