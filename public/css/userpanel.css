@@ -66,6 +66,7 @@
     background-color: #015F9E;
     color: white;
 }
+
 .card {
     width: 350px;
 }
@@ -82,9 +83,12 @@
 }
 
 .book-image {
-    width: 120px;          /* Same width for all */
-    height: 160px;         /* Same height for all */
-    object-fit: cover;     /* Crop and center image without distortion */
+    width: 120px;
+    /* Same width for all */
+    height: 160px;
+    /* Same height for all */
+    object-fit: cover;
+    /* Crop and center image without distortion */
     border-radius: 5px;
     margin: 0%;
     padding: 0%;
@@ -188,5 +192,3 @@
     align-items: center;
     display: flex;
 }
-
-

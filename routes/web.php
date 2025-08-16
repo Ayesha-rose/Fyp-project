@@ -56,6 +56,8 @@ Route::get('/myreviews', [UserReviewController::class, 'index'])
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/activitystreak', [ReadingController::class, 'showStreak'])
+        ->name('user_dashboard.activitystreak');
 
     // Book actions
     Route::get('/book/read/{id}', [ReadingController::class, 'store'])->name('book.read');
