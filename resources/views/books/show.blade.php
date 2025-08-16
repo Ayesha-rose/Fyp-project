@@ -53,37 +53,30 @@
                 <h5>Author: {{ $book->author }}</h5>
                 <h5>Category: {{ $book->category->category_name }}</h5>
                 <p style="text-align: justify;"><b>Description:</b> {{ $book->description }}</p>
+                <div class="d-flex gap-2 my-2">
+                    @auth
+                    <form action="{{ route('book.read', $book->id) }}" method="POST" target="_blank">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Read Book</button>
+                    </form>
+                    @endauth
 
-                <!-- @auth
-                <a href="{{ asset('storage/' . $book->pdf_link) }}" class="btn btn-primary" target="_blank">
-                    Read Book
-                </a>
-                @endauth -->
+                    @guest
+                    <a href="{{ route('login') }}" class="btn btn-primary">
+                        Read Book
+                    </a>
+                    @endguest
 
-                @auth
-                <form action="{{ route('book.read', $book->id) }}" method="POST" target="_blank">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Read Book</button>
-                </form>
-                @endauth
-
-
-
-                @guest
-                <a href="{{ route('login') }}" class="btn btn-primary">
-                    Read Book
-                </a>
-                @endguest
-
-                @auth
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
-                    Add your Review
-                </button>
-                @else
-                <div class="alert alert-info my-3">
-                    Please <a href="{{ route('login') }}" class="alert-link">log in</a> to submit a review.
+                    @auth
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                        Add your Review
+                    </button>
+                    @else
+                    <div class="alert alert-info my-3">
+                        Please <a href="{{ route('login') }}" class="alert-link">log in</a> to submit a review.
+                    </div>
+                    @endauth
                 </div>
-                @endauth
             </div>
         </div>
 
