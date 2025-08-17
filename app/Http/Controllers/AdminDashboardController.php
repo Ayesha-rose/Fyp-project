@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\User;
+use App\Models\Book;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminDashboardController extends Controller
 {
@@ -14,7 +18,11 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-       return view('admin.dashboard');
+        $totalUsers = User::where('role', 'user')->count();   // sab users count
+        $totalBooks = Book::count();   // sab books count
+        $averageRating = DB::table('reviews')->avg('rating');
+
+        return view('admin.dashboard', compact('totalUsers', 'totalBooks', 'averageRating'));
     }
 
     /**
