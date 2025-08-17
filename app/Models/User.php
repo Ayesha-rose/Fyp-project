@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+    public function notes()
+    {
+        return $this->hasMany(\App\Models\Note::class);
+    }
 }

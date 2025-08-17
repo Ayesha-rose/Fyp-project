@@ -150,4 +150,20 @@ class ReadingController extends Controller
             ['streak_count' => $streakCount]
         );
     }
+    public function reads($id, Request $request)
+{
+    $book = \App\Models\Book::findOrFail($id);
+
+    $currentPage = (int) $request->query('page', 1);
+
+    // iss book aur iss user ke notes (optional: iss page ke)
+    $notesForThisPage = $book->notes()
+        ->where('user_id', auth()->id())
+        ->where('page_no', $currentPage)
+        ->latest()
+        ->get();
+
+    return view('books.reads', compact('book','currentPage','notesForThisPage'));
+}
+
 }
