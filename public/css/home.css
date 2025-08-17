@@ -13,8 +13,6 @@ body {
   font-style: bold;
 }
 
-
-
 body.homepage-background {
   margin-top: 0%;
   padding-top: 0%;
@@ -36,8 +34,6 @@ body.homepage-background {
   border-radius: 4px;
   box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .bg1 {
   background-image: url("images/cover1.png");

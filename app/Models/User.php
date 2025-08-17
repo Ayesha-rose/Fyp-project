@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Review;
 
 class User extends Authenticatable
 {
@@ -48,6 +49,6 @@ class User extends Authenticatable
     }
     public function reviews()
     {
-        return $this->hasMany(\App\Models\Review::class);
+        return $this->hasMany(Review::class);
     }
 }

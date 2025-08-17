@@ -1,35 +1,21 @@
-html,
-body {
+html {
   height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-
-#image_Content {
+body {
   margin-top: 0%;
   padding-top: 0%;
+  padding-bottom: 0%;
   margin-bottom: 0%;
   width: 100%;
-  height: 50%;
-  object-fit: cover;
+  height: 100%;
+  background: url('../images/signin.png') no-repeat left;
   background-size: contain;
-  /* margin-top: 0%;
-    padding-top: 0%;
-    margin-bottom: 0%;
-    width: 100%;
-    height: 100vh;
-    background: url('/images/signup_img.png') no-repeat left;
-    background-size: contain; */
 }
 
-.form-wrapper {
-  width: 100%;
-  max-width: 550px;
-  padding: 30px;
-}
-
-.btn-google,
+/* .btn-google,
 .btn-twitter {
   background-color: white;
   border: 1px solid #ccc;
@@ -39,10 +25,10 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
-}
+} */
 
 .btn-primary-custom {
-  background-color: #4a1cdb;
+  background: linear-gradient(rgba(71, 55, 255, 1), rgba(110, 164, 252, 1));
   color: white;
   padding: 10px 20px;
   border: none;
@@ -51,9 +37,19 @@ body {
   font-weight: 500;
 }
 
+
 input.form-control {
-  border-radius: 50px;
-  padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 10px 15px;
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2) ;
+
+}
+
+input.form-control:focus {
+    outline: none ;
+    border: 1px solid #ccc;
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .or-divider {

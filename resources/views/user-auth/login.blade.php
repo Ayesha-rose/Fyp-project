@@ -5,12 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eduverse</title>
-
-  <!-- Bootstrap 5-->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />  -->
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('css/login.css')}}" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -22,14 +16,14 @@
   <div class="container">
     <div class="row">
       <!-- Left Side Image -->
-      <div class="col-md-6 p-0 d-none d-md-block">
-        <img src="/images/signup_img.png" alt="Library Image" class="img-fluid" />
+      <div class="col-md-6 p-0 d-none d-md-block d-sm-block">
+        <!-- <img src="/images/signup_img.png" alt="Library Image" class="img-fluid" /> -->
       </div>
 
       <!-- Right Side Form -->
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
-        <div class="form-wrapper ">
-          <h3 class="mb-4 fw-bold">Sign in</h3>
+      <div class="col-md-6">
+        <div class="form-wrapper" style="margin-top: 160px;">
+          <h3 class="mb-4 fw-bold" style="color: #015F9E;">Sign in</h3>
           <!-- Email Input -->
           <form action="/login" method="post">
             @csrf
@@ -43,7 +37,7 @@
             </div>
 
             <!-- Sign In Button -->
-            <button class="btn-primary-custom ">Sign in</button>
+            <button class="btn-primary-custom  fw-bold">Sign in</button>
           </form>
           <!-- Footer -->
           <div class="form-footer mt-4">

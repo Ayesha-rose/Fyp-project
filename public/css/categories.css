@@ -41,6 +41,10 @@ nav {
 #search_button {
     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
 }
+#search_button{
+    background: linear-gradient(rgba(71, 55, 255, 1), rgba(110, 164, 252, 1));
+
+}
 
 #input-feild input:focus,
 #input-main input:focus {

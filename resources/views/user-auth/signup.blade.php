@@ -8,69 +8,32 @@
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('css/signup.css')}}" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    .valid {
-      color: green;
-    }
-    .invalid {
-      color: red;
-    }
-  </style>
 </head>
 
 <body>
   <div class="container">
     <div class="row">
-      <!-- Column 1 -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <img
-        src="/images/Logo (1).png"
-        alt="Eduverse Logo"
-        class="img-fluid logo-img mb-3" />
-        <h3>Join <span class="text-primary">Eduverse</span> Today</h3>
-        <p class="fs-5 fw-normal">
-          Unlock a universe of free books and boundless learning.
-        </p>
 
-        @if ($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
+      <div class="col-md-6 mt-5">
+        <img src="/images/Logo (1).png" alt="Eduverse Logo" class="img-fluid logo-img mb-3" />
+        <h3>Join <span class="text-primary">Eduverse</span> Today</h3>
+        <p class="fs-5 fw-normal">Unlock a universe of free books and boundless learning. </p>
 
         <form action="/signup" method="post">
           @csrf
-          <input
-            type="email"
-            name="email"
-            class="form-control mb-3"
-            placeholder="Email"
-            required />
-          <input
-            type="text"
-            name="name"
-            class="form-control mb-3"
-            placeholder="Name"
-            required />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control mb-3"
-            placeholder="Enter Password"
-            required
-            onkeyup="validatePassword()" />
-          <input
-            type="password"
-            name="password_confirmation"
-            class="form-control mb-3"
-            placeholder="Re-enter Password"
-            required />
-
+          <input type="email" name="email" class="form-control mb-3" placeholder="Email" required />
+          <input type="text" name="name" class="form-control mb-3" placeholder="Name" required />
+          <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Enter Password" required onkeyup="validatePassword()" />
+          <input type="password" name="password_confirmation" class="form-control mb-3" placeholder="Re-enter Password" required />
+          @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
           <div id="password-rules">
             <div class="row gx-2 gy-2">
               <div class="col-6">
@@ -81,14 +44,16 @@
               </div>
             </div>
           </div>
-
-          <p class="small">
+          <br>
+          <!-- <p class="small">
             By creating an account, you agree to the
             <a href="#" class="text-dark">Terms of Use</a> and
             <a href="#" class="text-dark">Privacy Policy</a>.
           </p>
+          @error('email')
+          <div class="text-danger small">{{ $message }}</div>
+          @enderror -->
 
-          <!-- Button -->
           <button
             type="submit"
             class="btn2 border-0 text-white rounded-pill w-100 fw-bold">
@@ -96,21 +61,18 @@
           </button>
 
           <p class="mt-3">
-            Already have an account? <a href="login" class="text-dark">Sign in</a>
+            Already have an account? <a href="login">Sign in</a>
           </p>
         </form>
       </div>
 
-      <!-- Column 2 -->
-      <div class="col-lg-6 p-0">
-        <img
-        src="/images/img1.png"
-        alt="Learning Image"
-        class="w-100 img-content" />
-      </div>
+
+       <!-- <div class="col-md-6 p-0 d-none">
+        <img src="/images/signup_img.png" alt="Library Image" class="img-fluid" />
+      </div> -->
     </div>
   </div>
-   <script>
+  <script>
     function validatePassword() {
       const password = document.getElementById("password").value;
 
@@ -136,4 +98,5 @@
     }
   </script>
 </body>
+
 </html>
