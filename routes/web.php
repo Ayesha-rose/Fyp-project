@@ -46,8 +46,6 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
-
-
 Route::get('/myfeed', [MyFeedController::class, 'index'])
     ->name('user_dashboard.myfeed')
     ->middleware('auth');
@@ -84,7 +82,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/book/favorite/{id}', [ReadingController::class, 'toggleFavorite'])->name('book.favorite');
     Route::get('/favorites', [ReadingController::class, 'favorites'])->name('user_dashboard.favorites');
 
-    // Route::get('/activitystreak', function () {
-    //     return view('user_dashboard.activitystreak');
-    // })->name('user_dashboard.activitystreak');
 });

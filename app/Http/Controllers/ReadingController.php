@@ -116,8 +116,32 @@ class ReadingController extends Controller
 
     public function showStreak()
     {
-        return view('user_dashboard.activitystreak'); // blade file ka exact naam
+        $userId = Auth::id();
+        $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
+
+        $lastStreak = ActivityStreak::where('user_id', $userId)
+            ->orderBy('activity_date', 'desc')
+            ->first();
+
+        $currentStreak = 0;
+
+        if ($lastStreak) {
+            if (
+                $lastStreak->activity_date->isSameDay($today) ||
+                $lastStreak->activity_date->isSameDay($yesterday)
+            ) {
+                // Agar kal ya aaj ki activity hai → show actual streak
+                $currentStreak = $lastStreak->streak_count;
+            } else {
+                // Gap > 1 day → streak reset ho chuki (UI me 0)
+                $currentStreak = 0;
+            }
+        }
+
+        return view('user_dashboard.activitystreak', compact('currentStreak', 'lastStreak'));
     }
+
 
 
     private function updateStreak()
@@ -125,7 +149,6 @@ class ReadingController extends Controller
         $userId = Auth::id();
         $today = Carbon::today();
 
-        // Get last streak
         $lastStreak = ActivityStreak::where('user_id', $userId)
             ->orderBy('activity_date', 'desc')
             ->first();
@@ -133,36 +156,40 @@ class ReadingController extends Controller
         if ($lastStreak) {
             $yesterday = Carbon::yesterday();
 
-            if ($lastStreak->activity_date->toDateString() == $yesterday->toDateString()) {
-                $streakCount = $lastStreak->streak_count + 1; // continue streak
-            } elseif ($lastStreak->activity_date->toDateString() == $today->toDateString()) {
-                $streakCount = $lastStreak->streak_count; // already updated today
+            if ($lastStreak->activity_date->isSameDay($yesterday)) {
+                // Continue streak
+                $streakCount = $lastStreak->streak_count + 1;
+            } elseif ($lastStreak->activity_date->isSameDay($today)) {
+                // Already updated today
+                $streakCount = $lastStreak->streak_count;
             } else {
-                $streakCount = 1; // streak broke
+                // Gap aya (2 ya zyada din miss kiye) → reset streak
+                $streakCount = 1;
             }
         } else {
-            $streakCount = 1; // first streak
+            // First streak
+            $streakCount = 1;
         }
 
-        // Insert or update streak
         ActivityStreak::updateOrCreate(
             ['user_id' => $userId, 'activity_date' => $today],
             ['streak_count' => $streakCount]
         );
     }
+
+
     public function reads($id, Request $request)
-{
-    $book = \App\Models\Book::findOrFail($id);
+    {
+        $book = \App\Models\Book::findOrFail($id);
 
-    $currentPage = (int) $request->query('page', 1);
+        $currentPage = (int) $request->query('page', 1);
 
-    $notesForThisPage = $book->notes()
-        ->where('user_id', auth()->id())
-        ->where('page_no', $currentPage)
-        ->latest()
-        ->get();
+        $notesForThisPage = $book->notes()
+            ->where('user_id', auth()->id())
+            ->where('page_no', $currentPage)
+            ->latest()
+            ->get();
 
-    return view('books.show', compact('book', 'currentPage', 'notesForThisPage'));
-}
-
+        return view('books.show', compact('book', 'currentPage', 'notesForThisPage'));
+    }
 }
