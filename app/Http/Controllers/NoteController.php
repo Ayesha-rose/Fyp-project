@@ -9,54 +9,34 @@ use Illuminate\Routing\Controller;
 
 class NoteController extends Controller
 {
-    public function index()
+    // Page specific notes
+    public function pageNotes(Book $book, Request $request)
     {
-        $user = auth()->user();
+        $page = $request->query('page_no', 1);
 
- 
-        $notes = Note::with('book')
-            ->where('user_id', $user->id)
-            ->orderByDesc('created_at')
-            ->get();
+        $notes = Note::where('user_id', auth()->id())
+            ->where('book_id', $book->id)
+            ->where('page_no', $page)
+            ->get(['x', 'y', 'detail']);
 
-        return view('user_dashboard.mynotes', compact('notes'));
+        return response()->json($notes);
     }
 
+    // Store sticky note
     public function store(Request $request)
     {
         $data = $request->validate([
-            'book_id' => ['required','exists:books,id'],
-            'page_no' => ['required','integer','min:1'],
-            'detail'  => ['required','string','max:5000'],
+            'book_id' => 'required|exists:books,id',
+            'page_no' => 'required|integer|min:1',
+            'x' => 'required|numeric',
+            'y' => 'required|numeric',
+            'detail' => 'required|string|max:5000',
         ]);
 
         $data['user_id'] = auth()->id();
 
         Note::create($data);
 
-        return back()->with('success', 'Note saved!');
-    }
-
-    public function update(Request $request, Note $note)
-    {
-        abort_unless($note->user_id === auth()->id(), 403);
-
-        $data = $request->validate([
-            'detail'  => ['required','string','max:5000'],
-            'page_no' => ['required','integer','min:1'],
-        ]);
-
-        $note->update($data);
-
-        return back()->with('success', 'Note updated!');
-    }
-
-    public function destroy(Note $note)
-    {
-        abort_unless($note->user_id === auth()->id(), 403);
-
-        $note->delete();
-
-        return back()->with('success', 'Note deleted!');
+        return response()->json(['success' => true]);
     }
 }

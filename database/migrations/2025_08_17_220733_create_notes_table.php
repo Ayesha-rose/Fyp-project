@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMynotesTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,12 +16,12 @@ class CreateMynotesTable extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('book_id')->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('page_no');
+             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('book_id')->constrained()->onDelete('cascade');
+            $table->integer('page_no');
+            $table->float('x');
+            $table->float('y');
             $table->text('detail');
-
-            $table->index(['user_id', 'book_id', 'page_no']);
         });
     }
 

@@ -11,22 +11,6 @@
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <style>
-        .note-sticky {
-    background: #fff8b3;
-    border: 1px solid #e5d574;
-    padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 6px 14px rgba(0,0,0,.08);
-}
-
-.note-card {
-    background: #fffbe6;
-    border: 1px solid #f2e6a7;
-    border-radius: 10px;
-    width: 260px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.06);
-}
-
         .star-rating {
             flex-direction: row-reverse;
             /* highest star first */
@@ -175,52 +159,6 @@
             </div>
         </div>
     </div>
-    {{-- PDF ko desired page par open karein --}}
-<embed src="{{ asset($book->pdf_link) }}#page={{ $currentPage }}"
-       type="application/pdf"
-       width="100%" height="700px" />
-
-{{-- Sticky-note style se form box (CSS neeche) --}}
-<div class="note-sticky mt-3">
-    <form action="{{ route('notes.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="book_id" value="{{ $book->id }}">
-        <div class="row g-2 align-items-end">
-            <div class="col-md-2">
-                <label class="form-label fw-bold">Page #</label>
-                <input type="number" name="page_no" class="form-control" min="1" value="{{ $currentPage }}">
-            </div>
-            <div class="col-md-8">
-                <label class="form-label fw-bold">Your Note</label>
-                <textarea name="detail" class="form-control" rows="2" placeholder="Type your note..." required></textarea>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary w-100">Add Note</button>
-            </div>
-        </div>
-    </form>
-</div>
-
-{{-- Iss page ke existing notes (top pe sticky feel se dikhado) --}}
-@if($notesForThisPage->count())
-    <div class="mt-3">
-        <h6 class="fw-bold">Notes for page {{ $currentPage }}</h6>
-        <div class="d-flex flex-wrap gap-3">
-            @foreach($notesForThisPage as $note)
-                <div class="note-card p-3">
-                    <div class="small text-muted">Saved: {{ $note->created_at->format('d-M-Y h:i a') }}</div>
-                    <div class="mt-1">{{ $note->detail }}</div>
-
-                    <form action="{{ route('notes.destroy', $note) }}" method="POST" class="mt-2">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-sm btn-outline-danger">Delete</button>
-                    </form>
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
