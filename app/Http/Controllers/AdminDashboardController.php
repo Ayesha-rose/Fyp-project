@@ -25,6 +25,14 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard', compact('totalUsers', 'totalBooks', 'averageRating'));
     }
 
+
+     public function users()
+    {
+        $users = User::where('role', 'user')->orderBy('id', 'asc')->paginate(10);
+
+        return view('admin.users', compact('users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

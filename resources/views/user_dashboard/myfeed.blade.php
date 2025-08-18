@@ -16,7 +16,7 @@
                             @if($book->category)
                                 <small class="text-muted">{{ $book->category->category_name }}</small>
                             @endif
-                            <a href="{{ route('book.show', $book->id) }}" class="btn btn-primary btn-sm mt-auto mb-2 ms-5">View</a>
+                            <a href="{{ route('book.show', $book->id) }}" class="btn btn-primary btn-sm mt-auto mb-2 ms-3">View</a>
                         </div>
                     </div>
                 </div>

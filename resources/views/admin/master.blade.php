@@ -53,6 +53,11 @@
               </a>
             </li>
             <li class="nav-item sidemenu">
+              <a href="{{ route('admin.users') }}" class="nav-link {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                <i class="fas fa-users"></i> Manage Users
+              </a>
+            </li>
+            <li class="nav-item sidemenu">
               <a href="{{ route('admin_categories.index') }}" class="nav-link {{ request()->routeIs('admin_categories.index') ? 'active' : '' }}">
                 <i class="fas fa-tags"></i> Manage Categories
               </a>
