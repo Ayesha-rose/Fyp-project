@@ -1,46 +1,73 @@
 @extends('user_dashboard.usersidebar')
 
 @section('userpanelcontent')
-<div class="main-content mt-4">
-    <div class="col-md-10 ms-sm-auto px-md-4 feed">
-        <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-            <h2><b>My Calendar</b></h2>
-        </div>
-        <div class="d-flex justify-content-start">
-            <h4  class="fw-bold text-dark">January 2025</h4>
-            <select id="monthSelector" class="form-select w-auto ms-3 list">
-                <option value="0">January</option>
-                <option value="1">February</option>
-                <option value="2">March</option>
-                <option value="3">April</option>
-                <option value="4">May</option>
-                <option value="5">June</option>
-                <option value="6">July</option>
-                <option value="7">August</option>
-                <option value="8">September</option>
-                <option value="9">October</option>
-                <option value="10">November</option>
-                <option value="11">December</option>
-            </select>
-        </div>
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered text-center">
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody id="calendarBody"></tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<div class="container mt-4">
 
+    <!-- 🔥 Streak Summary -->
+    <div class="alert alert-success text-center">
+        🔥 Current Streak: {{ count($streakDays) }} days <br>
+        🏆 Longest Streak: {{ $maxStreak }} days
+    </div>
+
+    <h2 class="fw-bold text-center mb-4">📅 My Reading Calendar - {{ \Carbon\Carbon::create($year, $month)->format('F Y') }}</h2>
+
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                $currentDay = $startOfMonth->copy();
+            @endphp
+
+            <tr>
+                {{-- Empty cells before month start --}}
+                @for ($i = 0; $i < $startOfMonth->dayOfWeek; $i++)
+                    <td></td>
+                @endfor
+
+                {{-- Calendar Days --}}
+                @while ($currentDay <= $endOfMonth)
+                    <td style="vertical-align: top; height: 120px;
+                        @if(in_array($currentDay->format('Y-m-d'), $streakDays)) 
+                            background-color: #d4edda; /* light green for streak */
+                            border: 2px solid green;
+                        @endif
+                    ">
+                        <strong>{{ $currentDay->day }}</strong>
+                        <div style="font-size: 12px; text-align:left;">
+                            @if(isset($events[$currentDay->format('Y-m-d')]))
+                                @foreach($events[$currentDay->format('Y-m-d')] as $event)
+                                    <div>• {{ $event }}</div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </td>
+
+                    {{-- Row break on Saturday --}}
+                    @if ($currentDay->dayOfWeek == 6)
+                        </tr><tr>
+                    @endif
+
+                    @php
+                        $currentDay->addDay();
+                    @endphp
+                @endwhile
+
+                {{-- Empty cells after month end --}}
+                @for ($i = $endOfMonth->dayOfWeek; $i < 6; $i++)
+                    <td></td>
+                @endfor
+            </tr>
+        </tbody>
+    </table>
+</div>
 @endsection

@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCategoryController;
- use App\Http\Controllers\NoteController;
+use App\Http\Controllers\CalendarController;  
 use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MyFeedController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\UserReviewController;
 
 
 Route::get('/', function () {
+    // phpinfo();
     return view('home');
 })->name('home');
 
@@ -62,6 +63,9 @@ Route::post('/book/read/{id}', [ReadingController::class, 'read'])
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/mycalendar', [CalendarController::class, 'index'])->name('user_dashboard.mycalendar');
+
+
     Route::get('/activitystreak', [ReadingController::class, 'showStreak'])
         ->name('user_dashboard.activitystreak');
 
@@ -80,15 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/book/favorite/{id}', [ReadingController::class, 'toggleFavorite'])->name('book.favorite');
     Route::get('/favorites', [ReadingController::class, 'favorites'])->name('user_dashboard.favorites');
 
-
-    Route::get('/mycalendar', function () {
-        return view('user_dashboard.mycalendar');
-    })->name('user_dashboard.mycalendar');
-
- 
-
-
-    Route::get('/activitystreak', function () {
-        return view('user_dashboard.activitystreak');
-    })->name('user_dashboard.activitystreak');
+    // Route::get('/activitystreak', function () {
+    //     return view('user_dashboard.activitystreak');
+    // })->name('user_dashboard.activitystreak');
 });

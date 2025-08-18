@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use App\Models\Book;
-
+use App\Models\GeminiService;
 use Illuminate\Http\Request;
 
 
@@ -44,6 +44,11 @@ class ReviewController extends Controller
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
+        $status = GeminiService::analyzeReview($validated['review']);
+        // dd($status == "Appropriate\n");
+        if($status != "Appropriate\n") {
+            return back()->withErrors(['review' => 'Your review contains inappropriate content or mistakes.']);
+        }
         $book->reviews()->updateOrCreate(
             ['user_id' => auth()->id()],
             [

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Review;
 
 class Book extends Model
 {
@@ -27,10 +28,6 @@ class Book extends Model
     }
     public function reviews()
     {
-        return $this->hasMany(\App\Models\Review::class);
-    }
-    public function notes()
-    {
-        return $this->hasMany(\App\Models\Note::class);
+        return $this->hasMany(Review::class);
     }
 }
