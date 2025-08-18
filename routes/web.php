@@ -85,10 +85,7 @@ Route::middleware('auth')->group(function () {
         return view('user_dashboard.mycalendar');
     })->name('user_dashboard.mycalendar');
 
-   Route::get('/mynotes', function () {
-        return view('user_dashboard.mynotes');
-    })->name('user_dashboard.mynotes');
-
+ 
 
 
     Route::get('/activitystreak', function () {

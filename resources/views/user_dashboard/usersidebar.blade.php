@@ -65,12 +65,6 @@
                         </a>
                     </li>
                     <li class="nav-item sidemenu">
-                        <a href="{{ route('user_dashboard.mynotes') }}"
-                            class="nav-link {{ request()->routeIs('user_dashboard.mynotes') ? 'active' : '' }}">
-                            <i class="fa-solid fa-note-sticky"></i> My Notes
-                        </a>
-                    </li>
-                    <li class="nav-item sidemenu">
                         <a href="{{ route('user_dashboard.myreviews') }}"
                             class="nav-link {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}">
                             <i class="fa-solid fa-star"></i> My Reviews

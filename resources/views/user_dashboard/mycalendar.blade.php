@@ -6,12 +6,10 @@
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
             <h2><b>My Calendar</b></h2>
-            <button class="btn btn-primary" onclick="addEvent()">Add Event <i class="fa fa-plus"
-                    aria-hidden="true"></i></button>
         </div>
         <div class="d-flex justify-content-start">
-            <h4 id="monthYear" class="fw-bold text-dark">January 2025</h4>
-            <select id="monthSelector" class="form-select w-auto ms-3 list" onchange="changeMonth()">
+            <h4  class="fw-bold text-dark">January 2025</h4>
+            <select id="monthSelector" class="form-select w-auto ms-3 list">
                 <option value="0">January</option>
                 <option value="1">February</option>
                 <option value="2">March</option>
