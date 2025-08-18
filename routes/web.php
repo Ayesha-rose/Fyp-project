@@ -21,10 +21,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    
+
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
 
     Route::resource('admin_categories', AdminCategoryController::class);
+    
     Route::resource('manage_books', AdminBookController::class);
 });
 

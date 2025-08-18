@@ -28,10 +28,6 @@
                 
             @endforelse
         </div>
-
-        <div class="mt-3">
-            {{ $relatedBooks->links() }}
-        </div>
     </div>
 </div>
 @endsection
