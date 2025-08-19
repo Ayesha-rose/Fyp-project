@@ -16,7 +16,7 @@
   <div class="container">
     <div class="row">
       <!-- Left Side Image -->
-      <div class="col-md-6 p-0 d-none d-md-block d-sm-block">
+      <div class="col-md-6 p-0" id="rightimg">
         <!-- <img src="/images/signup_img.png" alt="Library Image" class="img-fluid" /> -->
       </div>
 

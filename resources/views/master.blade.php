@@ -73,7 +73,7 @@
 
             @auth
             @if(Auth::user()->role === 'admin')
-            <a href="{{ route('admin.dashboard') }}"class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
+            <a href="{{ route('admin.dashboard') }}" class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
               {{ Auth::user()->name }}
             </a>
             @else
@@ -96,6 +96,60 @@
   <div class="userpanel">
     @yield('userpanel')
   </div>
+
+  @if(request()->routeIs('home') || request()->routeIs('categories'))
+
+  <footer class="py-5 mt-5">
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="d-flex align-items-center mb-3">
+            <img src="/images/Logo (1).png" alt="Eduverse Logo" style="width: 40px; height: 40px;">
+            <h5 class="ms-2 fw-bold fs-4 mb-0">Eduverse</h5>
+          </div>
+          <p class="text-muted fs-6 fw-normal mt-4 pt-1 small">
+            We make onboarding new employees ridiculously easy. On day one, they're ready to go. And retaining them is
+            easier.
+          </p>
+          <div class="d-flex gap-3">
+            <p class="fs-6 fw-normal text-muted mt-1">Follow us on:</p>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-8 col-md-6">
+          <div class="row">
+            <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
+              <ul class="list-unstyled small">
+                <li><a href="{{ route('home') }}" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Home</a></li>
+                <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Features</a></li>
+                <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Services</a></li>
+              </ul>
+
+
+            </div>
+            <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
+              <ul class="list-unstyled small ">
+                <li><a href="{{ route('categories') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Categories</a></li>
+                <li><a href="{{ route('user_dashboard.myfeed') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">My Books</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
+              <ul class="list-unstyled small ">
+                <li><a href="{{ route('reviews') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Review</a></li>
+                <li><a href="#" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Get Updates</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  @endif
   @yield('scripts')
 
 </body>

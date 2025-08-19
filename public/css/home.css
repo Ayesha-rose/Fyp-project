@@ -23,6 +23,12 @@ body.homepage-background {
   background-size: contain;
 }
 
+@media (max-width: 768px) {
+  body.homepage-background {
+    background: none;
+  }
+}
+
 #input-feild input:focus,
 #input-main input:focus {
   outline: none;

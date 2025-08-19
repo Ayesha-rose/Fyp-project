@@ -179,13 +179,22 @@
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image">
                                 </a>
                                 <div class="card-body" style="margin: 0px; padding: 0px;">
-                                    <a href="{{ route('book.show', $book->id) }}" class="card-text"><b>Title: </b>{{$book->title}}</a>
-                                    <p class="card-text"><b>Author: </b>{{$book->author}}</p>
+
+                                    @auth
+                                    <a href="{{ route('book.show', $book->id) }}" class="card-text text-truncate">
+                                        <b>Title: </b>{{$book->title}}
+                                    </a>
+                                    @else
+                                    <a href="{{ route('login') }}" class="card-text text-truncate">
+                                        <b>Title: </b>{{$book->title}}
+                                    </a>
+                                    @endauth
+                                    <p class="card-text text-truncate"><b>Author: </b>{{$book->author}}</p>
                                 </div>
                                 <p class="mb-1">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <i class="bi {{ $i <= round($avgRating) ? 'bi-star-fill text-warning' : 'bi-star text-muted' }}"></i>
-                                    @endfor
+                                        @endfor
                                         <span class="text-muted ms-1">{{ $avgRating ?? 'No ratings' }}</span>
                                 </p>
                             </div>
@@ -210,47 +219,8 @@
                 @endif
             </div>
             @endforeach
-
-
         </div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-5 mt-5 " id="footer">
-                    <img src="images/Logo_ft.png" class="footer_logo">
-                    <p class="text-muted">We make our onboarding new employees <br> ridiculously easy. On day one
-                        ther're <br> ready to go.
-                        And
-                        retaining them is easier.</p>
-                    <p class="text-muted">Follow us on:
-                        <a href="#" class="icon"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-twitter"></i></a>
-
-                    </p>
-                </div>
-                <div class="col-6 mt-4 ms-5 text-muted">
-                    <div class="row  my-5">
-                        <div class="col-4 ">
-                            <b>Home</b><br>
-                            <b>Features</b><br>
-                            <b>Services</b>
-                        </div>
-                        <div class="col-4 ">
-                            <b>Catagories</b><br>
-                            <b>My Books</b>
-                        </div>
-                        <div class="col-4 ">
-                            <b>Reviews</b><br>
-                            <b>Get Updates</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 @endsection
 

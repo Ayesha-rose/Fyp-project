@@ -384,10 +384,9 @@
   </div>
 
   <!-- Footer -->
-  <footer class="py-5 mt-5">
+  <!-- <footer class="py-5 mt-5">
     <div class="container">
       <div class="row align-items-start">
-        <!-- Left side (Logo + About) -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="d-flex align-items-center mb-3">
             <img src="/images/Logo (1).png" alt="Eduverse Logo" style="width: 40px; height: 40px;">
@@ -406,7 +405,6 @@
           </div>
         </div>
 
-        <!-- Right side (Links) -->
         <div class="col-lg-8 col-md-6">
           <div class="row">
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
@@ -435,7 +433,7 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
   <!-- Bootstrap icons (if not added already) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">

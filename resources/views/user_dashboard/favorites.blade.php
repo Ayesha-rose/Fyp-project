@@ -17,12 +17,12 @@
                     <a href="{{ route('book.read', $item->book->id) }}" class="book-card">
                         <img src="{{ asset('storage/' . $item->book->image) }}" alt="Book Image">
                     </a>
-                    <div class="card-body">
-                        <a href="{{ route('book.show', $item->book->id) }}" class="card-text">
+                    <div class="card-body" style="margin: 3px 0px 0px 3px; padding: 3px 0px 0px 3px;">
+                        <a href="{{ route('book.show', $item->book->id) }}" class="card-text d-block text-truncate">
                             <b>Title: </b>{{ $item->book->title }}
                         </a>
-                        <p class="card-text"><b>Author: </b>{{ $item->book->author }}</p>
-                       
+                        <p class="card-text text-truncate"><b>Author: </b>{{ $item->book->author }}</p>
+
                     </div>
                 </div>
             </div>
