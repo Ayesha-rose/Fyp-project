@@ -4,8 +4,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
 }
 
 body.categories-background {
@@ -18,12 +18,14 @@ body.categories-background {
     background-size: contain;
 
 }
+
 @media (max-width: 768px) {
-    body.categories-background{
+    body.categories-background {
         height: auto;
-        background: none; 
+        background: none;
     }
-    .globe{
+
+    .globe {
         display: none;
     }
 }
@@ -54,7 +56,8 @@ nav {
 #search_button {
     box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);
 }
-#search_button{
+
+#search_button {
     background: linear-gradient(rgba(71, 55, 255, 1), rgba(110, 164, 252, 1));
 
 }

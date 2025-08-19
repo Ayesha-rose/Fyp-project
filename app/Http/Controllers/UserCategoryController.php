@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Category;
+use App\Models\Book;
+
 
 class UserCategoryController extends Controller
 {
@@ -35,6 +37,26 @@ class UserCategoryController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+
+        $query = $request->input('query');
+
+
+        if (empty($query)) {
+            return redirect()->back();
+        }
+        $books = Book::where('title', 'LIKE', "%{$query}%")
+            ->orWhere('author', 'LIKE', "%{$query}%")
+            ->get();
+
+        // Categories bhi bhej do taki page load ho sake
+        $categories = Category::with('books.reviews')->get();
+
+        return view('categories', compact('books', 'query', 'categories'));
+    }
+
 
     /**
      * Store a newly created resource in storage.

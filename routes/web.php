@@ -45,6 +45,8 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
+Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search');
+
 
 Route::middleware('auth')->group(function () {
 
