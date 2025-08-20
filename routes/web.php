@@ -33,6 +33,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin.notifications.index');
     Route::post('/admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('admin.notifications.markAllRead');
+    Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markRead'])->name('notifications.markRead');
+    Route::delete('/admin/notifications/{id}', [NotificationController::class, 'delete'])->name('admin.notifications.delete');
+    Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll'])->name('admin.notifications.deleteAll');
 });
 
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');

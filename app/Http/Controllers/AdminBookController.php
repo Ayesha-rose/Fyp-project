@@ -53,8 +53,14 @@ class AdminBookController extends Controller
         $book->image = $request->image->store('book-image');
         $book->save();
 
-        return redirect()->route('manage_books.index');
+        \App\Models\Notification::create([
+            'title'   => 'New Book Added',
+            'message' => 'Admin has added a new book: ' . $book->title,
+        ]);
+
+        return redirect()->route('manage_books.index')->with('success', 'Book added and notification created.');
     }
+
 
     /**
      * Display the specified resource.
@@ -98,21 +104,26 @@ class AdminBookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
-        $category = Category::findOrFail($request->category_id);
-        $book->category_id = $category->id;
         $book->title = $request->title;
         $book->author = $request->author;
-        if ($request->hasFile('pdf_link')) {
+
+        if ($request->hasFile('pdf')) {
             $book->pdf_link = $request->pdf->store('book-pdf');
         }
-        $book->description = $request->description;
         if ($request->hasFile('image')) {
             $book->image = $request->image->store('book-image');
         }
 
+        $book->description = $request->description;
         $book->save();
 
-        return redirect()->route('manage_books.index');
+
+        \App\Models\Notification::create([
+            'title'   => 'Book Updated',
+            'message' => 'Admin has updated the book: ' . $book->title,
+        ]);
+
+        return redirect()->route('manage_books.index')->with('success', 'Book updated successfully.');
     }
 
     /**
@@ -123,7 +134,16 @@ class AdminBookController extends Controller
      */
     public function destroy($id)
     {
-        Book::findOrFail($id)->delete();
-        return redirect()->route('manage_books.index');
+        $book = Book::findOrFail($id);
+        $title = $book->title;
+        $book->delete();
+
+
+        \App\Models\Notification::create([
+            'title'   => 'Book Deleted',
+            'message' => 'Admin has deleted the book: ' . $title,
+        ]);
+
+        return redirect()->route('manage_books.index')->with('success', 'Book deleted successfully.');
     }
 }

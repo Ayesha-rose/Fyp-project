@@ -51,8 +51,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
-    public function notes()
+    protected static function booted()
     {
-        return $this->hasMany(\App\Models\Note::class);
+        static::created(function ($user) {
+            \App\Models\Notification::create([
+                'title' => 'New User Registered',
+                'message' => 'User ' . $user->name . ' has joined the system.',
+            ]);
+        });
     }
 }
