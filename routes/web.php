@@ -11,58 +11,55 @@ use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MyFeedController;
 use App\Http\Controllers\UserReviewController;
+use App\Http\Controllers\NotificationController;  
 
-
-
+// Home
 Route::get('/', function () {
-    // phpinfo();
     return view('home');
 })->name('home');
 
+// Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
 
     Route::resource('admin_categories', AdminCategoryController::class);
-    
     Route::resource('manage_books', AdminBookController::class);
+
+   
+
+Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin.notifications.index');
+Route::post('/admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
 });
 
+// Authentication
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
-
 Route::get('/signup', [UserController::class, 'signupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
-
-Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
-Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show');
-
 Route::get('/logout-confirm', [UserController::class, 'logoutConfirmForm'])->name('logout.confirm');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
+// Categories & Books
+Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
+Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show');
+
+// Reviews
 Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
-
 Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search');
 
-
+// User dashboard
 Route::middleware('auth')->group(function () {
-
     Route::get('/myfeed', [MyFeedController::class, 'index'])->name('user_dashboard.myfeed');
-
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('books.reviews.store');
-
     Route::get('/myreviews', [UserReviewController::class, 'index'])->name('user_dashboard.myreviews');
-
     Route::get('/mycalendar', [CalendarController::class, 'index'])->name('user_dashboard.mycalendar');
-
     Route::get('/activitystreak', [ReadingController::class, 'showStreak'])->name('user_dashboard.activitystreak');
 
     Route::get('/book/read/{id}', [ReadingController::class, 'store'])->name('book.read');
     Route::post('/book/mark-complete/{id}', [ReadingController::class, 'markComplete'])->name('book.complete');
-
     Route::post('/book/read/{id}', [ReadingController::class, 'read'])->name('book.read');
 
     Route::get('/currentlyread', [ReadingController::class, 'currently'])->name('user_dashboard.currentlyread');

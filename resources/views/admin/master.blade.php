@@ -67,9 +67,16 @@
                 request()->routeIs('manage_books.create') || 
                 request()->routeIs('manage_books.edit') ? 'active' : '' }} ">
                 <i class="fas fa-book"></i> Manage Books</a></li>
-            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-calendar"></i> Calendar</a></li>
-            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a></li>
-            <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-robot"></i> AI Chatbot</a></li>
+            <li class="nav-item sidemenu">
+              <a href="{{ route('admin.notifications.index') }}"
+                class="nav-link {{ request()->routeIs('admin.notifications.index') ? 'active' : '' }}">
+                <i class="fas fa-bell"></i> Notifications
+                @if(isset($unreadCount) && $unreadCount > 0)
+                <span class="badge bg-danger">{{ $unreadCount }}</span>
+                @endif
+              </a>
+            </li>
+
             <li class="nav-item sidemenu"><a href="#" class="nav-link"><i class="fas fa-comment-dots"></i> Reviews</a></li>
           </ul>
         </div>
