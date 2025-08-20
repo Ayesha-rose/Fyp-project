@@ -12,7 +12,6 @@ use Carbon\Carbon;
 
 class ReadingController extends Controller
 {
-    // Mark book as currently reading
     public function store($bookId)
     {
         $userId = Auth::id();
@@ -28,21 +27,20 @@ class ReadingController extends Controller
     {
         $userId = Auth::id();
 
-        // 1️⃣ Update reading status
         Reading::updateOrCreate(
             ['user_id' => $userId, 'book_id' => $bookId],
             ['status' => 'read']
         );
 
-        // 2️⃣ Update streak
         $this->updateStreak();
 
-        // 3️⃣ Redirect to PDF
         $book = \App\Models\Book::findOrFail($bookId);
-        return redirect()->away(asset('storage/' . $book->pdf_link));
+        // dd($book->pdf_link);
+        return view('view-pdf', ['pdfUrl' => asset('storage/' . $book->pdf_link)]);
+
+        // return redirect()->away(asset('storage/' . $book->pdf_link));
     }
 
-    // Mark book as complete
     public function markComplete($bookId)
     {
         $userId = Auth::id();
@@ -57,7 +55,6 @@ class ReadingController extends Controller
         return redirect()->route('reading.already');
     }
 
-    // Show currently reading books
     public function currently()
     {
         $userId = Auth::id();
@@ -69,7 +66,6 @@ class ReadingController extends Controller
         return view('user_dashboard.currentlyread', compact('books'));
     }
 
-    // Show already read books
     public function already()
     {
         $userId = Auth::id();
@@ -101,11 +97,9 @@ class ReadingController extends Controller
             ->first();
 
         if ($existing && $existing->status === 'favorite') {
-            // Remove favorite
             $existing->delete();
             return back()->with('message', 'Removed from favorites.');
         } else {
-            // Mark as favorite
             Reading::updateOrCreate(
                 ['user_id' => $userId, 'book_id' => $bookId],
                 ['status' => 'favorite']
@@ -131,10 +125,8 @@ class ReadingController extends Controller
                 $lastStreak->activity_date->isSameDay($today) ||
                 $lastStreak->activity_date->isSameDay($yesterday)
             ) {
-                // Agar kal ya aaj ki activity hai → show actual streak
                 $currentStreak = $lastStreak->streak_count;
             } else {
-                // Gap > 1 day → streak reset ho chuki (UI me 0)
                 $currentStreak = 0;
             }
         }
@@ -157,17 +149,13 @@ class ReadingController extends Controller
             $yesterday = Carbon::yesterday();
 
             if ($lastStreak->activity_date->isSameDay($yesterday)) {
-                // Continue streak
                 $streakCount = $lastStreak->streak_count + 1;
             } elseif ($lastStreak->activity_date->isSameDay($today)) {
-                // Already updated today
                 $streakCount = $lastStreak->streak_count;
             } else {
-                // Gap aya (2 ya zyada din miss kiye) → reset streak
                 $streakCount = 1;
             }
         } else {
-            // First streak
             $streakCount = 1;
         }
 

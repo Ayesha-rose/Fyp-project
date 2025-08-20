@@ -72,7 +72,7 @@
             </div>
 
             @auth
-            @if(Auth::user()->role === 'admin')
+            @if(Auth::check() && Auth::user()->role === 'admin')
             <a href="{{ route('admin.dashboard') }}" class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
               {{ Auth::user()->name }}
             </a>

@@ -11,7 +11,6 @@
             <div class="col-12">
                 <div class="card w-100">
                     <div class="row ">
-                        <!-- Book Image -->
 
                         <div class="col-md-2 d-flex align-items-center">
                             <img src="{{ asset('storage/' . $review->book->image) }}"
@@ -19,7 +18,6 @@
                                 alt="{{ $review->book->title }}">
                         </div>
 
-                        <!-- Book Details -->
                         <div class="col-md-10">
                             <div class="card-body" style="padding:  5px 5px 5px 0px; margin-left: 0;">
                                 <h6>
@@ -30,7 +28,6 @@
                                 </small>
                                 <p class="my-0 " style="text-align: justify;"><b>Review:</b> {{ $review->review }}</p>
 
-                                <!-- Star Rating -->
                                 <div class="star-rating ">
                                     @for ($i = 1; $i <= 5; $i++)
                                         @if ($i <=$review->rating)

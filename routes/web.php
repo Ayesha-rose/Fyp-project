@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBookController;
@@ -11,28 +12,29 @@ use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MyFeedController;
 use App\Http\Controllers\UserReviewController;
-use App\Http\Controllers\NotificationController;  
+use App\Http\Controllers\NotificationController;
+use App\Models\Book;
 
 // Home
 Route::get('/', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }
     return view('home');
 })->name('home');
 
 // Admin routes
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
 
     Route::resource('admin_categories', AdminCategoryController::class);
     Route::resource('manage_books', AdminBookController::class);
 
-   
-
-Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin.notifications.index');
-Route::post('/admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
+    Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin.notifications.index');
+    Route::post('/admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
 });
 
-// Authentication
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/signup', [UserController::class, 'signupForm'])->name('signup');
@@ -40,18 +42,18 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/logout-confirm', [UserController::class, 'logoutConfirmForm'])->name('logout.confirm');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-// Categories & Books
-Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
 Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show');
 
-// Reviews
 Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
+
 Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search');
 
-// User dashboard
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:user')->group(function () {
+
+    Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
+
     Route::get('/myfeed', [MyFeedController::class, 'index'])->name('user_dashboard.myfeed');
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('books.reviews.store');
     Route::get('/myreviews', [UserReviewController::class, 'index'])->name('user_dashboard.myreviews');
