@@ -45,8 +45,8 @@
             @endforeach
         </div>
         @else
-        <div class="d-flex flex-column align-items-center text-muted feed-box fw-bold">
-            <p class="text-center">You haven’t reviewed any books yet.</p>
+        <div class="text-muted" style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+            You haven’t reviewed any books yet.
         </div>
         @endif
     </div>

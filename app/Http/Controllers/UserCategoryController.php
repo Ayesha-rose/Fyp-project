@@ -17,7 +17,6 @@ class UserCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
         $categories = Category::with(['books.reviews'])->get();
         return view('categories', compact('categories'));
 
@@ -37,25 +36,64 @@ class UserCategoryController extends Controller
     {
         //
     }
-
     public function search(Request $request)
     {
-
-        $query = $request->input('query');
-
-
-        if (empty($query)) {
-            return redirect()->back();
+        $q = trim($request->query('query', ''));
+        if ($q === '') {
+            return back();
         }
-        $books = Book::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('author', 'LIKE', "%{$query}%")
+
+        $needle = mb_strtolower($q);
+
+        // A) Exact matches (case-insensitive)
+        $exactTitle  = Book::whereRaw('LOWER(title) = ?',  [$needle])->get();
+        $exactAuthor = Book::whereRaw('LOWER(author) = ?', [$needle])->get();
+
+        // Union of exact matches (unique by id)
+        $exactUnion = $exactTitle->merge($exactAuthor)->unique('id')->values();
+
+        if ($exactUnion->count() === 1) {
+            // Exactly one exact match → go straight to show
+            return redirect()->route('book.show', $exactUnion->first()->id);
+        }
+        if ($exactUnion->count() > 1) {
+            // Multiple exact matches → results page
+            $categories = Category::with('books.reviews')->get();
+            $books = $exactUnion->sortBy('title')->values();
+            return view('books.result', [
+                'books' => $books,
+                'query' => $q,
+                'categories' => $categories,
+                'mode' => 'exact',
+            ]);
+        }
+
+        // B) Partial fallback (title OR author contains)
+        $partial = Book::query()
+            ->where('title', 'LIKE', "%{$q}%")
+            ->orWhere('author', 'LIKE', "%{$q}%")
+            ->orderBy('title')
             ->get();
 
-        // Categories bhi bhej do taki page load ho sake
-        $categories = Category::with('books.reviews')->get();
+        if ($partial->count() === 1) {
+            // Single partial match → go straight to show
+            return redirect()->route('book.show', $partial->first()->id);
+        }
+        if ($partial->count() > 1) {
+            // Multiple partial matches → results page
+            $categories = Category::with('books.reviews')->get();
+            return view('books.result', [
+                'books' => $partial,
+                'query' => $q,
+                'categories' => $categories,
+                'mode' => 'partial',
+            ]);
+        }
 
-        return view('categories', compact('books', 'query', 'categories'));
+        // C) No matches → flash + stay on current page
+        return back()->withInput()->with('search_not_found', "No book found for \"{$q}\".");
     }
+
 
 
     /**
@@ -75,9 +113,9 @@ class UserCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**

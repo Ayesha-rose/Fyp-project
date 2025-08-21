@@ -7,60 +7,15 @@
 @endsection
 
 @section('userpanel')
-<div class="categories d-flex-lg  p-0 m-0" id="categories">
+<div class="categories d-flex-lg p-0 m-0" id="categories">
     <div class="container">
         <div class="row">
             <div class="front">
                 <div class="row mt-5">
                     <div class="col-6 p-0 mt-3">
                         <div class="left">
-                            <h1 class="mt-0">CATEGORIES</h1>
+                            <h1 class="mt-3">CATEGORIES</h1>
                         </div>
-                        <!-- <div class="row mt-4">
-                            <div class="col-8">
-                                <div class="input-group" id="input-main">
-                                    <span class="input-group-text bg-white border-0"><i
-                                            class="fas fa-search"></i></span>
-                                    <input type="text" class="form-control border-0"
-                                        placeholder="Search book name and author" src="">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn rounded text-white bg-primary fw-bold"
-                                    id="search_button">Search</button>
-                            </div>
-                        </div> -->
-                        <div class="row mt-4">
-                            <div class="col-8">
-                                <form action="{{ route('books.search') }}" method="GET">
-                                    <div class="input-group" id="input-main">
-                                        <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
-                                        <input type="text" name="query" class="form-control border-0"
-                                            placeholder="Search book name or author"
-                                            value="{{ request('query') }}">
-                                    </div>
-                            </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn rounded text-white bg-primary fw-bold"
-                                    id="search_button">Search</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        @if(isset($books) && request('query'))
-                        <div class="col-8 border rounded bg-white shadow-sm" style="max-height:250px; overflow-y:auto;">
-                            @if($books->count() > 0)
-                            @foreach($books as $book)
-                            <a href="{{ route('book.show', $book->id) }}" class="d-block p-2 border-bottom text-decoration-none text-dark">
-                                <b>{{ $book->title }}</b> <br>
-                                <small>{{ $book->author }}</small>
-                            </a>
-                            @endforeach
-                            @else
-                            <div class="p-2 text-muted">No book found</div>
-                            @endif
-                        </div>
-                        @endif
 
                         <div class="row mt-5">
                             <div class="col-md-5 ms-3 me-2">
@@ -68,13 +23,23 @@
                                     @foreach($categories as $category)
                                     <li class="category-item">
                                         <b>
-                                            <a class="category-term" href="#carousel{{ $category->id }}">{{ $category->category_name }}</a>
+                                            <a class="category-term" href="#carousel{{ $category->id }}">
+                                                {{ $category->category_name }}
+                                            </a>
                                         </b>
                                     </li>
+
+                                    @if(($loop->iteration % 6) == 0 && !$loop->last)
+                                </ul>
+                            </div>
+                            <div class="col-md-5 ms-3 me-2">
+                                <ul class="category-list">
+                                    @endif
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-6 ml-5 mt-3">
                         <img src="images/globe.png" class="globe ms-5">

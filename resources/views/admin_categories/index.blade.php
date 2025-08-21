@@ -28,12 +28,11 @@
       <tr>
         <td>{{ $category->category_name }}</td>
         <td>
-          <!-- Edit Button -->
-          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
+
+          <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
             Edit
           </button>
 
-          <!-- Delete Button -->
           <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $category->id }}">
             Delete
           </button>

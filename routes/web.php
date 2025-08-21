@@ -53,8 +53,17 @@ Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll
 
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
+
 Route::get('/signup', [UserController::class, 'signupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
+
+Route::get('/categories', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }
+    return app(UserCategoryController::class)->index();
+})->name('categories');
+
 Route::get('/logout-confirm', [UserController::class, 'logoutConfirmForm'])->name('logout.confirm');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -64,10 +73,10 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
-Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search');
+Route::get('/books/{book}', [UserCategoryController::class, 'show'])->name('book.show'); 
+Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search')->middleware('auth');
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
 
     Route::get('/myfeed', [MyFeedController::class, 'index'])->name('user_dashboard.myfeed');
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('books.reviews.store');
@@ -91,7 +100,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
 
 Route::get('password/forgot', [ForgetPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
 Route::post('password/email', [ForgetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 

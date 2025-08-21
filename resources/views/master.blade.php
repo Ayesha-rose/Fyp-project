@@ -49,47 +49,52 @@
                 request()->routeIs('user_dashboard.myreviews') 
                ? 'active' : '' }}"
                 href="{{ route('user_dashboard.myfeed') }}">
-                My Books
+                My Feed
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Book</a>
             </li>
-            <!-- @auth
-        @if(Auth::user()->role === 'admin')
-            <li class="nav-item">
-                <a class="nav-link fw-bold me-2 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
-            </li>
-        @endif
-    @endauth -->
           </ul>
-
-          <div class="d-flex align-items-center">
-            <div class="input-group me-3" id="input-feild">
-              <span class="input-group-text bg-white border-0"><i class="fas fa-search"></i></span>
-              <input class="form-control border-0 me-0" type="search" placeholder="Search" aria-label="Search">
+          
+          <form action="{{ route('books.search') }}" method="GET" class="d-flex" role="search">
+            <div class="input-group" id="input-feild">
+              <span class="input-group-text bg-white border-0">
+                <i class="fas fa-search"></i>
+              </span>
+              <input type="text" name="query" class="form-control border-0" placeholder="Search Book and Author" value="{{ old('query', request('query')) }}" required />
             </div>
+            <button type="submit" class="d-none" aria-hidden="true"></button>
+          </form>
 
-            @auth
-            @if(Auth::check() && Auth::user()->role === 'admin')
-            <a href="{{ route('admin.dashboard') }}" class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
-              {{ Auth::user()->name }}
-            </a>
-            @else
-            <span class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">{{ Auth::user()->name }}</span>
-            @endif
-
-            <form action="{{ route('logout.confirm') }}" method="GET">
-              @csrf
-              <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
-            </form>
-            @else
-            <a class="btn bg-light btn-outline-primary text-primary px-4 mx-4 pt-2" href="{{ route('login') }}">SignIn</a>
-            <a class="btn btn-outline-light text-light px-4 pt-2" style="background-color: #36A5DC;" href="{{ url('signup') }}">SignUp</a>
-            @endauth
+          @if(session('search_not_found'))
+          <div class="container mt-2">
+            <div class="alert alert-warning py-2 px-3 mb-0">
+              {{ session('search_not_found') }}
+            </div>
           </div>
+          @endif
+
+          @auth
+          @if(Auth::check() && Auth::user()->role === 'admin')
+          <a href="{{ route('admin.dashboard') }}" class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
+            {{ Auth::user()->name }}
+          </a>
+          @else
+          <span class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">{{ Auth::user()->name }}</span>
+          @endif
+
+          <form action="{{ route('logout.confirm') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-primary fw-bold bg-light text-danger" style="border: none;">Logout</button>
+          </form>
+          @else
+          <a class="btn bg-light btn-outline-primary text-primary px-4 mx-4 pt-2" href="{{ route('login') }}">SignIn</a>
+          <a class="btn btn-outline-light text-light px-4 pt-2" style="background-color: #36A5DC;" href="{{ url('signup') }}">SignUp</a>
+          @endauth
         </div>
+      </div>
       </div>
     </nav>
   </header>

@@ -37,7 +37,7 @@
             </div>
 
             <!-- Sign In Button -->
-            <button class="btn-primary-custom  fw-bold">Sign in</button>
+            <button class="btn-primary-custom w-100 fw-bold">Sign in</button>
           </form>
           <!-- Footer -->
           <div class="form-footer mt-4">

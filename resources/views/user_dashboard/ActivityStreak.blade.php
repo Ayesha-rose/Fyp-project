@@ -40,7 +40,7 @@
 
             <!-- Streak History Card -->
             <div class="col-md-6">
-                <div class="card border-0" 
+                <div class="card text-center border-0" 
                      style="background-color: #ffffff; transition: box-shadow 0.3s, transform 0.3s; border-radius: 4px; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
                         <h5 class="card-title text-primary">Streak History</h5>

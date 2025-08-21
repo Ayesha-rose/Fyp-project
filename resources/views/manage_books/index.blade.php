@@ -9,13 +9,11 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>Books List</h2>
 
-      <!-- Add Book Button -->
       <a href="{{ route ('manage_books.create')}}" class="btn text-white px-4 pt-2" style="background-color: #015F9E;">
         Add Book
       </a>
     </div>
 
-    <!-- Book Table -->
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -38,15 +36,14 @@
           <td> <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View PDF</a></td>
           <td>{{ $book->description }}</td>
           <td> <img src ="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
-          <td>
-            <!-- Edit Button -->
-            <a class="btn btn-sm btn-outline-secondary"
+          <td class="d-flex gap-2">
+
+          <a class="btn btn-sm btn-outline-primary"
               href="{{ route('manage_books.edit', $book->id) }}">
               Edit
             </a>
 
-            <!-- Delete Button -->
-            <button type="button"
+]            <button type="button"
               class="btn btn-sm btn-outline-danger"
               data-bs-toggle="modal"
               data-bs-target="#deleteModal{{ $book->id }}">
@@ -54,7 +51,7 @@
             </button>
           </td>
         </tr>
-        <!-- Delete Modal -->
+
         <div class="modal fade" id="deleteModal{{ $book->id }}" tabindex="-1"
           aria-labelledby="deleteModalLabel{{ $book->id }}" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
