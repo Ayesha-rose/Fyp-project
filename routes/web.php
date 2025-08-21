@@ -15,7 +15,7 @@ use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\NotificationController;
 use App\Models\Book;
 
-// Home
+
 Route::get('/', function () {
     if (Auth::check() && Auth::user()->role === 'admin') {
         return redirect()->route('admin.dashboard');
@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Admin routes
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
@@ -31,12 +31,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin_categories', AdminCategoryController::class);
     Route::resource('manage_books', AdminBookController::class);
 
-    Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin.notifications.index');
-    Route::post('/admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
-    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('admin.notifications.markAllRead');
-    Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markRead'])->name('notifications.markRead');
-    Route::delete('/admin/notifications/{id}', [NotificationController::class, 'delete'])->name('admin.notifications.delete');
-    Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll'])->name('admin.notifications.deleteAll');
+
+Route::get('/admin/notifications', [NotificationController::class, 'index'])
+    ->name('admin.notifications.index');
+
+Route::post('/admin/notifications/{id}/mark-read', [NotificationController::class, 'markRead'])
+    ->name('admin.notifications.markRead');
+
+Route::post('/admin/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])
+    ->name('admin.notifications.markAllRead');
+
+Route::delete('/admin/notifications/{id}', [NotificationController::class, 'delete'])
+    ->name('admin.notifications.delete');
+
+Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll'])
+    ->name('admin.notifications.deleteAll');
+
 });
 
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
@@ -54,8 +64,7 @@ Route::get('/reviews', function () {
 
 Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search');
 
-Route::middleware('auth', 'role:user')->group(function () {
-
+Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/categories', [UserCategoryController::class, 'index'])->name('categories');
 
     Route::get('/myfeed', [MyFeedController::class, 'index'])->name('user_dashboard.myfeed');
