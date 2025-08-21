@@ -33,7 +33,7 @@
             <input type="password" class="form-control mb-1 w-100" name="password" placeholder="Password" value="" required>
 
             <div class="d-flex justify-content-end mb-3">
-              <a href="#" class="text-muted" style="font-size: 14px;">Forget your password</a>
+              <a href="{{ route('password.request') }}" class="text-muted" style="font-size: 14px;">Forget your password</a>
             </div>
 
             <!-- Sign In Button -->

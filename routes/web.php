@@ -13,6 +13,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MyFeedController;
 use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Models\Book;
 
 
@@ -86,3 +88,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/book/favorite/{id}', [ReadingController::class, 'toggleFavorite'])->name('book.favorite');
     Route::get('/favorites', [ReadingController::class, 'favorites'])->name('user_dashboard.favorites');
 });
+
+
+Route::get('password/forgot', [ForgetPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
