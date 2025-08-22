@@ -1,6 +1,5 @@
 @extends('admin.master')
 
-
 @section('adminpanel')
 <div class="container">
     <div class="card">
@@ -28,8 +27,7 @@
                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
-
-
+                        
                     </div>
 
                     <div class="col-md-6 form-group">

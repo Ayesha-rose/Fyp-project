@@ -18,19 +18,32 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        $totalUsers = User::where('role', 'user')->count();   // sab users count
-        $totalBooks = Book::count();   // sab books count
+        $totalUsers = User::where('role', 'user')->count();
+        $totalBooks = Book::count();
         $averageRating = DB::table('reviews')->avg('rating');
 
         return view('admin.dashboard', compact('totalUsers', 'totalBooks', 'averageRating'));
     }
 
 
-     public function users()
+    public function users()
     {
-        $users = User::where('role', 'user')->orderBy('id', 'asc')->paginate(10);
+        $users = User::where('role', 'user')->orderBy('id', 'asc')->get();
 
         return view('admin.users', compact('users'));
+    }
+
+    public function reviews()
+    {
+        $books = Book::whereHas('reviews')->get();
+
+        return view('admin.adminreviews', compact('books'));
+    }
+
+    public function bookReviews($id)
+    {
+        $book = Book::with('reviews.user')->findOrFail($id);
+        return view('admin.book_reviews', compact('book'));
     }
 
     /**

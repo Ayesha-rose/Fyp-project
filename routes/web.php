@@ -15,7 +15,6 @@ use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Models\Book;
 
 
 Route::get('/', function () {
@@ -27,28 +26,35 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
 
     Route::resource('admin_categories', AdminCategoryController::class);
+
     Route::resource('manage_books', AdminBookController::class);
 
+    Route::get('/admin/notifications', [NotificationController::class, 'index'])
+        ->name('admin.notifications.index');
 
-Route::get('/admin/notifications', [NotificationController::class, 'index'])
-    ->name('admin.notifications.index');
+    Route::post('/admin/notifications/{id}/mark-read', [NotificationController::class, 'markRead'])
+        ->name('admin.notifications.markRead');
 
-Route::post('/admin/notifications/{id}/mark-read', [NotificationController::class, 'markRead'])
-    ->name('admin.notifications.markRead');
+    Route::post('/admin/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])
+        ->name('admin.notifications.markAllRead');
 
-Route::post('/admin/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])
-    ->name('admin.notifications.markAllRead');
+    Route::delete('/admin/notifications/{id}', [NotificationController::class, 'delete'])
+        ->name('admin.notifications.delete');
 
-Route::delete('/admin/notifications/{id}', [NotificationController::class, 'delete'])
-    ->name('admin.notifications.delete');
+    Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll'])
+        ->name('admin.notifications.deleteAll');
 
-Route::delete('/admin/notifications', [NotificationController::class, 'deleteAll'])
-    ->name('admin.notifications.deleteAll');
+    Route::get('/admin/reviews', [AdminDashboardController::class, 'reviews'])
+        ->name('admin.adminreviews');
 
+    Route::get('/admin/reviews/{book}', [AdminDashboardController::class, 'bookReviews'])
+        ->name('admin.book_reviews');
 });
 
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
@@ -56,6 +62,14 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/signup', [UserController::class, 'signupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
+
+Route::get('password/forgot', [ForgetPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+Route::post('password/email', [ForgetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/categories', function () {
     if (Auth::check() && Auth::user()->role === 'admin') {
@@ -73,7 +87,7 @@ Route::get('/reviews', function () {
     return view('reviews');
 })->name('reviews');
 
-Route::get('/books/{book}', [UserCategoryController::class, 'show'])->name('book.show'); 
+Route::get('/books/{book}', [UserCategoryController::class, 'show'])->name('book.show');
 Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search')->middleware('auth');
 
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -97,13 +111,3 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/book/favorite/{id}', [ReadingController::class, 'toggleFavorite'])->name('book.favorite');
     Route::get('/favorites', [ReadingController::class, 'favorites'])->name('user_dashboard.favorites');
 });
-
-
-Route::get('password/forgot', [ForgetPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-
-Route::post('password/email', [ForgetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-

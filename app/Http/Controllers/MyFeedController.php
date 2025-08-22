@@ -19,29 +19,25 @@ class MyFeedController extends Controller
     {
         $userId = auth()->id();
 
-        // 1) Seed set: user’s currently-reading + already-read book IDs
         $seedBookIds = Reading::where('user_id', $userId)
             ->whereIn('status', ['read', 'complete'])
             ->pluck('book_id');
 
-        // 2) Categories of those seed books
         $categoryIds = Book::whereIn('id', $seedBookIds)
             ->pluck('category_id')
             ->unique()
             ->values();
 
-        // 3) Related books in those categories, excluding seed books
         if ($categoryIds->isEmpty()) {
-            // No history → graceful fallback
             $relatedBooks = Book::with('category')
                 ->orderByDesc('created_at')
-                ->paginate(12);
+                ->get();
         } else {
             $relatedBooks = Book::with('category')
                 ->whereIn('category_id', $categoryIds)
                 ->whereNotIn('id', $seedBookIds)
                 ->orderByDesc('created_at')
-                ->paginate(12);
+                ->get();
         }
 
         return view('user_dashboard.myfeed', compact('relatedBooks'));

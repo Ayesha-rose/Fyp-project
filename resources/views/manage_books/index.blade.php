@@ -29,21 +29,21 @@
       <tbody>
         @foreach($books as $book)
         <tr>
-       
+
           <td>{{ $book->category->category_name ?? ' ' }}</td>
           <td>{{ $book->title }}</td>
           <td>{{ $book->author }}</td>
           <td> <a href="{{ asset('storage/' . $book->pdf_link) }}" target="_blank">View PDF</a></td>
           <td>{{ $book->description }}</td>
-          <td> <img src ="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
+          <td> <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" width="100"></td>
           <td class="d-flex gap-2">
 
-          <a class="btn btn-sm btn-outline-primary"
+            <a class="btn btn-sm btn-outline-primary"
               href="{{ route('manage_books.edit', $book->id) }}">
               Edit
             </a>
 
-]            <button type="button"
+            <button type="button"
               class="btn btn-sm btn-outline-danger"
               data-bs-toggle="modal"
               data-bs-target="#deleteModal{{ $book->id }}">

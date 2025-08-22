@@ -35,7 +35,7 @@
                                         @else
                                         <i class="bi bi-star text-warning"></i>
                                         @endif
-                                        @endfor
+                                    @endfor
                                 </div>
                             </div>
                         </div>
