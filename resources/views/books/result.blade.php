@@ -20,8 +20,8 @@
       <div class="col-12 mb-3">
         <div class="card w-100">
           <div class="row g-0">
-            <!-- Book Image -->
-            <div class="col-md-1">
+
+          <div class="col-md-1">
               <img src="{{ asset('storage/' . $book->image) }}"
                 class="img-fluid rounded-start book-image"
                 alt="{{ $book->title }}">

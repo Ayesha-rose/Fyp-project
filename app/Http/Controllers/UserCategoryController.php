@@ -44,20 +44,15 @@ class UserCategoryController extends Controller
         }
 
         $needle = mb_strtolower($q);
-
-        // A) Exact matches (case-insensitive)
         $exactTitle  = Book::whereRaw('LOWER(title) = ?',  [$needle])->get();
         $exactAuthor = Book::whereRaw('LOWER(author) = ?', [$needle])->get();
 
-        // Union of exact matches (unique by id)
         $exactUnion = $exactTitle->merge($exactAuthor)->unique('id')->values();
 
         if ($exactUnion->count() === 1) {
-            // Exactly one exact match → go straight to show
             return redirect()->route('book.show', $exactUnion->first()->id);
         }
         if ($exactUnion->count() > 1) {
-            // Multiple exact matches → results page
             $categories = Category::with('books.reviews')->get();
             $books = $exactUnion->sortBy('title')->values();
             return view('books.result', [
@@ -68,7 +63,6 @@ class UserCategoryController extends Controller
             ]);
         }
 
-        // B) Partial fallback (title OR author contains)
         $partial = Book::query()
             ->where('title', 'LIKE', "%{$q}%")
             ->orWhere('author', 'LIKE', "%{$q}%")
@@ -76,11 +70,9 @@ class UserCategoryController extends Controller
             ->get();
 
         if ($partial->count() === 1) {
-            // Single partial match → go straight to show
             return redirect()->route('book.show', $partial->first()->id);
         }
         if ($partial->count() > 1) {
-            // Multiple partial matches → results page
             $categories = Category::with('books.reviews')->get();
             return view('books.result', [
                 'books' => $partial,
@@ -90,8 +82,7 @@ class UserCategoryController extends Controller
             ]);
         }
 
-        // C) No matches → flash + stay on current page
-        return back()->withInput()->with('search_not_found', "No book found for \"{$q}\".");
+        return back()->withInput()->with('search_modal_message', "No book or author found for \"{$q}\".");
     }
 
 

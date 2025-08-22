@@ -69,14 +69,6 @@
             <button type="submit" class="d-none" aria-hidden="true"></button>
           </form>
 
-          @if(session('search_not_found'))
-          <div class="container mt-2">
-            <div class="alert alert-warning py-2 px-3 mb-0">
-              {{ session('search_not_found') }}
-            </div>
-          </div>
-          @endif
-
           @auth
           @if(Auth::check() && Auth::user()->role === 'admin')
           <a href="{{ route('admin.dashboard') }}" class="btn px-4 mx-4 pt-2 fw-bold text-muted" style="border:none;">
@@ -134,8 +126,6 @@
                 <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Features</a></li>
                 <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Services</a></li>
               </ul>
-
-
             </div>
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
               <ul class="list-unstyled small ">
@@ -146,8 +136,7 @@
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
               <ul class="list-unstyled small ">
                 <li><a href="{{ route('reviews') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Review</a></li>
-                <li><a href="#" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Get Updates</a>
-                </li>
+                <li><a href="#" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Get Updates</a></li>
               </ul>
             </div>
           </div>
@@ -156,8 +145,28 @@
     </div>
   </footer>
   @endif
+
   @yield('scripts')
 
-</body>
+  @if(session('search_modal_message'))
+  <div class="modal fade show" id="searchNotFoundModal" tabindex="-1" aria-labelledby="searchNotFoundLabel" aria-modal="true" role="dialog" style="display:block; background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-3 shadow">
+        <div class="modal-header" style="color: #015F9E;">
+          <h5 class="modal-title" id="searchNotFoundLabel"><i class="fas fa-search"></i> Search Result</h5>
+          <a href="{{ url()->previous() }}" class="btn-close btn-close-black"></a>
+        </div>
+        <div class="modal-body text-center">
+          <i class="bi bi-exclamation-triangle-fill fs-1 mb-3" style="color: #015F9E;"></i>
+          <p class="fw-bold mb-0">
+            {{ session('search_modal_message') }}
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  @endif
 
+</body>
 </html>

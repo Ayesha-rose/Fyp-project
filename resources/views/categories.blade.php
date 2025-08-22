@@ -87,7 +87,7 @@
                                 <p class="mb-1">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <i class="bi {{ $i <= round($avgRating) ? 'bi-star-fill text-warning' : 'bi-star text-muted' }}"></i>
-                                        @endfor
+                                    @endfor
                                         <span class="text-muted ms-1">{{ $avgRating ?? 'No ratings' }}</span>
                                 </p>
                             </div>

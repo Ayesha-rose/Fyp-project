@@ -67,7 +67,7 @@
                     <li class="nav-item sidemenu">
                         <a href="{{ route('user_dashboard.myreviews') }}"
                             class="nav-link {{ request()->routeIs('user_dashboard.myreviews') ? 'active' : '' }}">
-                            <i class="fa-solid fa-star"></i> My Reviews
+                            <i class="fa-solid fa-comment-dots"></i> My Reviews
                         </a>
                     </li>
                 </ul>

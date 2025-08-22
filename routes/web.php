@@ -14,16 +14,11 @@ use App\Http\Controllers\MyFeedController;
 use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResetPasswordController;
 
 
-Route::get('/', function () {
-    if (Auth::check() && Auth::user()->role === 'admin') {
-        return redirect()->route('admin.dashboard');
-    }
-    return view('home');
-})->name('home');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
