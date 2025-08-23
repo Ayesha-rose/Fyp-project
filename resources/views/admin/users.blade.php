@@ -11,6 +11,7 @@
 
     </div>
 
+    <!-- table content -->
         <table class="table table-bordered">
             <thead>
                 <tr>

@@ -12,7 +12,7 @@
         <div class="books-grid">
             <div class="card" style="width: 160px;">
                 <img src="{{ asset('storage/'.$book->image) }}" class="book-card" alt="{{ $book->title }}">
-
+<!-- condition apply -->
                 <div class="card-body" style="margin: 3px 0px 0px 3px; padding: 3px 0px 0px 3px;">
                     <h5 class="card-title text-truncate" style="font-size: medium;">Title: {{ $book->title }}</h5>
 

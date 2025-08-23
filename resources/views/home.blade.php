@@ -95,6 +95,7 @@
         <a href="#" class="book-card">
           <img src="{{ asset('storage/'.$review->book->image) }}" alt="{{ $review->book->title }}">
         </a>
+        <!-- condition applied -->
         <div class="card-body" style="margin: 0; padding: 0; width: 160px; overflow: hidden;">
           <h5 class="card-text text-truncate">{{ $review->book->title }}</h5>
           <p class="card-text text-truncate">{{ $review->book->author }}</p>

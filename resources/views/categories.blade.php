@@ -16,7 +16,7 @@
                         <div class="left">
                             <h1 class="mt-3">CATEGORIES</h1>
                         </div>
-
+<!-- Manage categories -->
                         <div class="row mt-5">
                             <div class="col-md-5 ms-3 me-2">
                                 <ul class="category-list">
