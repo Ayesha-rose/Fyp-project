@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\Book;
 
 
 class HomeController extends Controller
@@ -21,17 +22,37 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
+        $categories = Category::all();
 
-        $categories = Category::all(); 
-        
+        $books = Book::orderBy('created_at', 'desc')->take(4)->get();
 
         $topReviews = Review::with('book', 'user')
             ->orderByDesc('rating')
             ->take(5)
             ->get();
 
-        return view('home', compact('topReviews', 'categories'));
+        $bestBooks = collect();
+
+        foreach ($categories as $category) {
+            $book = $category->books()
+                ->withAvg('reviews', 'rating')
+                ->orderByDesc('reviews_avg_rating')
+                ->first();
+
+            if ($book) {
+                $bestBooks->push($book);
+            }
+
+            if ($bestBooks->count() >= 4) {
+                break;
+            }
+        }
+
+        return view('home', compact('topReviews', 'categories', 'books', 'bestBooks'));
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -19,7 +19,7 @@ body.categories-background {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     body.categories-background {
         height: auto;
         background: none;

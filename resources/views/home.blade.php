@@ -7,11 +7,11 @@
 @endsection
 
 @section('userpanel')
-<!-- Hero Section -->
+
 <div class="userpanel">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 py-5 mt-5">
+      <div class="col-md-6 col-sm-12 py-5 mt-5">
         <h1 class="fw-bold text-dark mb-5">Explore A World of <br><span class="text-primary"><u>knowledge</u></span> &<br>
           <span class="text-primary "><u>adventure!</u></span>
         </h1>
@@ -24,32 +24,25 @@
         <br><br>
       </div>
       <div class="col-md-6 mt-2">
-        <div class="position-relative">
-          <img src="images/h2.png" alt="Book 1" class="position-absolute rounded" href="#"
-            style="top: 20px; left: 210px; height: 250px; width: 190px; " />
-          <img src="images/h3.png" alt="Book 4" class="position-absolute rounded" href="#"
-            style="top: 315px; left:270px; height: 230px; width: 170px; " />
-          <img src="images/h1.png" alt="Book 2 right" class="position-absolute rounded" href="#"
-            style="top: 120px; left: 390px; height: 240px; width: 190px; " />
-          <img src="images/h4.png" alt="Book 2 left" class="position-absolute rounded" href="#"
-            style="top: 210px; left: 0%; height: 320px; width: 245px; " />
+        <div class="position-relative books-layout">
+          @foreach($bestBooks as $index => $book)
+          <img src="{{ asset('storage/' . $book->image) }}"
+            alt="{{ $book->title }}"
+            class="position-absolute rounded shadow-sm img-fluid book-img-{{ $index }}">
+          @endforeach
         </div>
       </div>
+
     </div>
   </div>
 </div>
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-
-
-<!-- Hero Section -->
 <div class="container my-5">
   <p class="text-primary fw-bold fs-5">FEATURES</p>
   <p class="fw-bold fs-1">What You Can Do?</p>
 
   <div class="row g-4 mt-4">
-    <!-- Card 1 -->
+
     <div class="col-md-4">
       <div class="card text-center border-0 p-4">
         <div class="icon-box mx-auto mb-3">
@@ -93,7 +86,7 @@
   </div>
 
 
-  <h2 class="mb-4 " style="color: #015F9E;"><b>Top Rated Reviews</b></h2>
+  <h2 class="mb-4 " style="color: #015F9E;"><b>Top Rated Books</b></h2>
   @if($topReviews->count() > 0)
   <div class="row justify-content-center">
     <div class="books-grid d-flex flex-wrap justify-content-center gap-5">
@@ -128,7 +121,7 @@
 
   <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class=" fw-bold m-0 color">Browse Genres</h2>
+      <h2 class=" fw-bold m-0" style="color: #015F9E;">Browse Genres</h2>
       <select class="form-select" style="width: 17%; color:#B0B0B0;">
         <option value="">All Categories</option>
         @foreach($categories->skip(5) as $category)
@@ -137,19 +130,17 @@
       </select>
     </div>
 
-    <div class="row g-5 text-center d-flex justify-content-between">
+    <div class="row text-center d-flex justify-content-between">
       @foreach($categories->take(5) as $category)
       <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-        <a href="#carousel{{ $category->id }}" class="btn btn-bg btn-category w-100 text-white fw-semibold">
-          {{ $category->category_name }}
+        <a href="#carousel{{ $category->id }}" class="btn btn-category text-white fw-bold mt-1" style="height: 50px; width: 160px;">
+          <p class="fs-5 d-flex align-items-center justify-content-center m-0">{{ $category->category_name }}</p>
         </a>
       </div>
       @endforeach
     </div>
   </div>
 
-
-  <!-- Services -->
   <div class="container my-5">
     <p class="text-uppercase fw-bold text-primary">Services</p>
     <h2 class="fw-bold mb-4">The Services for You</h2>
@@ -162,75 +153,45 @@
         <p class="fs-4 fw-bold"><span class="fw-bold text-primary">Rent</span> your favorite book fairly easy on <span
             class="fw-bold text-primary">Eduverse</span> !</p>
         <div>
-          <p class="fs-6 text-muted">Viewing, rent, and organize your favorite books has never been easier. An
+          <p class="para fs-6 text-muted">Viewing, rent, and organize your favorite books has never been easier. An
             integrated digital library rent that’s simple to use, Eduverse lets you spend less time managing your work
             and more time actually doing it!</p>
         </div>
-        <p class="fs-6  text-muted fw-normal">Effortless rentals, personalized shelves—Eduverse transforms book management,
+        <p class="para fs-6 text-muted fw-normal">Effortless rentals, personalized shelves—Eduverse transforms book management,
           enhancing your reading experience~</p>
       </div>
     </div>
 
     <div class="row align-items-center flex-md-row-reverse">
-      <div class="col-md-6 d-flex justify-content-end">
+      <div class="col-md-5 d-flex justify-content-end">
         <img src="/images/sImage2.png" alt="Service Image 2" class="img-fluid">
       </div>
-      <div class="col-md-6">
+      <div class="col-md-7">
         <p class="fs-4 fw-bold ">Quick Book Rentals: <span class="fw-bold text-primary">Dive </span>into <span
             class="fw-bold text-primary">Reading</span> Instantly</p>
-        <p class="fs-6 fw-normal text-muted">Discover instant literary delight. Access a vast library, borrow your favorite
+        <p class="para fs-6 fw-normal text-muted">Discover instant literary delight. Access a vast library, borrow your favorite
           reads, and dive into captivating stories within minutes. Reading made quick and easy, just a click away!</p>
-        <p class="fs-6 fw-normal text-muted">Unlock a world of stories effortlessly. Browse genres, choose, rent in minutes.
+        <p class="para fs-6 fw-normal text-muted">Unlock a world of stories effortlessly. Browse genres, choose, rent in minutes.
           Seamlessly manage your reading adventures with our intuitive platform~</p>
       </div>
     </div>
   </div>
 
-
   <div class="py-5">
-    <p class=" color t1 fs-1 fw-bold text-center text-dark mt-5">Recently Added</p>
+    <p class="fs-1 fw-bold text-center mt-5" style="color: #015F9E;">Recently Added</p>
 
     <div class="row g-4">
-      <!-- Card 1 -->
+      @foreach($books as $book)
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <img src="/images/rImage1.png" alt="" class="img-fluid">
+        <img src="{{ asset('storage/' . $book->image) }}" class="img-fluid book-img ">
         <div class="bg-light mt-2 p-3 rounded">
-          <p class="fs-6 text-muted mb-1">May 8, 2023</p>
-          <p class="fs-6 fw-semibold mb-1">Elit in dolor varius</p>
-          <p class="fs-6 fw-semibold mb-0">vestibulum ipsum ut massa</p>
+          <p class="fs-6 text-muted mb-1">{{ $book->created_at->format('M d, Y') }}</p>
+          <p class="fs-6 fw-semibold mb-1">{{ $book->title }}</p>
         </div>
       </div>
-
-      <!-- Card 2 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <img src="/images/rImage2.png" alt="" class="img-fluid">
-        <div class="bg-light mt-2 p-3 rounded">
-          <p class="fs-6 text-muted mb-1">May 8, 2023</p>
-          <p class="fs-6 fw-semibold mb-1">Amet phasellus dui habitant</p>
-          <p class="fs-6 fw-semibold mb-0">magna etiam dapibus justo</p>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <img src="/images/rImage3.png" alt="" class="img-fluid">
-        <div class="bg-light mt-2 p-3 rounded">
-          <p class="fs-6 text-muted mb-1">May 8, 2023</p>
-          <p class="fs-6 fw-semibold mb-1">Donec platea nunc ridiculus</p>
-          <p class="fs-6 fw-semibold mb-0">pellentesque eu.</p>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <img src="/images/rImage4.png" alt="" class="img-fluid">
-        <div class="bg-light mt-2 p-3 rounded">
-          <p class="fs-6 text-muted mb-1">May 8, 2023</p>
-          <p class="fs-6 fw-semibold mb-0">Facilisis magna in elementum quam.</p>
-          <p class="fs-6 fw-semibold mb-0">elementum quam.</p>
-        </div>
-      </div>
+      @endforeach
     </div>
+
   </div>
 
 </div>
