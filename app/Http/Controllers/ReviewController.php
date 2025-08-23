@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use App\Models\Book;
 use App\Models\GeminiService;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 
 class ReviewController extends Controller
@@ -17,7 +18,11 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews =Review::with(['user', 'book'])
+                ->latest()
+                ->get()
+                ->groupBy('book_id'); 
+        return view('reviews', compact('reviews'));
     }
 
     /**
@@ -46,7 +51,7 @@ class ReviewController extends Controller
 
         $status = GeminiService::analyzeReview($validated['review']);
         // dd($status == "Appropriate\n");
-        if($status != "Appropriate\n") {
+        if ($status != "Appropriate\n") {
             return back()->withErrors(['review' => 'Your review contains inappropriate content or mistakes.']);
         }
         $book->reviews()->updateOrCreate(

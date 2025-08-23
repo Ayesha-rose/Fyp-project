@@ -78,9 +78,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show');
 
-Route::get('/reviews', function () {
-    return view('reviews');
-})->name('reviews');
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
+
+// Route::get('/reviews', function () {
+//     return view('reviews');
+// })->name('reviews');
 
 Route::get('/books/{book}', [UserCategoryController::class, 'show'])->name('book.show');
 Route::get('/search', [UserCategoryController::class, 'search'])->name('books.search')->middleware('auth');

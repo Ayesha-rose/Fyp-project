@@ -191,6 +191,7 @@ body.homepage-background {
   .books-layout {
     min-height: 0;
   }
+
   .book-img-0,
   .book-img-1,
   .book-img-2,
@@ -212,4 +213,27 @@ body.homepage-background {
   width: 120px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+}
+
+
+.star-rating {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-rating input:checked~label,
+.star-rating label:hover,
+.star-rating label:hover~label {
+  color: #ffc107;
 }

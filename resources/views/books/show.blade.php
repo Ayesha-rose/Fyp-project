@@ -1,49 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('master')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Eduverse</title>
-    <!-- Bootstrap & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
 
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <style>
-        .star-rating {
-            flex-direction: row-reverse;
-            /* highest star first */
-            justify-content: flex-end;
-        }
+@section('userpanel')
 
-        .star-rating input {
-            display: none;
-            /* hide the radio buttons */
-        }
-
-        .star-rating label {
-            font-size: 1.5rem;
-            color: #ccc;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        /* Highlight stars when selected */
-        .star-rating input:checked~label,
-        .star-rating label:hover,
-        .star-rating label:hover~label {
-            color: #ffc107;
-            /* yellow stars */
-        }
-    </style>
-</head>
-
-
-<body>
-
-    <div class="container">
-        <div class="row align-items-center my-4 g-4">
+<div class="container">
+    <div class="main-content ">
+        <div class="row align-items-center mb-4 g-4">
             <div class="col-md-4">
                 <img src="{{ asset('storage/' . $book->image) }}" class="img-fluid rounded" alt="Book Image">
             </div>
@@ -109,59 +74,57 @@
                     @endfor
             </p>
         </div>
-        @endforeach
-        @endif
     </div>
+    @endforeach
+    @endif
+</div>
 
-    {{-- Review Modal --}}
-    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-3 rounded-4 shadow">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fw-bold" id="reviewModalLabel" style="color: #015F9E;">
-                        <i class="fa-solid fa-star"></i> Write Your Review
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @php
-                    $existingReview = $book->reviews->where('user_id', auth()->id())->first();
-                    $currentRating = optional($existingReview)->rating ?? 0;
-                    @endphp
+{{-- Review Modal --}}
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 rounded-4 shadow">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="reviewModalLabel" style="color: #015F9E;">
+                    <i class="fa-solid fa-star"></i> Write Your Review
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @php
+                $existingReview = $book->reviews->where('user_id', auth()->id())->first();
+                $currentRating = optional($existingReview)->rating ?? 0;
+                @endphp
 
-                    <form method="POST" action="{{ route('books.reviews.store', $book) }}">
-                        @csrf
+                <form method="POST" action="{{ route('books.reviews.store', $book) }}">
+                    @csrf
 
-                        {{-- Review --}}
-                        <div class="mb-3">
-                            <textarea name="review" class="form-control" rows="4" required>{{ old('review', optional($existingReview)->review) }}</textarea>
+                    {{-- Review --}}
+                    <div class="mb-3">
+                        <textarea name="review" class="form-control" rows="4" required>{{ old('review', optional($existingReview)->review) }}</textarea>
+                    </div>
+
+                    {{-- Star Rating --}}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: #015F9E;">Rate this book:</label>
+                        <div class="star-rating d-flex gap-1">
+
+                            @for ($i = 5; $i >= 1; $i--)
+                            <input type="radio" name="rating" id="rating{{ $i }}" value="{{ $i }}"
+                                autocomplete="off" {{ $i == $currentRating ? 'checked' : '' }} required>
+                            <label for="rating{{ $i }}" title="{{ $i }} stars">&#9733;</label>
+                            @endfor
+
                         </div>
+                    </div>
 
-                        {{-- Star Rating --}}
-                        <div class="mb-3">
-                            <label class="form-label fw-bold" style="color: #015F9E;">Rate this book:</label>
-                            <div class="star-rating d-flex gap-1">
-
-                                @for ($i = 5; $i >= 1; $i--)
-                                <input type="radio" name="rating" id="rating{{ $i }}" value="{{ $i }}"
-                                    autocomplete="off" {{ $i == $currentRating ? 'checked' : '' }} required>
-                                <label for="rating{{ $i }}" title="{{ $i }} stars">&#9733;</label>
-                                @endfor
-
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">
-                            {{ $existingReview ? 'Update Review' : 'Submit Review' }}
-                        </button>
-                    </form>
-                </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        {{ $existingReview ? 'Update Review' : 'Submit Review' }}
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@endsection

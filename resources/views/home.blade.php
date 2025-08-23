@@ -38,7 +38,7 @@
 </div>
 
 <div class="container my-5">
-  <p class="text-primary fw-bold fs-5">FEATURES</p>
+  <p class="text-primary fw-bold fs-5" id="features">FEATURES</p>
   <p class="fw-bold fs-1">What You Can Do?</p>
 
   <div class="row g-4 mt-4">
@@ -133,16 +133,21 @@
     <div class="row text-center d-flex justify-content-between">
       @foreach($categories->take(5) as $category)
       <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-        <a href="#carousel{{ $category->id }}" class="btn btn-category text-white fw-bold mt-1" style="height: 50px; width: 160px;">
-          <p class="fs-5 d-flex align-items-center justify-content-center m-0">{{ $category->category_name }}</p>
+        <a href="{{ route('categories') }}#carousel{{ $category->id }}"
+          class="btn btn-category text-white fw-bold mt-1"
+          style="height: 50px; width: 160px;">
+          <p class="fs-5 d-flex align-items-center justify-content-center m-0">
+            {{ $category->category_name }}
+          </p>
         </a>
       </div>
       @endforeach
     </div>
   </div>
 
+
   <div class="container my-5">
-    <p class="text-uppercase fw-bold text-primary">Services</p>
+    <p class="text-uppercase fw-bold text-primary" id="services">Services</p>
     <h2 class="fw-bold mb-4">The Services for You</h2>
 
     <div class="row align-items-center mb-5">

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
   @yield('styles')
 
 </head>
@@ -20,8 +21,8 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-light mx-0 px-0">
       <div class="container">
-        <a class="navbar-brand" href="Home.html">
-          <img src="images/Logo.png">
+        <a class="navbar-brand" href="{{ route('home') }}">
+          <img src="{{ asset('images/Logo.png') }}" alt="Eduverse Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarTogglerDemo" aria-controls="navbarTogglerDemo" aria-expanded="false"
@@ -47,18 +48,20 @@
                request()->routeIs('user_dashboard.mycalendar') || 
                request()->routeIs('user_dashboard.activitystreak') ||
                request()->routeIs('user_dashboard.myreviews') ||
-               request()->routeIs('books.search')
+               request()->routeIs('books.search') ||
+               request()->routeIs('book.show') ||
+               request()->routeIs('book.read')
                ? 'active' : '' }}"
                 href="{{ route('user_dashboard.myfeed') }}">
-                My Feed
+                My Book
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Book</a>
+              <a class="nav-link fw-bold me-2 {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
             </li>
           </ul>
-          
+
           <form action="{{ route('books.search') }}" method="GET" class="d-flex" role="search">
             <div class="input-group" id="input-feild">
               <span class="input-group-text bg-white border-0">
@@ -95,7 +98,7 @@
     @yield('userpanel')
   </div>
 
-  @if(request()->routeIs('home') || request()->routeIs('categories'))
+  @if(request()->routeIs('home') || request()->routeIs('categories') || request()->routeIs('reviews'))
 
   <footer class="py-5 mt-5">
     <div class="container">
@@ -109,13 +112,13 @@
             We make onboarding new employees ridiculously easy. On day one, they're ready to go. And retaining them is
             easier.
           </p>
-          <div class="d-flex gap-3">
+          <!-- <div class="d-flex gap-3">
             <p class="fs-6 fw-normal text-muted mt-1">Follow us on:</p>
             <a href="#" class="text-muted fs-5"><i class="bi bi-facebook"></i></a>
             <a href="#" class="text-muted fs-5"><i class="bi bi-instagram"></i></a>
             <a href="#" class="text-muted fs-5"><i class="bi bi-linkedin"></i></a>
             <a href="#" class="text-muted fs-5"><i class="bi bi-twitter"></i></a>
-          </div>
+          </div> -->
         </div>
 
         <div class="col-lg-8 col-md-6">
@@ -123,8 +126,8 @@
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
               <ul class="list-unstyled small">
                 <li><a href="{{ route('home') }}" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Home</a></li>
-                <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Features</a></li>
-                <li><a href="#" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Services</a></li>
+                <li><a href="{{ route('home') }}#features" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Features</a></li>
+                <li><a href="{{ route('home') }}#services" class="text-decoration-none fs-6 fw-medium text-dark mb-2 d-block">Services</a></li>
               </ul>
             </div>
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
@@ -135,8 +138,8 @@
             </div>
             <div class="col-6 col-md-4 mb-3 d-flex justify-content-end">
               <ul class="list-unstyled small ">
-                <li><a href="{{ route('reviews') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Review</a></li>
-                <li><a href="#" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Get Updates</a></li>
+                <li><a href="{{ route('reviews') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Reviews</a></li>
+                <li><a href="{{ route('user_dashboard.activitystreak') }}" class="text-decoration-none fs-6 fw-medium mb-2 text-dark d-block">Reading Streaks</a></li>
               </ul>
             </div>
           </div>
@@ -162,11 +165,12 @@
             {{ session('search_modal_message') }}
           </p>
         </div>
-        
+
       </div>
     </div>
   </div>
   @endif
 
 </body>
+
 </html>
