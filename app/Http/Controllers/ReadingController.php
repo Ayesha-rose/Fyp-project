@@ -36,7 +36,10 @@ class ReadingController extends Controller
 
         $book = \App\Models\Book::findOrFail($bookId);
         // dd($book->pdf_link);
-        return view('view-pdf', ['pdfUrl' => asset('storage/' . $book->pdf_link)]);
+        return view('view-pdf', [
+            'pdfUrl' => asset('storage/' . $book->pdf_link),
+            'book' => $book
+        ]);
 
         // return redirect()->away(asset('storage/' . $book->pdf_link));
     }
