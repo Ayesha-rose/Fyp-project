@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-
+<!-- condition -->
             @foreach($categories as $category)
             <div class="col-12 mt-3 mb-1">
                 <h4><a href="#category{{ $category->id }}" class="categ">{{ $category->category_name }}</a></h4>
