@@ -111,31 +111,44 @@ class ReadingController extends Controller
         }
     }
 
-    public function showStreak()
+    public function showStreak(Request $request)
     {
         $userId = Auth::id();
+
+        $limit = $request->get('streak_limit', 5); // Default 5 streaks
+        $expanded = $request->get('expand', false); // Show more clicked?
+
+        // All streaks, descending order
+        $streakHistoryQuery = ActivityStreak::where('user_id', $userId)
+            ->orderBy('activity_date', 'desc');
+
+        $totalStreaks = $streakHistoryQuery->count();
+
+        $streakHistory = $expanded ? $streakHistoryQuery->get() : $streakHistoryQuery->take($limit)->get();
+
+        // --- Current streak calculation ---
+        $lastStreak = $streakHistoryQuery->first(); // last activity
         $today = Carbon::today();
         $yesterday = Carbon::yesterday();
-
-        $lastStreak = ActivityStreak::where('user_id', $userId)
-            ->orderBy('activity_date', 'desc')
-            ->first();
-
         $currentStreak = 0;
 
         if ($lastStreak) {
-            if (
-                $lastStreak->activity_date->isSameDay($today) ||
-                $lastStreak->activity_date->isSameDay($yesterday)
-            ) {
+            if ($lastStreak->activity_date->isSameDay($today) || $lastStreak->activity_date->isSameDay($yesterday)) {
                 $currentStreak = $lastStreak->streak_count;
-            } else {
-                $currentStreak = 0;
             }
         }
 
-        return view('user_dashboard.activitystreak', compact('currentStreak', 'lastStreak'));
+        return view('user_dashboard.activitystreak', compact(
+            'streakHistory',
+            'limit',
+            'totalStreaks',
+            'expanded',
+            'lastStreak',
+            'currentStreak'
+        ));
     }
+
+
 
 
 

@@ -53,7 +53,7 @@
                                     @else
                                         <a href="{{ route('reviews', ['book_id' => $book->id, 'book_limit' => $limit]) }}" 
                                            class="text-primary">
-                                            Show More Reviews
+                                            Show More
                                         </a>
                                     @endif
                                 @endif
@@ -67,8 +67,8 @@
         {{-- Show More Books --}}
         @if($totalBooks > $limit)
             <div class="text-center mt-4">
-                <a href="{{ route('reviews', ['book_limit' => $limit + 4]) }}" class="btn btn-primary">
-                    Show More Books
+                <a href="{{ route('reviews', ['book_limit' => $limit + 4]) }}">
+                    Show More
                 </a>
             </div>
         @endif

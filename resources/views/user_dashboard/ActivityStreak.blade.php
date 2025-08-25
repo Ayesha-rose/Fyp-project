@@ -6,11 +6,6 @@
 
         <h2 class="fw-bold">My Activity Streak</h2>
 
-        @php
-            // Yeh values controller se aa rahi hain
-            // $currentStreak aur $lastStreak
-        @endphp
-
         <div class="row mb-4">
             <!-- Current Streak Card -->
             <div class="col-md-6">
@@ -46,14 +41,21 @@
                         <h5 class="card-title text-primary">Streak History</h5>
 
                         @php
+                            $limit = request()->get('streak_limit', 5);
+                            $expanded = request()->get('expand', false);
+
                             $streakHistory = \App\Models\ActivityStreak::where('user_id', Auth::id())
                                 ->orderBy('activity_date','desc')
                                 ->get();
+
+                            $totalStreaks = $streakHistory->count();
+
+                            $streaksToShow = $expanded ? $streakHistory : $streakHistory->take($limit);
                         @endphp
 
                         @if($streakHistory->count() > 0)
                             <ul class="list-group list-group-flush mt-3">
-                                @foreach($streakHistory as $streak)
+                                @foreach($streaksToShow as $streak)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         {{ $streak->activity_date->format('d M, Y') }}
                                         <span class="badge rounded-pill" style="background-color: orangered;">
@@ -62,6 +64,21 @@
                                     </li>
                                 @endforeach
                             </ul>
+
+                            {{-- Show More / Show Less --}}
+                            @if($totalStreaks > $limit)
+                                <div class=" mt-2">
+                                    @if(!$expanded)
+                                        <a href="{{ route('user_dashboard.activitystreak', ['streak_limit' => $limit, 'expand' => true]) }}">
+                                            Show More Streaks
+                                        </a>
+                                    @else
+                                        <a href="{{ route('user_dashboard.activitystreak', ['streak_limit' => $limit]) }}" >
+                                            Show Less
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
                         @else
                             <p class="text-muted mt-3">No streak history available.</p>
                         @endif
