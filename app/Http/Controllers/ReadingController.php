@@ -114,38 +114,42 @@ class ReadingController extends Controller
     public function showStreak(Request $request)
     {
         $userId = Auth::id();
-
-        $limit = $request->get('streak_limit', 5); // Default 5 streaks
-        $expanded = $request->get('expand', false); // Show more clicked?
-
-        // All streaks, descending order
-        $streakHistoryQuery = ActivityStreak::where('user_id', $userId)
-            ->orderBy('activity_date', 'desc');
-
-        $totalStreaks = $streakHistoryQuery->count();
-
-        $streakHistory = $expanded ? $streakHistoryQuery->get() : $streakHistoryQuery->take($limit)->get();
-
-        // --- Current streak calculation ---
-        $lastStreak = $streakHistoryQuery->first(); // last activity
         $today = Carbon::today();
-        $yesterday = Carbon::yesterday();
-        $currentStreak = 0;
 
-        if ($lastStreak) {
-            if ($lastStreak->activity_date->isSameDay($today) || $lastStreak->activity_date->isSameDay($yesterday)) {
-                $currentStreak = $lastStreak->streak_count;
-            }
+        $streaks = ActivityStreak::where('user_id', $userId)
+            ->orderBy('activity_date', 'desc')
+            ->pluck('activity_date')
+            ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
+            ->toArray();
+
+        $currentStreak = 0;
+        $day = $today->copy();
+        while (in_array($day->format('Y-m-d'), $streaks)) {
+            $currentStreak++;
+            $day->subDay();
         }
 
-        return view('user_dashboard.activitystreak', compact(
-            'streakHistory',
-            'limit',
-            'totalStreaks',
-            'expanded',
-            'lastStreak',
-            'currentStreak'
-        ));
+        $lastStreakDate = !empty($streaks) ? Carbon::parse($streaks[0]) : null;
+
+        
+        $streakHistory = ActivityStreak::where('user_id', $userId)
+            ->orderBy('activity_date', 'desc')
+            ->get();
+
+        $limit = 5;
+        $expanded = $request->get('expand', false);
+        $streaksToShow = $expanded ? $streakHistory : $streakHistory->take($limit);
+        $totalStreaks = $streakHistory->count();
+
+        return view('user_dashboard.activitystreak', [
+            'currentStreak' => $currentStreak,
+            'lastStreak' => $lastStreakDate ? (object)['activity_date' => $lastStreakDate] : null,
+            'streakHistory' => $streakHistory,
+            'streaksToShow' => $streaksToShow,
+            'totalStreaks' => $totalStreaks,
+            'expanded' => $expanded,
+            'limit' => $limit
+        ]);
     }
 
 

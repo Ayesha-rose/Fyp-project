@@ -19,8 +19,9 @@ class CalendarController extends Controller
     {
         $user = auth()->user();
 
-        $month = Carbon::now()->month;
-        $year = Carbon::now()->year;
+        $month = $request->query('month', Carbon::now()->month);
+        $year = $request->query('year', Carbon::now()->year);
+
 
         $startOfMonth = Carbon::create($year, $month, 1)->startOfMonth();
         $endOfMonth = Carbon::create($year, $month, 1)->endOfMonth();
@@ -40,20 +41,18 @@ class CalendarController extends Controller
             }
         }
 
-        // Show More / Show Less logic
         $showMoreDay = $request->query('day');
         $showMoreAction = $request->query('action');
 
         $eventsToShow = [];
         foreach ($events as $day => $dayEvents) {
             if ($day === $showMoreDay && $showMoreAction === 'more') {
-                $eventsToShow[$day] = $dayEvents; // saare events show
+                $eventsToShow[$day] = $dayEvents;
             } else {
-                $eventsToShow[$day] = array_slice($dayEvents, 0, 2); // sirf 2 events
+                $eventsToShow[$day] = array_slice($dayEvents, 0, 2);
             }
         }
 
-        // Streak logic (same as before)
         $streakDays = [];
         $dates = collect($readings)
             ->pluck('created_at')
@@ -81,36 +80,26 @@ class CalendarController extends Controller
 
             $nextDate = $dates->get($i + 1);
             if (!$nextDate || Carbon::parse($date)->addDay()->format('Y-m-d') != $nextDate) {
-                if ($date != $streakStart) {
-                    $streakDays[$date]['end'] = true;
-                }
+                
+                $streakDays[$date]['end'] = true;
+                // if ($date != $streakStart) {
+                //     $streakDays[$date]['end'] = true;
+                // }
             }
 
             $maxStreak = max($maxStreak, $currentStreak);
             $prevDate = $date;
         }
 
-        if ($prevDate && $prevDate == Carbon::today()->format('Y-m-d')) {
-            unset($streakDays[$prevDate]['end']);
-            $streakDays[$prevDate]['continue'] = true;
-        }
+        // if ($prevDate && $prevDate == Carbon::today()->format('Y-m-d')) {
+        //     unset($streakDays[$prevDate]['end']);
+        //     $streakDays[$prevDate]['continue'] = true;
+        // }
 
         $startedCount = $readings->where('status', 'read')->count();
         $completedCount = $readings->where('status', 'complete')->count();
 
-        return view('user_dashboard.mycalendar', [
-            'month' => $month,
-            'year' => $year,
-            'startOfMonth' => $startOfMonth,
-            'endOfMonth' => $endOfMonth,
-            'events' => $events,
-            'eventsToShow' => $eventsToShow,
-            'streakDays' => $streakDays,
-            'startedCount' => $startedCount,
-            'completedCount' => $completedCount,
-            'maxStreak' => $maxStreak,
-            'showMoreDay' => $showMoreDay,
-        ]);
+        return view('user_dashboard.mycalendar', compact('month', 'year', 'startOfMonth', 'endOfMonth', 'events', 'eventsToShow', 'streakDays', 'startedCount', 'completedCount', 'maxStreak', 'showMoreDay'));
     }
 
 
