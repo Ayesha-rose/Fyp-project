@@ -16,14 +16,34 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reviews =Review::with(['user', 'book'])
-                ->latest()
-                ->get()
-                ->groupBy('book_id'); 
-        return view('reviews', compact('reviews'));
+        $limit = $request->get('book_limit', 5); // Default 5 books
+        $books = Book::with(['reviews' => function ($q) {
+            $q->latest(); // reviews ko descending order me lao
+        }, 'reviews.user'])
+            ->withCount('reviews')
+            ->whereHas('reviews')
+            ->orderBy('created_at', 'desc')
+            ->take($limit)
+            ->get();
+
+        $expandedBookId = $request->get('book_id'); // jis book ka "Show More Reviews" click hua
+        $totalBooks = Book::whereHas('reviews')->count(); // total books count
+
+        return view('reviews', compact('books', 'expandedBookId', 'limit', 'totalBooks'));
     }
+
+    // public function bookReviews($id)
+    // { 
+    //     $book = Book::with(['reviews.user'])->findOrFail($id);
+
+    //     // Reviews paginate (5 per page)
+    //     $reviews = $book->reviews()->with('user')->paginate(5);
+
+    //     return view('book-reviews', compact('book', 'reviews'));
+    // }
+
 
     /**
      * Show the form for creating a new resource.

@@ -23,7 +23,7 @@ class UserReviewController extends Controller
             ->latest()
             ->get();
 
-        return view('user_dashboard.myreviews', compact('reviews'));
+        return view ('user_dashboard.myreviews', compact('reviews'));
     }
 
     /**

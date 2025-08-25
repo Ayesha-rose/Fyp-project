@@ -80,6 +80,9 @@ Route::get('/books/{id}', [AdminBookController::class, 'show'])->name('book.show
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
+Route::get('/book/{id}/reviews', [ReviewController::class, 'bookReviews'])->name('book.reviews');
+
+
 // Route::get('/reviews', function () {
 //     return view('reviews');
 // })->name('reviews');
