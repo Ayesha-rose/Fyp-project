@@ -186,6 +186,12 @@
                             </button>
                         </div>
                     </div>
+                    <div class="text-center mb-2">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Enter page number and click arrow to navigate and read that page
+                        </small>
+                    </div>
                     <div class="d-flex justify-content-center">
                         <button id="readPageBtn" class="btn btn-sm btn-success">
                             <i class="fas fa-play me-1"></i>Read This Page
@@ -909,41 +915,87 @@ function readFromPage(pageNumber) {
     console.log('Attempting to read from page:', pageNumber);
     console.log('Available page texts:', window.pageTexts);
     
-    if (!window.pageTexts || !window.pageTexts[pageNumber]) {
-        document.getElementById('audioStatus').innerHTML = `<span class="text-warning">No content available for page ${pageNumber}</span>`;
-        return;
-    }
-    
-    const pageText = window.pageTexts[pageNumber];
-    console.log('Page text for page', pageNumber, ':', pageText);
-    
-    if (!pageText || pageText.trim().length === 0) {
-        document.getElementById('audioStatus').innerHTML = `<span class="text-warning">Page ${pageNumber} has no readable content</span>`;
-        return;
-    }
-    
     // Stop current reading if any
     if (isReading) {
         stopReading();
     }
     
-    // Set up reading for this specific page
-    currentText = pageText;
-    textChunks = splitTextIntoChunks(pageText, 150);
-    currentIndex = 0;
-    
-    console.log('Created chunks for page', pageNumber, ':', textChunks);
-    
-    if (textChunks.length === 0) {
-        document.getElementById('audioStatus').innerHTML = `<span class="text-warning">No readable content on page ${pageNumber}</span>`;
-        return;
+    // Check if we have stored text for this page
+    if (window.pageTexts && window.pageTexts[pageNumber]) {
+        const pageText = window.pageTexts[pageNumber];
+        console.log('Using stored text for page', pageNumber, ':', pageText);
+        
+        if (pageText && pageText.trim().length > 0) {
+            // Set up reading for this specific page
+            currentText = pageText;
+            textChunks = splitTextIntoChunks(pageText, 150);
+            currentIndex = 0;
+            
+            console.log('Created chunks for page', pageNumber, ':', textChunks);
+            
+            if (textChunks.length === 0) {
+                document.getElementById('audioStatus').innerHTML = `<span class="text-warning">No readable content on page ${pageNumber}</span>`;
+                return;
+            }
+            
+            // Update status
+            document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
+            
+            // Start reading from this page
+            startReading();
+            return;
+        }
     }
     
-    // Update status
-    document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
+    // If no stored text, try to extract it now
+    console.log('No stored text found, extracting from page', pageNumber);
+    document.getElementById('audioStatus').innerHTML = `Extracting content from page ${pageNumber}...`;
     
-    // Start reading from this page
-    startReading();
+    // Try to extract text from the specific page
+    if (pdfDocument) {
+        pdfDocument.getPage(pageNumber).then(async (page) => {
+            try {
+                const pageText = await extractTextWithMultipleMethods(page);
+                
+                if (pageText && pageText.trim().length > 0) {
+                    // Store this page text
+                    if (!window.pageTexts) window.pageTexts = {};
+                    window.pageTexts[pageNumber] = pageText;
+                    
+                    // Set up reading for this specific page
+                    currentText = pageText;
+                    textChunks = splitTextIntoChunks(pageText, 150);
+                    currentIndex = 0;
+                    
+                    console.log('Successfully extracted text from page', pageNumber, ':', pageText.substring(0, 150) + '...');
+                    
+                    // Update status and start reading
+                    document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
+                    startReading();
+                    
+                } else {
+                    // Create fallback content
+                    const fallbackText = `Page ${pageNumber} of ${bookTitle} by ${bookAuthor}. This page contains content that could not be extracted automatically.`;
+                    window.pageTexts[pageNumber] = fallbackText;
+                    
+                    currentText = fallbackText;
+                    textChunks = splitTextIntoChunks(fallbackText, 150);
+                    currentIndex = 0;
+                    
+                    document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} with fallback content`;
+                    startReading();
+                }
+            } catch (error) {
+                console.error(`Error extracting text from page ${pageNumber}:`, error);
+                document.getElementById('audioStatus').innerHTML = `<span class="text-danger">Failed to extract content from page ${pageNumber}</span>`;
+            }
+        }).catch(error => {
+            console.error(`Error getting page ${pageNumber}:`, error);
+            document.getElementById('audioStatus').innerHTML = `<span class="text-danger">Error accessing page ${pageNumber}</span>`;
+        });
+    } else {
+        document.getElementById('audioStatus').innerHTML = `<span class="text-warning">PDF not loaded. Please wait for initialization to complete.</span>`;
+    }
 }
 
 // Function to extract text directly from iframe content
@@ -1285,17 +1337,80 @@ function goToSpecificPage() {
     const pageNumber = parseInt(document.getElementById('pageInput').value);
     if (pageNumber >= 1 && pageNumber <= totalPages) {
         console.log('Navigating to page:', pageNumber);
+        
+        // Stop any current reading
+        if (isReading) {
+            stopReading();
+        }
+        
+        // Update current page number
         window.currentPageNumber = pageNumber;
         updatePageDisplay();
+        
+        // Navigate to the specific page in PDF viewer
         navigateToPage(pageNumber);
         
         // Clear the input
         document.getElementById('pageInput').value = '';
         
-        // Read the content of the new page
-        setTimeout(() => {
-            readFromPage(pageNumber);
-        }, 500);
+        // Update status
+        document.getElementById('audioStatus').innerHTML = `Navigated to page ${pageNumber}. Extracting content...`;
+        
+        // Wait for page to load, then extract and read content
+        setTimeout(async () => {
+            try {
+                // Try to get text from the specific page
+                if (pdfDocument) {
+                    const page = await pdfDocument.getPage(pageNumber);
+                    const pageText = await extractTextWithMultipleMethods(page);
+                    
+                    if (pageText && pageText.trim().length > 0) {
+                        // Store this page text
+                        if (!window.pageTexts) window.pageTexts = {};
+                        window.pageTexts[pageNumber] = pageText;
+                        
+                        // Set up reading for this specific page
+                        currentText = pageText;
+                        textChunks = splitTextIntoChunks(pageText, 150);
+                        currentIndex = 0;
+                        
+                        console.log(`Successfully extracted text from page ${pageNumber}:`, pageText.substring(0, 150) + '...');
+                        
+                        // Update status and start reading
+                        document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
+                        startReading();
+                        
+                    } else {
+                        // If extraction failed, try to read from stored text
+                        if (window.pageTexts && window.pageTexts[pageNumber]) {
+                            readFromPage(pageNumber);
+                        } else {
+                            // Create fallback content for this page
+                            const fallbackText = `Page ${pageNumber} of ${bookTitle} by ${bookAuthor}. This page contains content that is part of the book.`;
+                            window.pageTexts[pageNumber] = fallbackText;
+                            
+                            currentText = fallbackText;
+                            textChunks = splitTextIntoChunks(fallbackText, 150);
+                            currentIndex = 0;
+                            
+                            document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} with fallback content`;
+                            startReading();
+                        }
+                    }
+                } else {
+                    // If PDF document not available, try to read from stored text
+                    if (window.pageTexts && window.pageTexts[pageNumber]) {
+                        readFromPage(pageNumber);
+                    } else {
+                        document.getElementById('audioStatus').innerHTML = `<span class="text-warning">Page ${pageNumber} content not available. Try refreshing the page.</span>`;
+                    }
+                }
+            } catch (error) {
+                console.error(`Error reading page ${pageNumber}:`, error);
+                document.getElementById('audioStatus').innerHTML = `<span class="text-danger">Error reading page ${pageNumber}: ${error.message}</span>`;
+            }
+        }, 1000);
+        
     } else {
         alert('Please enter a valid page number (1 to ' + totalPages + ')');
     }
@@ -1304,17 +1419,39 @@ function goToSpecificPage() {
 // Page navigation functions
 function goToPreviousPage() {
     if (window.currentPageNumber > 1) {
-        window.currentPageNumber--;
+        const newPage = window.currentPageNumber - 1;
+        console.log('Navigating to previous page:', newPage);
+        
+        // Stop current reading if any
+        if (isReading) {
+            stopReading();
+        }
+        
+        window.currentPageNumber = newPage;
         updatePageDisplay();
-        navigateToPage(window.currentPageNumber);
+        navigateToPage(newPage);
+        
+        // Update status
+        document.getElementById('audioStatus').innerHTML = `Navigated to page ${newPage}. Click "Read This Page" to start reading.`;
     }
 }
 
 function goToNextPage() {
     if (window.currentPageNumber < totalPages) {
-        window.currentPageNumber++;
+        const newPage = window.currentPageNumber + 1;
+        console.log('Navigating to next page:', newPage);
+        
+        // Stop current reading if any
+        if (isReading) {
+            stopReading();
+        }
+        
+        window.currentPageNumber = newPage;
         updatePageDisplay();
-        navigateToPage(window.currentPageNumber);
+        navigateToPage(newPage);
+        
+        // Update status
+        document.getElementById('audioStatus').innerHTML = `Navigated to page ${newPage}. Click "Read This Page" to start reading.`;
     }
 }
 
