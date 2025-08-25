@@ -25,12 +25,10 @@
                 @endphp
 
                 <tr>
-                    {{-- Empty cells before month start --}}
                     @for ($i = 0; $i < $startOfMonth->dayOfWeek; $i++)
                         <td></td>
                         @endfor
 
-                        {{-- Calendar Days --}}
                         @while ($currentDay <= $endOfMonth)
                             @php
                             $dayKey=$currentDay->format('Y-m-d');
@@ -42,17 +40,23 @@
                     ">
                                 <strong>{{ $currentDay->day }}</strong>
                                 <div style="font-size: 11px; text-align:left;">
-
-                                    {{-- Events --}}
-                                    @if(isset($events[$dayKey]))
-                                    @foreach($events[$dayKey] as $event)
+                                    @if(isset($eventsToShow[$dayKey]))
+                                    @foreach($eventsToShow[$dayKey] as $event)
                                     <div>{{ $event }}</div>
                                     @endforeach
+
+                                    @if(count($events[$dayKey]) > 2)
+                                    @if($showMoreDay === $dayKey)
+                                    <a href="{{ route('user_dashboard.mycalendar') }}">Show Less</a>
+                                    @else
+                                    <a href="{{ route('user_dashboard.mycalendar', ['day' => $dayKey, 'action' => 'more']) }}">Show More</a>
+                                    @endif
+                                    @endif
                                     @endif
 
-                                    @if(isset($streakDays[$dayKey]['day']))
+                                    <!-- @if(isset($streakDays[$dayKey]['day']))
                                     <div><i class="fa-solid fa-fire" style="color: orangered;"></i> Streak Day</div>
-                                    @endif
+                                    @endif -->
                                     @if(isset($streakDays[$dayKey]['start']))
                                     <div><i class="fa-solid fa-fire" style="color: orangered;"></i> Streak Started</div>
                                     @endif
@@ -62,8 +66,8 @@
                                     @if(isset($streakDays[$dayKey]['end']))
                                     <div><i class="fa-solid fa-fire" style="color: orangered;"></i> Streak Ended</div>
                                     @endif
-
                                 </div>
+
                             </td>
 
                             {{-- Row break on Saturday --}}
@@ -85,7 +89,7 @@
         </table>
 
         <hr>
-        <div class="my-4 p-3  border rounded" >
+        <div class="my-4 p-3  border rounded">
             <h4 class="fw-bold"><i class="fa-solid fa-square-poll-vertical"></i> Monthly Report</h4>
             <p><i class="fa-solid fa-book-open"></i> <b>Books Started:</b> {{ $startedCount }}</p>
             <p><i class="fa-solid fa-square-check" style="color: green;"></i> <b>Books Completed:</b> {{ $completedCount }}</p>

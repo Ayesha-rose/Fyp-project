@@ -15,9 +15,9 @@ class CalendarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $user = auth()->user();
+        $user = auth()->user();
 
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
@@ -30,18 +30,30 @@ class CalendarController extends Controller
             ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->get();
 
-        // 📌 Events (completed / reading)
         $events = [];
         foreach ($readings as $reading) {
             $date = Carbon::parse($reading->created_at)->format('Y-m-d');
             if ($reading->status == 'complete') {
-                $events[$date][] = "✅ Completed: " . $reading->book->title;
+                $events[$date][] = "Completed: " . $reading->book->title;
             } elseif ($reading->status == 'read') {
-                $events[$date][] = "📖 Reading: " . $reading->book->title;
+                $events[$date][] = "Reading: " . $reading->book->title;
             }
         }
 
-        // 🔥 Streak Logic
+        // Show More / Show Less logic
+        $showMoreDay = $request->query('day');
+        $showMoreAction = $request->query('action');
+
+        $eventsToShow = [];
+        foreach ($events as $day => $dayEvents) {
+            if ($day === $showMoreDay && $showMoreAction === 'more') {
+                $eventsToShow[$day] = $dayEvents; // saare events show
+            } else {
+                $eventsToShow[$day] = array_slice($dayEvents, 0, 2); // sirf 2 events
+            }
+        }
+
+        // Streak logic (same as before)
         $streakDays = [];
         $dates = collect($readings)
             ->pluck('created_at')
@@ -57,20 +69,16 @@ class CalendarController extends Controller
 
         foreach ($dates as $i => $date) {
             if (!$prevDate || Carbon::parse($prevDate)->addDay()->format('Y-m-d') != $date) {
-                // ✨ New streak start
                 $streakStart = $date;
                 $streakDays[$date]['start'] = true;
                 $currentStreak = 1;
             } else {
-                // ✨ Streak continue
                 $streakDays[$date]['continue'] = true;
                 $currentStreak++;
             }
 
-            // Always mark day
             $streakDays[$date]['day'] = true;
 
-            // Check next day (end of streak)
             $nextDate = $dates->get($i + 1);
             if (!$nextDate || Carbon::parse($date)->addDay()->format('Y-m-d') != $nextDate) {
                 if ($date != $streakStart) {
@@ -82,13 +90,11 @@ class CalendarController extends Controller
             $prevDate = $date;
         }
 
-        // ✅ Agar streak aaj tak chal rahi hai → last day "continue" hoga, "end" nahi
         if ($prevDate && $prevDate == Carbon::today()->format('Y-m-d')) {
             unset($streakDays[$prevDate]['end']);
             $streakDays[$prevDate]['continue'] = true;
         }
 
-        // 📊 Monthly report
         $startedCount = $readings->where('status', 'read')->count();
         $completedCount = $readings->where('status', 'complete')->count();
 
@@ -98,12 +104,15 @@ class CalendarController extends Controller
             'startOfMonth' => $startOfMonth,
             'endOfMonth' => $endOfMonth,
             'events' => $events,
+            'eventsToShow' => $eventsToShow,
             'streakDays' => $streakDays,
             'startedCount' => $startedCount,
             'completedCount' => $completedCount,
             'maxStreak' => $maxStreak,
+            'showMoreDay' => $showMoreDay,
         ]);
     }
+
 
 
 

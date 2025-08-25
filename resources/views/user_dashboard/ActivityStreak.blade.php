@@ -7,7 +7,7 @@
         <h2 class="fw-bold">My Activity Streak</h2>
 
         <div class="row mb-4">
-            <!-- Current Streak Card -->
+            
             <div class="col-md-6">
                 <div class="card text-center border-0" 
                      style="background-color: #ffffff; transition: box-shadow 0.3s, transform 0.3s; border-radius: 4px; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <!-- Streak History Card -->
+            
             <div class="col-md-6">
                 <div class="card text-center border-0" 
                      style="background-color: #ffffff; transition: box-shadow 0.3s, transform 0.3s; border-radius: 4px; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.2);">
@@ -43,13 +43,10 @@
                         @php
                             $limit = request()->get('streak_limit', 5);
                             $expanded = request()->get('expand', false);
-
                             $streakHistory = \App\Models\ActivityStreak::where('user_id', Auth::id())
                                 ->orderBy('activity_date','desc')
                                 ->get();
-
                             $totalStreaks = $streakHistory->count();
-
                             $streaksToShow = $expanded ? $streakHistory : $streakHistory->take($limit);
                         @endphp
 
@@ -65,7 +62,6 @@
                                 @endforeach
                             </ul>
 
-                            {{-- Show More / Show Less --}}
                             @if($totalStreaks > $limit)
                                 <div class=" mt-2">
                                     @if(!$expanded)
