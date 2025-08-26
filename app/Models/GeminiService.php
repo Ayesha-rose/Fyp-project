@@ -32,8 +32,7 @@ class GeminiService
 
         $response =  $response->json();
         $status = $response['candidates'][0]['content']['parts'][0]['text'] ?? 'Unknown';
-        // $data = json_decode($response);
-        // dd($response, $status);
+        
         return $status;
     }
 }

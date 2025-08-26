@@ -157,12 +157,11 @@
             </div>
 
             <!-- Audio Controls Section -->
-            <div class="audio-controls w-100 mt-4">
+           <div class="audio-controls w-100">
                 <h5 class="text-center mb-3">
                     <i class="fas fa-headphones me-2"></i>Audio Reader
                 </h5>
                 
-                <!-- Audio Control Buttons -->
                 <div class="d-grid gap-2">
                     <button id="startAudioBtn" class="audio-btn">
                         <i class="fas fa-play me-2"></i>Start Reading
@@ -188,63 +187,87 @@
                 <!-- Page Navigation -->
                 <div class="page-navigation mt-3">
                     <h6 class="text-center mb-2">Page Navigation</h6>
-                    
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <button id="prevPageBtn" class="btn btn-sm btn-outline-primary">
                             <i class="fas fa-chevron-left"></i> Previous
                         </button>
-                        
-                        <span id="currentPageDisplay" class="text-muted">
-                            Page 1 of {{ $book->total_pages ?? '?' }}
-                        </span>
-                        
+                        <span id="currentPageDisplay" class="text-muted">Page 1 of {{ $book->total_pages ?? '?' }}</span>
                         <button id="nextPageBtn" class="btn btn-sm btn-outline-primary">
                             Next <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
-                    
                     <div class="d-flex justify-content-center mb-2">
                         <div class="input-group input-group-sm" style="max-width: 200px;">
-                            <input type="number" id="pageInput" 
-                                   class="form-control" 
-                                   placeholder="Page #" 
-                                   min="1" 
-                                   max="{{ $book->total_pages ?? 100 }}">
-                            
+                            <input type="number" id="pageInput" class="form-control" placeholder="Page #" min="1" max="{{ $book->total_pages ?? 100 }}">
                             <button id="goToPageBtn" class="btn btn-outline-secondary btn-sm">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
-                    
                     <div class="text-center mb-2">
                         <small class="text-muted">
                             <i class="fas fa-info-circle me-1"></i>
                             Enter page number and click arrow to navigate and read that page
                         </small>
                     </div>
-                    
                     <div class="d-flex justify-content-center">
                         <button id="readPageBtn" class="btn btn-sm btn-success">
                             <i class="fas fa-play me-1"></i>Read This Page
                         </button>
                     </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <button id="refreshPageBtn" class="btn btn-sm btn-outline-warning">
+                            <i class="fas fa-sync-alt me-1"></i>Refresh Page Text
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <button id="extractTextBtn" class="btn btn-sm btn-outline-info">
+                            <i class="fas fa-file-text me-1"></i>Extract Page Text
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <button id="forceReadBtn" class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-volume-up me-1"></i>Force Read Page
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Audio Settings -->
-                <div class="audio-settings mt-3">
+                <div class="audio-settings">
                     <div class="setting-group">
                         <label>Speed:</label>
-                        <input type="range" id="speedControl" 
-                               min="0.5" max="2" step="0.1" value="1" />
+                        <input type="range" id="speedControl" min="0.5" max="2" step="0.1" value="1" />
                         <span id="speedValue">1.0x</span>
                     </div>
-                    
                     <div class="setting-group">
                         <label>Volume:</label>
-                        <input type="range" id="volumeControl" 
-                               min="0" max="1" step="0.1" value="1" />
+                        <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1" />
                         <span id="volumeValue">100%</span>
+                    </div>
+                </div>
+                
+                <div class="audio-progress">
+                    <div class="audio-progress-bar" id="audioProgressBar"></div>
+                </div>
+                
+                <div class="audio-status" id="audioStatus">
+                    Ready to read: {{ $book->title ?? 'Book' }}
+                </div>
+                
+                <div class="audio-notification" id="audioNotification" style="display: none;">
+                    <div class="alert alert-info text-center">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Auto-start enabled!</strong> Audio reading will begin automatically in a few seconds.
+                    </div>
+                </div>
+                
+                <div class="audio-info" id="audioInfo" style="display: none;">
+                    <div class="text-center">
+                        <small class="text-muted">
+                            <span id="currentPosition">0</span> of <span id="totalChunks">0</span> segments
+                        </small>
+                        <br>
+                        <small class="text-muted" id="timeRemaining"></small>
                     </div>
                 </div>
             </div>
@@ -320,16 +343,6 @@ async function findMeaning() {
     }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
 <!-- Audio Scripts -->
 <script>
 // Set PDF.js worker path
