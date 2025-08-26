@@ -1,4 +1,4 @@
-@extends('master') {{-- Or your main layout --}}
+@extends('master') 
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -122,28 +122,47 @@
 <div class="container-fluid">
     <div class="row" style="height: 100vh;">
 
+        <!-- Left Side PDF -->
         <div class="col-md-9" style="height:100%; padding:0;">
-            <iframe src="{{ $pdfUrl }}" width="100%" height="100%" style="border:none;" id="pdfViewer"></iframe>
+            <iframe src="{{ $pdfUrl }}" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:none;" 
+                    id="pdfViewer">
+            </iframe>
         </div>
 
-        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center bg-light">
-            <h4 class="mb-3">Add Your Notes</h4>
-            <form method="POST" action="">
-                @csrf
-                <div class="mb-3 w-100">
-                    <textarea name="notes" class="form-control" rows="6" placeholder="Write your notes here..."></textarea>
-                </div>
-                <div class="mb-3 w-100">
-                    <button type="submit" class="btn btn-primary w-100">Save Notes</button>
-                </div>
-            </form>
+        <!-- Right Side -->
+        <div class="col-md-3 d-flex flex-column justify-content-start align-items-center bg-light overflow-auto p-3">
+
+            <!-- Word Meaning Finder -->
+            <h4 class="mb-3">Word Meaning Finder</h4>
             
+            <div class="mb-3 w-100">
+                <input type="text" id="wordInput" 
+                       class="form-control" 
+                       placeholder="Enter word or sentence...">
+            </div>
+            
+            <div class="mb-3 w-100">
+                <button onclick="findMeaning()" 
+                        class="btn btn-primary w-100">
+                    Find Meaning
+                </button>
+            </div>
+            
+            <div id="result" 
+                 class="w-100 p-2 border rounded bg-white" 
+                 style="min-height:150px; overflow:auto;">
+            </div>
+
             <!-- Audio Controls Section -->
-            <div class="audio-controls w-100">
+            <div class="audio-controls w-100 mt-4">
                 <h5 class="text-center mb-3">
                     <i class="fas fa-headphones me-2"></i>Audio Reader
                 </h5>
                 
+                <!-- Audio Control Buttons -->
                 <div class="d-grid gap-2">
                     <button id="startAudioBtn" class="audio-btn">
                         <i class="fas fa-play me-2"></i>Start Reading
@@ -169,94 +188,147 @@
                 <!-- Page Navigation -->
                 <div class="page-navigation mt-3">
                     <h6 class="text-center mb-2">Page Navigation</h6>
+                    
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <button id="prevPageBtn" class="btn btn-sm btn-outline-primary">
                             <i class="fas fa-chevron-left"></i> Previous
                         </button>
-                        <span id="currentPageDisplay" class="text-muted">Page 1 of {{ $book->total_pages ?? '?' }}</span>
+                        
+                        <span id="currentPageDisplay" class="text-muted">
+                            Page 1 of {{ $book->total_pages ?? '?' }}
+                        </span>
+                        
                         <button id="nextPageBtn" class="btn btn-sm btn-outline-primary">
                             Next <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
+                    
                     <div class="d-flex justify-content-center mb-2">
                         <div class="input-group input-group-sm" style="max-width: 200px;">
-                            <input type="number" id="pageInput" class="form-control" placeholder="Page #" min="1" max="{{ $book->total_pages ?? 100 }}">
+                            <input type="number" id="pageInput" 
+                                   class="form-control" 
+                                   placeholder="Page #" 
+                                   min="1" 
+                                   max="{{ $book->total_pages ?? 100 }}">
+                            
                             <button id="goToPageBtn" class="btn btn-outline-secondary btn-sm">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
+                    
                     <div class="text-center mb-2">
                         <small class="text-muted">
                             <i class="fas fa-info-circle me-1"></i>
                             Enter page number and click arrow to navigate and read that page
                         </small>
                     </div>
+                    
                     <div class="d-flex justify-content-center">
                         <button id="readPageBtn" class="btn btn-sm btn-success">
                             <i class="fas fa-play me-1"></i>Read This Page
                         </button>
                     </div>
-                    <div class="d-flex justify-content-center mt-2">
-                        <button id="refreshPageBtn" class="btn btn-sm btn-outline-warning">
-                            <i class="fas fa-sync-alt me-1"></i>Refresh Page Text
-                        </button>
-                    </div>
-                    <div class="d-flex justify-content-center mt-2">
-                        <button id="extractTextBtn" class="btn btn-sm btn-outline-info">
-                            <i class="fas fa-file-text me-1"></i>Extract Page Text
-                        </button>
-                    </div>
-                    <div class="d-flex justify-content-center mt-2">
-                        <button id="forceReadBtn" class="btn btn-sm btn-outline-success">
-                            <i class="fas fa-volume-up me-1"></i>Force Read Page
-                        </button>
-                    </div>
                 </div>
                 
                 <!-- Audio Settings -->
-                <div class="audio-settings">
+                <div class="audio-settings mt-3">
                     <div class="setting-group">
                         <label>Speed:</label>
-                        <input type="range" id="speedControl" min="0.5" max="2" step="0.1" value="1" />
+                        <input type="range" id="speedControl" 
+                               min="0.5" max="2" step="0.1" value="1" />
                         <span id="speedValue">1.0x</span>
                     </div>
+                    
                     <div class="setting-group">
                         <label>Volume:</label>
-                        <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1" />
+                        <input type="range" id="volumeControl" 
+                               min="0" max="1" step="0.1" value="1" />
                         <span id="volumeValue">100%</span>
                     </div>
                 </div>
-                
-                <div class="audio-progress">
-                    <div class="audio-progress-bar" id="audioProgressBar"></div>
-                </div>
-                
-                <div class="audio-status" id="audioStatus">
-                    Ready to read: {{ $book->title ?? 'Book' }}
-                </div>
-                
-                <div class="audio-notification" id="audioNotification" style="display: none;">
-                    <div class="alert alert-info text-center">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <strong>Auto-start enabled!</strong> Audio reading will begin automatically in a few seconds.
-                    </div>
-                </div>
-                
-                <div class="audio-info" id="audioInfo" style="display: none;">
-                    <div class="text-center">
-                        <small class="text-muted">
-                            <span id="currentPosition">0</span> of <span id="totalChunks">0</span> segments
-                        </small>
-                        <br>
-                        <small class="text-muted" id="timeRemaining"></small>
-                    </div>
-                </div>
             </div>
+            
         </div>
-
     </div>
 </div>
+
+
+<script>
+const GEMINI_API_KEY = "AIzaSyCrRbzMIgVilC1UyuN2snirEebEiQzXb8U"; 
+
+async function findMeaning() {
+    const word = document.getElementById("wordInput").value.trim();
+    if (!word) {
+        document.getElementById("result").innerHTML = "<b>Please enter a word or sentence.</b>";
+        return;
+    }
+
+    try {
+        const prompt = `
+        You are a dictionary assistant.
+        Input: "${word}"
+        
+        If it's a single word → return JSON like this:
+        {
+          "original": "word",
+          "english_meaning": "English meaning here",
+          "synonyms": ["synonym1", "synonym2"],
+          "urdu_meaning": "اردو مطلب یہاں"
+        }
+
+        If it's a sentence → return JSON like this:
+        {
+          "original": "sentence",
+          "english_meaning": "English translation",
+          "urdu_meaning": "اردو ترجمہ"
+        }
+        ONLY return valid JSON, nothing else.
+        `;
+
+        const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                }),
+            }
+        );
+
+        const data = await response.json();
+        console.log("Gemini raw response:", data);
+
+        let textOutput = data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+
+        // Clean any extra text (ensure JSON only)
+        const jsonStr = textOutput.match(/\{[\s\S]*\}/)?.[0];
+        let resultData = JSON.parse(jsonStr);
+
+        // Build HTML Output
+        let html = `<b>Original:</b> ${resultData.original || word}<br>`;
+        if (resultData.english_meaning) html += `<b>English Meaning:</b> ${resultData.english_meaning}<br>`;
+        if (resultData.synonyms) html += `<b>Synonyms:</b> ${resultData.synonyms.join(", ")}<br>`;
+        if (resultData.urdu_meaning) html += `<b>Urdu Meaning:</b> ${resultData.urdu_meaning}<br>`;
+
+        document.getElementById("result").innerHTML = html;
+
+    } catch (error) {
+        document.getElementById("result").innerHTML = " Error fetching meaning!";
+        console.error(error);
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
 
 <!-- Audio Scripts -->
 <script>
