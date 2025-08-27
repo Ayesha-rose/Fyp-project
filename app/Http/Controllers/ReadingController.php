@@ -111,49 +111,31 @@ class ReadingController extends Controller
         }
     }
 
-    public function showStreak(Request $request)
+    public function showStreak()
     {
         $userId = Auth::id();
         $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
 
-        $streaks = ActivityStreak::where('user_id', $userId)
+        $lastStreak = ActivityStreak::where('user_id', $userId)
             ->orderBy('activity_date', 'desc')
-            ->pluck('activity_date')
-            ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
-            ->toArray();
+            ->first();
 
         $currentStreak = 0;
-        $day = $today->copy();
-        while (in_array($day->format('Y-m-d'), $streaks)) {
-            $currentStreak++;
-            $day->subDay();
+
+        if ($lastStreak) {
+            if (
+                $lastStreak->activity_date->isSameDay($today) ||
+                $lastStreak->activity_date->isSameDay($yesterday)
+            ) {
+                $currentStreak = $lastStreak->streak_count;
+            } else {
+                $currentStreak = 0;
+            }
         }
 
-        $lastStreakDate = !empty($streaks) ? Carbon::parse($streaks[0]) : null;
-
-        
-        $streakHistory = ActivityStreak::where('user_id', $userId)
-            ->orderBy('activity_date', 'desc')
-            ->get();
-
-        $limit = 5;
-        $expanded = $request->get('expand', false);
-        $streaksToShow = $expanded ? $streakHistory : $streakHistory->take($limit);
-        $totalStreaks = $streakHistory->count();
-
-        return view('user_dashboard.activitystreak', [
-            'currentStreak' => $currentStreak,
-            'lastStreak' => $lastStreakDate ? (object)['activity_date' => $lastStreakDate] : null,
-            'streakHistory' => $streakHistory,
-            'streaksToShow' => $streaksToShow,
-            'totalStreaks' => $totalStreaks,
-            'expanded' => $expanded,
-            'limit' => $limit
-        ]);
+        return view('user_dashboard.activitystreak', compact('currentStreak', 'lastStreak'));
     }
-
-
-
 
 
     private function updateStreak()
