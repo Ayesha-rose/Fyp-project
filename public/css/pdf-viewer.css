@@ -1,0 +1,190 @@
+/* PDF Viewer CSS Styles */
+
+/* Hide specific buttons */
+.hidden-button {
+    display: none !important;
+}
+
+.audio-controls {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.audio-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.audio-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    color: white;
+}
+
+.audio-btn:disabled {
+    background: #6c757d;
+    transform: none;
+    box-shadow: none;
+}
+
+.audio-status {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6c757d;
+    text-align: center;
+}
+
+.audio-progress {
+    width: 100%;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.audio-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.audio-settings {
+    margin-top: 15px;
+    padding: 10px;
+    background: #e9ecef;
+    border-radius: 8px;
+}
+
+.setting-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.setting-group label {
+    font-size: 12px;
+    margin: 0;
+}
+
+.setting-group input {
+    width: 60px;
+    font-size: 12px;
+}
+
+.page-navigation {
+    background: #e3f2fd;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #bbdefb;
+}
+
+.page-navigation h6 {
+    color: #1976d2;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.page-navigation .btn {
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+.page-navigation #currentPageDisplay {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1976d2;
+}
+
+.audio-notification {
+    margin-top: 10px;
+}
+
+.audio-notification .alert {
+    font-size: 12px;
+    padding: 8px 12px;
+    margin: 0;
+}
+
+/* Manual text input styles */
+.manual-text-input {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-top: 15px;
+}
+
+.manual-text-input h6 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.manual-text-input p {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.manual-text-input textarea {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.manual-text-input .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+/* Word meaning finder styles */
+#wordInput {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+#result {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    min-height: 150px;
+    overflow: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .col-md-9 {
+        width: 100%;
+    }
+    
+    .col-md-3 {
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .audio-controls {
+        margin-top: 15px;
+        padding: 10px;
+    }
+    
+    .page-navigation {
+        padding: 8px;
+    }
+    
+    .page-navigation .btn {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}

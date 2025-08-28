@@ -2,120 +2,8 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/pdf-viewer.css') }}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<style>
-    .audio-controls {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 15px;
-        margin-top: 20px;
-        border: 1px solid #dee2e6;
-    }
-    
-    .audio-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    .audio-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        color: white;
-    }
-    
-    .audio-btn:disabled {
-        background: #6c757d;
-        transform: none;
-        box-shadow: none;
-    }
-    
-    .audio-status {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #6c757d;
-        text-align: center;
-    }
-    
-    .audio-progress {
-        width: 100%;
-        height: 6px;
-        background: #e9ecef;
-        border-radius: 3px;
-        margin-top: 10px;
-        overflow: hidden;
-    }
-    
-    .audio-progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        width: 0%;
-        transition: width 0.3s ease;
-    }
-    
-    .audio-settings {
-        margin-top: 15px;
-        padding: 10px;
-        background: #e9ecef;
-        border-radius: 8px;
-    }
-    
-    .setting-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-    }
-    
-    .setting-group label {
-        font-size: 12px;
-        margin: 0;
-    }
-    
-    .setting-group input {
-        width: 60px;
-        font-size: 12px;
-    }
-    
-    .page-navigation {
-        background: #e3f2fd;
-        border-radius: 8px;
-        padding: 12px;
-        border: 1px solid #bbdefb;
-    }
-    
-    .page-navigation h6 {
-        color: #1976d2;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-    
-    .page-navigation .btn {
-        font-size: 11px;
-        padding: 4px 8px;
-    }
-    
-    .page-navigation #currentPageDisplay {
-        font-size: 12px;
-        font-weight: 500;
-        color: #1976d2;
-    }
-    
-    .audio-notification {
-        margin-top: 10px;
-    }
-    
-    .audio-notification .alert {
-        font-size: 12px;
-        padding: 8px 12px;
-        margin: 0;
-    }
-</style>
 @endsection
 
 @section('userpanel')
@@ -133,7 +21,7 @@
         </div>
 
         <!-- Right Side -->
-        <div class="col-md-3 d-flex flex-column justify-content-start align-items-center bg-light overflow-auto p-3">
+        <div class="col-md-3 d-flex flex-column justify-content-start align-items-center bg-light overflow-auto p-3" style="height:100%;">
 
             <!-- Word Meaning Finder -->
             <h4 class="mb-3">Word Meaning Finder</h4>
@@ -171,7 +59,7 @@
                         <i class="fas fa-play me-2"></i>Resume Reading
                     </button>
                     
-                    <button id="pauseAudioBtn" class="audio-btn" style="display: none;">
+                    <button id="pauseAudioBtn" class="audio-btn hidden-button" style="display: none;">
                         <i class="fas fa-pause me-2"></i>Pause
                     </button>
                     
@@ -216,7 +104,7 @@
                         </button>
                     </div>
                     <div class="d-flex justify-content-center mt-2">
-                        <button id="refreshPageBtn" class="btn btn-sm btn-outline-warning">
+                        <button id="refreshPageBtn" class="btn btn-sm btn-outline-warning hidden-button">
                             <i class="fas fa-sync-alt me-1"></i>Refresh Page Text
                         </button>
                     </div>
@@ -226,7 +114,7 @@
                         </button>
                     </div>
                     <div class="d-flex justify-content-center mt-2">
-                        <button id="forceReadBtn" class="btn btn-sm btn-outline-success">
+                        <button id="forceReadBtn" class="btn btn-sm btn-outline-success hidden-button">
                             <i class="fas fa-volume-up me-1"></i>Force Read Page
                         </button>
                     </div>
@@ -270,13 +158,26 @@
                         <small class="text-muted" id="timeRemaining"></small>
                     </div>
                 </div>
+                
+                <!-- Manual Text Input -->
+                <div class="manual-text-input mt-3" style="background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #dee2e6;">
+                    <h6><i class="fas fa-keyboard me-2"></i>Manual Text Input</h6>
+                    
+                    <textarea id="manualTextInput" class="form-control" rows="3" placeholder="Type or paste the text you want to read from..."></textarea>
+                    <div class="mt-2 d-flex gap-2">
+                        <button onclick="readManualText()" class="btn btn-sm btn-primary flex-fill">
+                            <i class="fas fa-play me-1"></i>Start Reading from This Text
+                        </button>
+                        <button onclick="clearManualText()" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i>Clear
+                        </button>
+                    </div>
+                </div>
             </div>
             
         </div>
     </div>
 </div>
-
-
 <script>
 const GEMINI_API_KEY = "AIzaSyCrRbzMIgVilC1UyuN2snirEebEiQzXb8U"; 
 
@@ -418,15 +319,12 @@ document.addEventListener('DOMContentLoaded', function() {
     window.currentPageNumber = 1;
     updatePageDisplay();
     
-    // Set up page change detection
     setupPageChangeDetection();
     
     // Set up PDF viewer click detection
     setupPDFViewerClickDetection();
-    
     // Load saved reading progress
     loadReadingProgress();
-    
     // Initialize PDF text extraction with a delay to ensure everything is loaded
     setTimeout(() => {
         initializePDFTextExtraction();
@@ -445,7 +343,6 @@ function setupPageChangeDetection() {
                 updatePageDisplay();
             }
         });
-        
         // Also try to detect page changes by monitoring the iframe
         setInterval(() => {
             try {
@@ -557,12 +454,10 @@ async function extractTextFromAllPages() {
             
             try {
                 const page = await pdfDocument.getPage(pageNum);
-                
-                // Try multiple text extraction methods
-                let pageText = await extractTextWithMultipleMethods(page);
+                                let pageText = await extractTextWithMultipleMethods(page);
                 
                 if (pageText && pageText.trim().length > 0) {
-                    // Store text for each page separately
+                 
                     if (!window.pageTexts) window.pageTexts = {};
                     window.pageTexts[pageNum] = pageText;
                     
@@ -576,7 +471,6 @@ async function extractTextFromAllPages() {
                     console.log(`Page ${pageNum} fallback text created`);
                 }
                 
-                // Update progress
                 const progress = (pageNum / totalPages) * 100;
                 document.getElementById('audioProgressBar').style.width = progress + '%';
                 
@@ -588,9 +482,7 @@ async function extractTextFromAllPages() {
             }
         }
         
-        // If we got some text, use it; otherwise use fallback
         if (allText.trim().length > 50) {
-            // Clean and process the extracted text
             currentText = cleanText(allText);
             textChunks = splitTextIntoChunks(currentText, 200);
             
@@ -598,15 +490,12 @@ async function extractTextFromAllPages() {
             document.getElementById('startAudioBtn').disabled = false;
             document.getElementById('readCurrentPageBtn').disabled = false;
             document.getElementById('readPageBtn').disabled = false;
-            
-            // Update page navigation with actual total pages
+   
             updatePageDisplay();
             
             // Show auto-start notification
             document.getElementById('audioNotification').style.display = 'block';
-            
-            // Auto-start reading after a short delay
-            setTimeout(() => {
+                        setTimeout(() => {
                 if (textChunks.length > 0) {
                     document.getElementById('audioNotification').style.display = 'none';
                     startReading();
@@ -623,13 +512,9 @@ async function extractTextFromAllPages() {
         useEnhancedFallback();
     }
 }
-
-// Enhanced text extraction with multiple methods
 async function extractTextWithMultipleMethods(page) {
     let extractedText = '';
-    
-    // Method 1: Try to get text from iframe content first (most reliable)
-    try {
+        try {
         const iframe = document.getElementById('pdfViewer');
         if (iframe && iframe.contentWindow) {
             // Try to access the PDF viewer's content directly
@@ -639,7 +524,6 @@ async function extractTextWithMultipleMethods(page) {
                 const pageElement = pdfViewer.pages[currentPage - 1];
                 
                 if (pageElement) {
-                    // Try to get text from the page element
                     const textElements = pageElement.querySelectorAll('.textLayer div');
                     if (textElements.length > 0) {
                         extractedText = Array.from(textElements)
@@ -659,7 +543,6 @@ async function extractTextWithMultipleMethods(page) {
         console.log('Method 1 (iframe) failed:', error.message);
     }
     
-    // Method 2: Enhanced PDF.js text extraction
     try {
         const textContent = await page.getTextContent({
             normalizeWhitespace: true,
@@ -667,7 +550,6 @@ async function extractTextWithMultipleMethods(page) {
         });
         
         if (textContent && textContent.items && textContent.items.length > 0) {
-            // Better text reconstruction with positioning
             const textItems = textContent.items;
             let reconstructedText = '';
             let lastY = 0;
@@ -675,9 +557,7 @@ async function extractTextWithMultipleMethods(page) {
             for (let i = 0; i < textItems.length; i++) {
                 const item = textItems[i];
                 const currentY = item.transform[5];
-                
-                // Add line break if Y position changes significantly
-                if (i > 0 && Math.abs(currentY - lastY) > 10) {
+                                if (i > 0 && Math.abs(currentY - lastY) > 10) {
                     reconstructedText += ' ';
                 }
                 
@@ -693,9 +573,7 @@ async function extractTextWithMultipleMethods(page) {
     } catch (error) {
         console.log('Method 2 (enhanced PDF.js) failed:', error.message);
     }
-    
-    // Method 3: Try with different PDF.js parameters
-    try {
+        try {
         const textContent = await page.getTextContent({
             normalizeWhitespace: false,
             disableCombineTextItems: true
@@ -712,7 +590,6 @@ async function extractTextWithMultipleMethods(page) {
         console.log('Method 3 (alternative PDF.js) failed:', error.message);
     }
     
-    // Method 4: Try to get text from page annotations
     try {
         const annotations = await page.getAnnotations();
         if (annotations && annotations.length > 0) {
@@ -737,9 +614,9 @@ async function extractTextWithMultipleMethods(page) {
 
 function cleanText(text) {
     return text
-        .replace(/\s+/g, ' ') // Replace multiple spaces with single space
-        .replace(/\n+/g, ' ') // Replace newlines with spaces
-        .replace(/\t+/g, ' ') // Replace tabs with spaces
+        .replace(/\s+/g, ' ') 
+        .replace(/\n+/g, ' ') 
+        .replace(/\t+/g, ' ')
         .trim();
 }
 
@@ -747,16 +624,13 @@ function useEnhancedFallback() {
     const bookTitle = '{{ $book->title ?? "Book" }}';
     const author = '{{ $book->author ?? "Author" }}';
     
-    // Create a comprehensive fallback text based on book information
     currentText = createBookContent();
     
     textChunks = splitTextIntoChunks(currentText, 150);
     document.getElementById('startAudioBtn').disabled = false;
     
-    // Show auto-start notification
     document.getElementById('audioNotification').style.display = 'block';
     
-    // Auto-start reading after a short delay
     setTimeout(() => {
         if (textChunks.length > 0) {
             document.getElementById('audioNotification').style.display = 'none';
@@ -877,12 +751,10 @@ function readNextChunk() {
     
     statusDiv.innerHTML = `Reading segment ${currentIndex + 1} of ${textChunks.length}`;
     
-    // Create and speak the utterance
     currentUtterance = new SpeechSynthesisUtterance(chunk);
     currentUtterance.rate = parseFloat(document.getElementById('speedControl').value);
     currentUtterance.pitch = 1.0;
     currentUtterance.volume = parseFloat(document.getElementById('volumeControl').value);
-    
     // Set voice (try to use a good quality voice)
     const voices = speechSynthesis.getVoices();
     const preferredVoice = voices.find(voice => 
@@ -896,16 +768,13 @@ function readNextChunk() {
     
     currentUtterance.onend = function() {
         currentIndex++;
-        // Save progress after each chunk
         saveReadingProgress();
         
         if (isReading && currentIndex < textChunks.length) {
-            // Small pause between chunks
             setTimeout(readNextChunk, 500);
         } else if (currentIndex >= textChunks.length) {
             // Finished reading
             statusDiv.innerHTML = '<span class="text-success">Finished reading the book!</span>';
-            // Clear saved progress when finished
             localStorage.removeItem(`readingProgress_${bookId}`);
             stopReading();
         }
@@ -941,8 +810,7 @@ function stopReading() {
         speechSynthesis.cancel();
         currentUtterance = null;
     }
-    
-    // Save progress when stopped
+ 
     saveReadingProgress();
     
     document.getElementById('startAudioBtn').style.display = 'block';
@@ -961,7 +829,6 @@ document.addEventListener('visibilitychange', function() {
     }
 });
 
-// Handle speech synthesis voices loading
 speechSynthesis.onvoiceschanged = function() {
     // Voices are now available
     console.log('Speech synthesis voices loaded');
@@ -978,7 +845,7 @@ function saveReadingProgress() {
     localStorage.setItem(`readingProgress_${bookId}`, JSON.stringify(progress));
 }
 
-// Load reading progress from localStorage
+
 function loadReadingProgress() {
     const savedProgress = localStorage.getItem(`readingProgress_${bookId}`);
     if (savedProgress) {
@@ -1000,7 +867,6 @@ function readFromPage(pageNumber) {
     console.log('Attempting to read from page:', pageNumber);
     console.log('Available page texts:', window.pageTexts);
     
-    // Stop current reading if any
     if (isReading) {
         stopReading();
     }
@@ -1011,7 +877,6 @@ function readFromPage(pageNumber) {
         console.log('Using stored text for page', pageNumber, ':', pageText);
         
         if (pageText && pageText.trim().length > 0) {
-            // Set up reading for this specific page
             currentText = pageText;
             textChunks = splitTextIntoChunks(pageText, 150);
             currentIndex = 0;
@@ -1022,21 +887,16 @@ function readFromPage(pageNumber) {
                 document.getElementById('audioStatus').innerHTML = `<span class="text-warning">No readable content on page ${pageNumber}</span>`;
                 return;
             }
-            
-            // Update status
+       
             document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
-            
-            // Start reading from this page
             startReading();
             return;
         }
     }
     
-    // If no stored text, try to extract it now
+  
     console.log('No stored text found, extracting from page', pageNumber);
     document.getElementById('audioStatus').innerHTML = `Extracting content from page ${pageNumber}...`;
-    
-    // Try to extract text from the specific page
     if (pdfDocument) {
         pdfDocument.getPage(pageNumber).then(async (page) => {
             try {
@@ -1083,7 +943,7 @@ function readFromPage(pageNumber) {
     }
 }
 
-// Function to extract text directly from iframe content
+//iframe content
 function extractTextFromIframe() {
     try {
         const iframe = document.getElementById('pdfViewer');
@@ -1092,7 +952,7 @@ function extractTextFromIframe() {
             return null;
         }
 
-        // Try to access the PDF viewer application
+     
         const pdfViewer = iframe.contentWindow.PDFViewerApplication;
         if (!pdfViewer) {
             console.log('PDF viewer application not found');
@@ -1102,25 +962,23 @@ function extractTextFromIframe() {
         const currentPage = pdfViewer.page || window.currentPageNumber || 1;
         console.log('Current page from iframe:', currentPage);
 
-        // Method 1: Try to get text from the text layer (most reliable for visible text)
+      
         if (pdfViewer.pages && pdfViewer.pages[currentPage - 1]) {
             const pageElement = pdfViewer.pages[currentPage - 1];
             
             // Look for text layer which contains the actual visible text
             const textLayer = pageElement.querySelector('.textLayer');
             if (textLayer) {
-                // Get all text elements and their content
+        
                 const textElements = textLayer.querySelectorAll('div');
                 if (textElements.length > 0) {
                     let extractedText = '';
-                    
-                    // Process each text element to maintain proper spacing and structure
+               
                     for (let i = 0; i < textElements.length; i++) {
                         const element = textElements[i];
                         const text = element.textContent || element.innerText;
                         
                         if (text && text.trim().length > 0) {
-                            // Add space between elements for better readability
                             if (i > 0) {
                                 extractedText += ' ';
                             }
@@ -1135,7 +993,6 @@ function extractTextFromIframe() {
                 }
             }
             
-            // Method 2: Try to get text from any visible text elements
             const allTextElements = pageElement.querySelectorAll('*');
             let visibleTexts = [];
             
@@ -1163,21 +1020,17 @@ function extractTextFromIframe() {
     }
 }
 
-// Function to read from current page (detected from iframe)
 function readCurrentPage() {
     console.log('readCurrentPage called');
     console.log('Current page number:', window.currentPageNumber);
-    
-    // First try to get text directly from iframe (most reliable)
+
     const iframeText = extractTextFromIframe();
     if (iframeText && iframeText.trim().length > 0) {
         console.log('Using iframe text for reading');
-        
-        // Store this text for the current page
+      
         if (!window.pageTexts) window.pageTexts = {};
         window.pageTexts[window.currentPageNumber] = iframeText;
-        
-        // Set up reading for this specific page
+     
         currentText = iframeText;
         textChunks = splitTextIntoChunks(iframeText, 150);
         currentIndex = 0;
@@ -1190,13 +1043,13 @@ function readCurrentPage() {
         return;
     }
     
-    // If iframe extraction failed, try stored page texts
+    
     if (window.pageTexts && window.pageTexts[window.currentPageNumber]) {
         console.log('Reading from stored page text for page:', window.currentPageNumber);
         readFromPage(window.currentPageNumber);
     } else {
         console.log('No stored text found, trying to extract from current page...');
-        // Try to extract text from the current visible page
+     
         extractTextFromCurrentVisiblePage();
     }
 }
@@ -1207,22 +1060,19 @@ async function refreshCurrentPageText() {
     statusDiv.innerHTML = 'Refreshing current page text with enhanced extraction...';
 
     try {
-        // Try to get the current page from the PDF document
+        
         if (pdfDocument && window.currentPageNumber) {
             const page = await pdfDocument.getPage(window.currentPageNumber);
-            
-            // Use the enhanced extraction method
+        
             const pageText = await extractTextWithMultipleMethods(page);
             
             if (pageText && pageText.trim().length > 0) {
-                // Store this page text
                 if (!window.pageTexts) window.pageTexts = {};
                 window.pageTexts[window.currentPageNumber] = pageText;
 
                 console.log('Successfully refreshed text for current page:', pageText.substring(0, 150) + '...');
                 statusDiv.innerHTML = `Page ${window.currentPageNumber} text refreshed successfully with enhanced extraction!`;
 
-                // Enable reading for this page
                 setTimeout(() => {
                     statusDiv.innerHTML = `Ready to read page ${window.currentPageNumber} with real content`;
                 }, 2000);
@@ -1250,7 +1100,6 @@ async function refreshCurrentPageText() {
             }
         }
 
-        // If all extraction methods fail, create intelligent fallback
         const fallbackText = `Page ${window.currentPageNumber} of ${bookTitle} by ${bookAuthor}. This page contains content that could not be extracted automatically.`;
 
         if (!window.pageTexts) window.pageTexts = {};
@@ -1272,18 +1121,15 @@ async function refreshCurrentPageText() {
     }
 }
 
-// Function to extract text from the currently visible page
 async function extractTextFromCurrentVisiblePage() {
     const statusDiv = document.getElementById('audioStatus');
     statusDiv.innerHTML = 'Extracting text from current visible page...';
     
     try {
-        // Try to get the current page from the PDF document
+    
         if (pdfDocument && window.currentPageNumber) {
             const page = await pdfDocument.getPage(window.currentPageNumber);
-            
-            // Use the enhanced extraction method
-            const pageText = await extractTextWithMultipleMethods(page);
+                        const pageText = await extractTextWithMultipleMethods(page);
             
             if (pageText && pageText.trim().length > 0) {
                 // Store this page text
@@ -1299,7 +1145,7 @@ async function extractTextFromCurrentVisiblePage() {
                 }, 1000);
                 return;
             } else {
-                // Try to get any text with basic method
+                
                 const basicText = await page.getTextContent();
                 if (basicText && basicText.items && basicText.items.length > 0) {
                     const basicPageText = basicText.items.map(item => item.str).join(' ');
@@ -1320,7 +1166,6 @@ async function extractTextFromCurrentVisiblePage() {
             }
         }
         
-        // If all extraction methods fail, create intelligent fallback
         const fallbackText = `Page ${window.currentPageNumber} of ${bookTitle} by ${bookAuthor}. This page contains content that could not be automatically extracted. The page shows important information and text that is part of the book.`;
         
         if (!window.pageTexts) window.pageTexts = {};
@@ -1328,8 +1173,7 @@ async function extractTextFromCurrentVisiblePage() {
         
         console.log('Created intelligent fallback text for current page');
         statusDiv.innerHTML = `Using fallback content for page ${window.currentPageNumber}`;
-        
-        // Read the fallback content
+       
         setTimeout(() => {
             readFromPage(window.currentPageNumber);
         }, 1000);
@@ -1344,15 +1188,13 @@ async function extractTextFromCurrentVisiblePage() {
         window.pageTexts[window.currentPageNumber] = basicFallback;
         
         statusDiv.innerHTML = 'Using fallback content for current page';
-        
-        // Read the basic fallback
+      
         setTimeout(() => {
             readFromPage(window.currentPageNumber);
         }, 1000);
     }
 }
 
-// Function to force refresh and read exact page content
 async function forceReadCurrentPage() {
     console.log('Force reading current page:', window.currentPageNumber);
     
@@ -1365,18 +1207,14 @@ async function forceReadCurrentPage() {
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
     }
-    
-    // Update status
+  
     document.getElementById('audioStatus').innerHTML = 'Extracting exact text from current page...';
     
-    // Wait a moment for the page to fully load
     setTimeout(async () => {
         try {
-            // Try to extract text directly from iframe first
             let extractedText = extractTextFromIframe();
             
             if (!extractedText || extractedText.trim().length === 0) {
-                // If iframe extraction failed, try PDF.js as fallback
                 console.log('Iframe extraction failed, trying PDF.js...');
                 
                 if (window.pdfDocument && window.currentPageNumber) {
@@ -1388,12 +1226,9 @@ async function forceReadCurrentPage() {
             }
             
             if (extractedText && extractedText.trim().length > 0) {
-                // Store this text for the current page
                 if (!window.pageTexts) window.pageTexts = {};
                 window.pageTexts[window.currentPageNumber] = extractedText;
-                
-                // Set up reading with the extracted text
-                currentText = extractedText;
+                                currentText = extractedText;
                 textChunks = splitTextIntoChunks(extractedText, 150);
                 currentIndex = 0;
                 
@@ -1441,32 +1276,24 @@ function goToSpecificPage() {
         // Update status
         document.getElementById('audioStatus').innerHTML = `Navigated to page ${pageNumber}. Extracting content...`;
         
-        // Wait for page to load, then extract and read content
         setTimeout(async () => {
             try {
-                // Try to get text from the specific page
                 if (pdfDocument) {
                     const page = await pdfDocument.getPage(pageNumber);
                     const pageText = await extractTextWithMultipleMethods(page);
                     
                     if (pageText && pageText.trim().length > 0) {
-                        // Store this page text
                         if (!window.pageTexts) window.pageTexts = {};
                         window.pageTexts[pageNumber] = pageText;
-                        
-                        // Set up reading for this specific page
                         currentText = pageText;
                         textChunks = splitTextIntoChunks(pageText, 150);
                         currentIndex = 0;
                         
                         console.log(`Successfully extracted text from page ${pageNumber}:`, pageText.substring(0, 150) + '...');
-                        
-                        // Update status and start reading
                         document.getElementById('audioStatus').innerHTML = `Reading page ${pageNumber} of ${totalPages}`;
                         startReading();
                         
                     } else {
-                        // If extraction failed, try to read from stored text
                         if (window.pageTexts && window.pageTexts[pageNumber]) {
                             readFromPage(pageNumber);
                         } else {
@@ -1483,7 +1310,7 @@ function goToSpecificPage() {
                         }
                     }
                 } else {
-                    // If PDF document not available, try to read from stored text
+                    
                     if (window.pageTexts && window.pageTexts[pageNumber]) {
                         readFromPage(pageNumber);
                     } else {
@@ -1551,7 +1378,7 @@ function navigateToPage(pageNumber) {
     try {
         const iframe = document.getElementById('pdfViewer');
         if (iframe && iframe.contentWindow) {
-            // Try to navigate to the specific page in the PDF viewer
+           
             if (iframe.contentWindow.PDFViewerApplication) {
                 iframe.contentWindow.PDFViewerApplication.page = pageNumber;
             }
@@ -1560,5 +1387,68 @@ function navigateToPage(pageNumber) {
         console.error('Error navigating to page:', error);
     }
 }
+
+function readManualText() {
+    const manualTextInput = document.getElementById('manualTextInput');
+    const text = manualTextInput.value.trim();
+    
+    if (!text) {
+        alert('Please enter some text to read.');
+        return;
+    }
+    if (isReading) {
+        stopReading();
+    }
+
+    currentText = '';
+    textChunks = [];
+    currentIndex = 0;
+
+    // Set up reading for the manual text
+    currentText = text;
+    textChunks = splitTextIntoChunks(text, 150);
+    currentIndex = 0;
+
+    // Update status
+    document.getElementById('audioStatus').innerHTML = `<span class="text-success">Reading from manual input: ${textChunks.length} segments</span>`;
+
+    // Start reading
+    startReading();
+    
+    // Clear the input after starting to read
+    manualTextInput.value = '';
+}
+
+// Function to clear manual text input
+function clearManualText() {
+    document.getElementById('manualTextInput').value = '';
+    document.getElementById('audioStatus').innerHTML = 'Ready to read: {{ $book->title ?? "Book" }}';
+}
+
+// Add keyboard shortcuts for manual text input
+document.addEventListener('DOMContentLoaded', function() {
+    const manualTextInput = document.getElementById('manualTextInput');
+    if (manualTextInput) {
+        // Enter key to start reading
+        manualTextInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                readManualText();
+            }
+        });
+        
+        // Auto-clear when starting to type
+        manualTextInput.addEventListener('input', function() {
+            if (this.value.length === 1) {
+                const statusDiv = document.getElementById('audioStatus');
+                if (statusDiv.innerHTML.includes('Please enter some text')) {
+                    statusDiv.innerHTML = 'Ready to read: {{ $book->title ?? "Book" }}';
+                }
+            }
+        });
+       
+        manualTextInput.focus();
+    }
+});
 </script>
 @endsection
